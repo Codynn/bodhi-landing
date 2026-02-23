@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from 'next'
 import { Outfit } from 'next/font/google'
 import './globals.css'
-import { Navbar } from '@/components/shared/Navbar'
 import Providers from '@/lib/Providers'
+import Navbar from '@/components/shared/Navbar'
+import Footer from '@/components/shared/Footer'
 
 // ── Font ─────────────────────────────────────────────────────────────────────
 const outfit = Outfit({
@@ -37,38 +38,7 @@ const siteConfig = {
   themeColor: '#C0392B',
 }
 
-// ── JSON-LD Structured Data ───────────────────────────────────────────────────
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'EducationalOrganization',
-  name: siteConfig.name,
-  alternateName: siteConfig.shortName,
-  description: siteConfig.description,
-  url: siteConfig.url,
-  logo: `${siteConfig.url}/images/logo.png`,
-  image: `${siteConfig.url}${siteConfig.ogImage}`,
-  telephone: ['+977-071-591633', '+977-985-6025633'],
-  email: 'info@bodhimontessori.edu.np',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'LCM-10, Lumbini Bazar',
-    addressLocality: 'Rupandehi',
-    addressRegion: 'Lumbini Province',
-    addressCountry: 'NP',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: '27.5291',
-    longitude: '83.4505',
-  },
-  sameAs: [
-    'https://facebook.com/bodhimontessori',
-    'https://youtube.com/@bodhimontessori',
-    'https://instagram.com/bodhimontessori',
-  ],
-  openingHours: 'Mo-Fr 09:00-16:00',
-  foundingDate: '2010',
-}
+
 
 // ── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
@@ -126,12 +96,9 @@ export const metadata: Metadata = {
       { url: '/icons/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
     ],
     apple: [{ url: '/icons/apple-touch-icon.png', sizes: '180x180' }],
-    shortcut: '/icons/favicon.ico',
+    shortcut: '/home/logo.svg',
   },
-  manifest: '/manifest.json',
-  verification: {
-    google: 'your-google-verification-code',
-  },
+ 
   formatDetection: { telephone: false, email: false, address: false },
   applicationName: siteConfig.shortName,
   category: 'education',
@@ -160,7 +127,6 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -173,8 +139,10 @@ export default function RootLayout({
           <Navbar />
 
           {/* ── Page Content ── */}
-          <main>{children}</main>
+          <main className='flex-1'>{children}</main>
         </Providers>
+
+         <Footer/>
       </body>
     </html>
   )
