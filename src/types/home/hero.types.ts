@@ -1,5 +1,6 @@
 export interface HeroStat {
-  value: string
+  value: number
+  suffix: string
   label: string
 }
 

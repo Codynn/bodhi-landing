@@ -8,10 +8,22 @@ import { ChevronDown, MapPin, Phone, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { NavItem, NavbarProps } from "@/types/layout/navbar.types";
-import { NAV_ITEMS, SOCIAL_LINKS, SCHOOL_INFO } from "@/constants/layout/navbar.constants";
+import {
+  NAV_ITEMS,
+  SOCIAL_LINKS,
+  SCHOOL_INFO,
+} from "@/constants/layout/navbar.constants";
 
 // Social Icons as SVGs
-const SocialIcon = ({ icon, href, name }: { icon: string; href: string; name: string }) => {
+const SocialIcon = ({
+  icon,
+  href,
+  name,
+}: {
+  icon: string;
+  href: string;
+  name: string;
+}) => {
   const icons: Record<string, JSX.Element> = {
     facebook: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
@@ -21,11 +33,20 @@ const SocialIcon = ({ icon, href, name }: { icon: string; href: string; name: st
     youtube: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
         <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
-        <polygon fill="white" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
+        <polygon
+          fill="white"
+          points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"
+        />
       </svg>
     ),
     instagram: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        className="w-3.5 h-3.5"
+      >
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
         <circle cx="12" cy="12" r="4" />
         <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
@@ -53,10 +74,16 @@ const SocialIcon = ({ icon, href, name }: { icon: string; href: string; name: st
   );
 };
 
-// Desktop Dropdown Nav Item
-const NavDropdown = ({ item, isActive }: { item: NavItem; isActive: boolean }) => {
+const NavDropdown = ({
+  item,
+  isActive,
+}: {
+  item: NavItem;
+  isActive: boolean;
+}) => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -70,33 +97,68 @@ const NavDropdown = ({ item, isActive }: { item: NavItem; isActive: boolean }) =
 
   return (
     <div ref={ref} className="relative">
+      {/* Trigger */}
       <button
         onClick={() => setOpen((prev) => !prev)}
         className={cn(
           "flex items-center gap-1 text-sm font-medium transition-colors hover:text-[#8B1A1A] pb-1",
-          isActive ? "text-[#8B1A1A] border-b-2 border-[#8B1A1A]" : "text-gray-800"
+          isActive
+            ? "text-[#8B1A1A] border-b-2 border-[#8B1A1A]"
+            : "text-gray-800",
         )}
         aria-haspopup="true"
         aria-expanded={open}
       >
         {item.label}
         <ChevronDown
-          className={cn("w-4 h-4 transition-transform duration-200", open && "rotate-180")}
+          className={cn(
+            "w-4 h-4 transition-transform duration-200",
+            open && "rotate-180",
+          )}
         />
       </button>
 
+      {/* Dropdown Panel */}
       {open && item.children && (
-        <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-100 py-1 z-50">
-          {item.children.map((child) => (
-            <Link
-              key={child.href}
-              href={child.href}
-              onClick={() => setOpen(false)}
-              className="block px-4 py-2 text-sm text-gray-700 hover:text-[#8B1A1A] hover:bg-red-50 transition-colors"
-            >
-              {child.label}
-            </Link>
-          ))}
+        <div
+          className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-80 bg-white rounded-3xl z-50 overflow-hidden"
+          style={{ boxShadow: '0 12px 48px rgba(0,0,0,0.15)' }}
+        >
+          {/* Dark red top accent bar */}
+          <div className="h-3 w-full bg-[#7B1C1C] rounded-t-3xl" />
+
+          {/* Items */}
+          <div className="px-8 py-2">
+            {item.children.map((child, idx) => {
+              const isChildActive = pathname === child.href;
+              const isLast = idx === item.children!.length - 1;
+
+              return (
+                <Link
+                  key={child.href}
+                  href={child.href}
+                  onClick={() => setOpen(false)}
+                  className={cn(
+                    "group flex items-center gap-5 py-6 transition-colors",
+                    !isLast && "border-b border-gray-200",
+                    isChildActive
+                      ? "text-[#8B1A1A]"
+                      : "text-gray-900 hover:text-[#8B1A1A]",
+                  )}
+                >
+                  {/* Plain arrow — matches Figma exactly */}
+                  <span className="text-2xl font-light leading-none transition-transform duration-200 group-hover:translate-x-1">
+                    →
+                  </span>
+
+                  {/* Label */}
+                  <span className="text-xl font-semibold leading-none tracking-tight">
+                    {child.label}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
@@ -123,12 +185,15 @@ const MobileNavItem = ({
           onClick={() => setOpen((prev) => !prev)}
           className={cn(
             "w-full flex items-center justify-between px-4 py-3 text-sm font-medium transition-colors",
-            isActive ? "text-[#8B1A1A]" : "text-gray-800"
+            isActive ? "text-[#8B1A1A]" : "text-gray-800",
           )}
         >
           {item.label}
           <ChevronDown
-            className={cn("w-4 h-4 transition-transform duration-200", open && "rotate-180")}
+            className={cn(
+              "w-4 h-4 transition-transform duration-200",
+              open && "rotate-180",
+            )}
           />
         </button>
         {open && (
@@ -156,7 +221,7 @@ const MobileNavItem = ({
         onClick={onClose}
         className={cn(
           "flex items-center gap-1 px-4 py-3 text-sm font-medium transition-colors hover:text-[#8B1A1A]",
-          isActive ? "text-[#8B1A1A]" : "text-gray-800"
+          isActive ? "text-[#8B1A1A]" : "text-gray-800",
         )}
       >
         {item.label}
@@ -186,7 +251,9 @@ export default function Navbar({ className }: NavbarProps) {
 
   return (
     <>
-      <header className={cn("w-full bg-white shadow-sm sticky top-0 z-40", className)}>
+      <header
+        className={cn("w-full bg-white shadow-sm sticky top-0 z-40", className)}
+      >
         {/* Top Info Bar — hidden on mobile */}
         <div className="hidden md:block border-b border-gray-100 px-6 py-2">
           <div className="max-w-7xl mx-auto flex items-center justify-end gap-4">
@@ -216,7 +283,10 @@ export default function Navbar({ className }: NavbarProps) {
         <nav className="px-4 md:px-6 py-3">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             {/* Logo + School Name */}
-            <Link href="/" className="flex items-center gap-2 md:gap-3 flex-shrink-0">
+            <Link
+              href="/"
+              className="flex items-center gap-2 md:gap-3 flex-shrink-0"
+            >
               <div className="relative w-10 h-10 md:w-12 md:h-12">
                 <Image
                   src="/home/logo.svg"
@@ -237,7 +307,13 @@ export default function Navbar({ className }: NavbarProps) {
                 const isActive = pathname === item.href;
 
                 if (item.children) {
-                  return <NavDropdown key={item.href} item={item} isActive={isActive} />;
+                  return (
+                    <NavDropdown
+                      key={item.href}
+                      item={item}
+                      isActive={isActive}
+                    />
+                  );
                 }
 
                 if (item.label === "Donate") {
@@ -246,8 +322,10 @@ export default function Navbar({ className }: NavbarProps) {
                       key={item.href}
                       href={item.href}
                       className={cn(
-                        "flex items-center gap-1 text-sm font-medium transition-colors hover:text-[#8B1A1A] pb-1",
-                        isActive ? "text-[#8B1A1A] border-b-2 border-[#8B1A1A]" : "text-gray-800"
+                        "flex items-center gap-1 text-sm font-medium transition-colors hover:text-[#8F3648] pb-1",
+                        isActive
+                          ? "text-[#8F3648] border-b-2 border-[#3D171F]"
+                          : "text-gray-800",
                       )}
                     >
                       Donate <span className="text-[#8B1A1A]">♥</span>
@@ -261,7 +339,9 @@ export default function Navbar({ className }: NavbarProps) {
                     href={item.href}
                     className={cn(
                       "text-sm font-medium transition-colors hover:text-[#8B1A1A] pb-1",
-                      isActive ? "text-[#8B1A1A] border-b-2 border-[#8B1A1A]" : "text-gray-800"
+                      isActive
+                        ? "text-[#8B1A1A] border-b-2 border-[#8B1A1A]"
+                        : "text-gray-800",
                     )}
                   >
                     {item.label}
@@ -274,7 +354,22 @@ export default function Navbar({ className }: NavbarProps) {
             <div className="flex items-center gap-3">
               {/* Contact Us — desktop only */}
               <Link href={SCHOOL_INFO.contactHref} className="hidden lg:block">
-                <Button className="bg-[#8B1A1A] hover:bg-[#7a1717] text-white rounded-full px-6 py-2 text-sm font-medium transition-colors">
+                <Button
+                  className="
+      bg-[#8B1A1A] 
+      hover:bg-[#7A1717]
+      text-white 
+      rounded-full 
+      px-6 py-2 
+      text-sm font-medium
+      shadow-[0_6px_0_#5E1010]
+      hover:shadow-[0_4px_0_#5E1010]
+      active:shadow-[0_0px_0_#5E1010]
+      active:translate-y-[6px]
+      hover:translate-y-[2px]
+      transition-all duration-150
+    "
+                >
                   Contact Us
                 </Button>
               </Link>
@@ -285,7 +380,11 @@ export default function Navbar({ className }: NavbarProps) {
                 aria-label={mobileOpen ? "Close menu" : "Open menu"}
                 className="lg:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100 transition-colors"
               >
-                {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                {mobileOpen ? (
+                  <X className="w-5 h-5" />
+                ) : (
+                  <Menu className="w-5 h-5" />
+                )}
               </button>
             </div>
           </div>
@@ -298,7 +397,9 @@ export default function Navbar({ className }: NavbarProps) {
         aria-hidden="true"
         className={cn(
           "fixed inset-0 bg-black/40 z-40 lg:hidden transition-opacity duration-300",
-          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          mobileOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none",
         )}
       />
 
@@ -306,7 +407,7 @@ export default function Navbar({ className }: NavbarProps) {
       <aside
         className={cn(
           "fixed top-0 right-0 h-full w-72 max-w-[85vw] bg-white z-50 shadow-2xl flex flex-col transition-transform duration-300 ease-in-out lg:hidden",
-          mobileOpen ? "translate-x-0" : "translate-x-full"
+          mobileOpen ? "translate-x-0" : "translate-x-full",
         )}
         aria-label="Mobile navigation"
       >
@@ -340,7 +441,10 @@ export default function Navbar({ className }: NavbarProps) {
 
         {/* Contact Us — right below header */}
         <div className="px-4 pt-4 pb-2 border-b border-gray-100">
-          <Link href={SCHOOL_INFO.contactHref} onClick={() => setMobileOpen(false)}>
+          <Link
+            href={SCHOOL_INFO.contactHref}
+            onClick={() => setMobileOpen(false)}
+          >
             <Button className="w-full bg-[#8B1A1A] hover:bg-[#7a1717] text-white rounded-full py-2 text-sm font-medium transition-colors">
               Contact Us
             </Button>

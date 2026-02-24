@@ -4,6 +4,7 @@ export interface Notice {
   date: string
   title: string
   description: string
+  fullContent: string   // ← full rich content for the modal
   href: string
 }
 

@@ -6,9 +6,8 @@ export const NAV_ITEMS: NavItem[] = [
     label: "About Us",
     href: "/about",
     children: [
-      { label: "Our Story", href: "/about/our-story" },
-      { label: "Vision & Mission", href: "/about/vision-mission" },
-      { label: "Our Team", href: "/about/team" },
+      { label: "Introduction", href: "/about/introduction" },
+      { label: "Our School Family", href: "/about/school-family" },
     ],
   },
   { label: "Academics", href: "/academics" },

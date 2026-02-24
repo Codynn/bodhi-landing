@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { ABOUT_CONTENT } from '@/constants/home/about.constants'
+import { Button } from '../ui/button'
 
 export default function AboutSection() {
   return (
@@ -41,21 +42,28 @@ export default function AboutSection() {
             </p>
 
             {/* Learn More Button */}
-            <Link
-              href={ABOUT_CONTENT.ctaHref}
-              className="
-                inline-flex items-center gap-2
-                bg-[#7B1C1C] hover:bg-[#C0392B]
-                text-white text-sm font-medium
-                px-6 py-3 rounded-full
-                transition-colors duration-200
-                mt-2
-              "
-            >
-              {ABOUT_CONTENT.ctaLabel}
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            <Link href={ABOUT_CONTENT.ctaHref} className="hidden lg:block">
+  <Button
+    className="
+      bg-[#8B1A1A] 
+      hover:bg-[#7A1717]
+      text-white 
+      rounded-full 
+      px-6 py-2 
+      text-sm font-medium
+      shadow-[0_6px_0_#5E1010]
+      hover:shadow-[0_4px_0_#5E1010]
+      active:shadow-[0_0px_0_#5E1010]
+      active:translate-y-[6px]
+      hover:translate-y-[2px]
+      transition-all duration-150
+    "
+  >
+    {ABOUT_CONTENT.ctaLabel}
+  </Button>
+</Link>
           </div>
+              <ArrowRight className="w-4 h-4" />
 
         </div>
       </div>
