@@ -49,7 +49,7 @@ function SocialCircle({
       target="_blank"
       rel="noopener noreferrer"
       className="
-        w-9 h-9 rounded-full 
+        w-9 h-9 rounded-full lg:p-2 
         border border-white/30
         flex items-center justify-center
         text-white
@@ -72,7 +72,7 @@ export default function Footer() {
 
       {/* Main Body */}
       <div className="bg-[#22784E] text-white">
-        <div className="max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-14 pt-12 pb-8">
+        <div className="max-w-screen mx-auto px-6 sm:px-10 lg:px-14 pt-12 pb-8">
 
           {/* ───── Grid ───── */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
@@ -91,21 +91,21 @@ export default function Footer() {
                 </div>
 
                 <div className="leading-tight">
-                  <p className="text-sm font-bold">Bodhi International</p>
-                  <p className="text-xs text-white/70">
+                  <p className="text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] font-bold">Bodhi International</p>
+                  <p className="text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] text-white/70">
                     Montessori School
                   </p>
                 </div>
               </Link>
 
-              <p className="text-sm text-white/75 leading-relaxed max-w-sm">
+              <p className="text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] text-white/75 leading-relaxed max-w-sm">
                 {FOOTER_CONTENT.description}
               </p>
             </div>
 
             {/* ── Quick Links ── */}
             <div className="flex flex-col gap-5">
-              <h4 className="text-base font-semibold tracking-wide">
+              <h4 className="text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] font-bold tracking-wide">
                 Quick Links
               </h4>
 
@@ -115,7 +115,7 @@ export default function Footer() {
                     <Link
                       href={link.href}
                       className="
-                        text-sm text-white/75 
+                        text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] text-white/75 
                         hover:text-white
                         transition-colors duration-200
                         inline-flex items-center gap-2
@@ -137,11 +137,11 @@ export default function Footer() {
 
               {/* Contact */}
               <div className="flex flex-col gap-3">
-                <h4 className="text-base font-semibold tracking-wide">
+                <h4 className="text-[16px] sm:text-[18px] md:text-[16px] lg:text-[18px] xl:text-[22px] 2xl:text-[24px] font-semibold tracking-wide">
                   Contact Us
                 </h4>
 
-                <div className="flex items-center gap-3 text-sm text-white/75">
+                <div className="flex items-center gap-3  text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] text-white/75">
                   <Phone className="w-4 h-4 text-white/60 shrink-0" />
                   <span>{FOOTER_CONTENT.phone}</span>
                 </div>
@@ -149,7 +149,7 @@ export default function Footer() {
 
               {/* Social */}
               <div className="flex flex-col gap-3">
-                <h4 className="text-base font-semibold tracking-wide">
+                <h4 className="text-[16px] sm:text-[18px] md:text-[16px] lg:text-[18px] xl:text-[22px] 2xl:text-[24px] font-semibold tracking-wide">
                   Follow Us
                 </h4>
 
@@ -157,22 +157,22 @@ export default function Footer() {
                   <SocialCircle
                     href={FOOTER_CONTENT.socials.facebook}
                     label="Facebook"
-                    icon={<Facebook className="w-4 h-4" />}
+                    icon={<Facebook className="w-4 h-4 lg:w-8 lg:h-8" />}
                   />
                   <SocialCircle
                     href={FOOTER_CONTENT.socials.youtube}
                     label="YouTube"
-                    icon={<Youtube className="w-4 h-4" />}
+                    icon={<Youtube className="w-4 h-4 lg:w-8 lg:h-8" />}
                   />
                   <SocialCircle
                     href={FOOTER_CONTENT.socials.instagram}
                     label="Instagram"
-                    icon={<Instagram className="w-4 h-4" />}
+                    icon={<Instagram className="w-4 h-4 lg:w-8 lg:h-8" />}
                   />
                   <SocialCircle
                     href={FOOTER_CONTENT.socials.linkedin}
                     label="LinkedIn"
-                    icon={<Linkedin className="w-4 h-4" />}
+                    icon={<Linkedin className="w-4 h-4 lg:w-8 lg:h-8" />}
                   />
                 </div>
               </div>
@@ -181,7 +181,7 @@ export default function Footer() {
           </div>
 
           {/* ───── Bottom Bar ───── */}
-          <div className="border-t border-white/20 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-white/60">
+          <div className="border-t border-white/20 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3  text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] text-white/60">
             <p>{FOOTER_CONTENT.copyright}</p>
 
             <div className="flex items-center gap-2">
@@ -219,7 +219,8 @@ export default function Footer() {
               bg-[#7B1C1C]
               hover:bg-[#681616]
               text-white
-              text-sm font-semibold
+              text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px]
+              font-semibold
               px-6 py-3
               rounded-l-full
               flex items-center gap-2

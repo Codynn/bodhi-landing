@@ -4,17 +4,17 @@ import { Quote } from 'lucide-react'
 export default function TestimonialsSection() {
   return (
     <section className="w-full bg-white">
-      <div className="max-w-[100vw] mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20 ">
+      <div className="max-w-screen mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20 ">
 
         {/* ── Header ── */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-14 gap-3">
-          <p className="text-xs sm:text-sm font-bold text-[#C0392B] uppercase tracking-widest">
+          <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-bold text-[#C0392B] uppercase tracking-widest">
             {TESTIMONIALS_CONTENT.label}
           </p>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#7B1C1C] leading-snug">
+          <h2 className="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] xl:text-[32px] 2xl:text-[54px] font-bold text-[#7B1C1C] leading-snug">
             {TESTIMONIALS_CONTENT.heading}
           </h2>
-          <p className="text-sm sm:text-base text-gray-500 leading-relaxed max-w-3xl">
+          <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] text-gray-500 leading-relaxed max-w-[80vw]">
             {TESTIMONIALS_CONTENT.description}
           </p>
         </div>
@@ -52,19 +52,19 @@ function TestimonialCard({
     <div className="flex flex-col gap-5 border border-gray-100 rounded-xl px-6 py-7 bg-gray-50">
 
       {/* Green Quote Mark */}
-      <span className="text-5xl font-serif font-black text-[#2D6A2D] leading-none select-none">
-        <Quote/>
+      <span className="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] xl:text-[32px] 2xl:text-[54px] font-serif font-black text-[#2D6A2D] leading-none select-none">
+        <Quote  className='w-8 h-8 lg:w-12 lg:h-12'/>
       </span>
 
       {/* Quote Text */}
-      <p className="text-sm sm:text-[15px] text-gray-600 leading-relaxed flex-1">
+      <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] text-gray-600 leading-relaxed flex-1">
         {quote}
       </p>
 
       {/* Author */}
       <div className="flex flex-col gap-0.5 mt-2">
-        <p className="text-sm font-semibold text-gray-800">{name}</p>
-        <p className="text-xs text-gray-400">{role}</p>
+        <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-semibold text-gray-800">{name}</p>
+        <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] text-gray-400">{role}</p>
       </div>
 
     </div>

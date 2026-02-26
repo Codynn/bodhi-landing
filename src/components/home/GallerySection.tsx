@@ -95,12 +95,12 @@ export function GallerySection() {
       <div className="max-w-[100vw] mx-auto">
 
         {/* Label */}
-        <p className="text-center text-xs sm:text-sm font-semibold tracking-widest text-[#8F3648] uppercase mb-3">
+        <p className="text-center text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-semibold tracking-widest text-[#8F3648] uppercase mb-3">
           {sectionLabel}
         </p>
 
         {/* Heading */}
-        <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-bold text-[#8F3648] mb-8 sm:mb-10">
+        <h2 className="text-center text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] xl:text-[32px] 2xl:text-[54px] font-bold text-[#8F3648] mb-8 sm:mb-10">
           {heading}
         </h2>
 
@@ -216,7 +216,7 @@ export function GallerySection() {
             aria-label="Previous"
             className="text-[#2D6A2D] hover:text-[#1a4a1a] disabled:text-gray-300 transition-colors"
           >
-            <ArrowLeft className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.8]" />
+            <ArrowLeft className="w-7 h-7 sm:w-12 sm:h-12 stroke-[1.8]" />
           </button>
           <button
             onClick={next}
@@ -224,7 +224,7 @@ export function GallerySection() {
             aria-label="Next"
             className="text-[#2D6A2D] hover:text-[#1a4a1a] disabled:text-gray-300 transition-colors"
           >
-            <ArrowRight className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.8]" />
+            <ArrowRight className="w-7 h-7 sm:w-12 sm:h-12 stroke-[1.8]" />
           </button>
         </div>
 

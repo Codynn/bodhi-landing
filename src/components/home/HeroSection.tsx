@@ -60,7 +60,7 @@ export function HeroSection() {
 
         {/* Heading */}
         <motion.h1
-          className="text-center text-3xl sm:text-4xl md:text-5xl font-bold text-[#8F3648] leading-tight tracking-tight max-w-4xl mx-auto mb-8 sm:mb-10"
+          className="text-center text-1xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-[#8F3648] leading-tight tracking-tight max-w-screen mx-auto mb-8 sm:mb-10"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
@@ -105,7 +105,24 @@ export function HeroSection() {
                   i < HERO_STATS.length - 1 ? 'border-b border-gray-100' : '',
                 ].join(' ')}
               >
-                <div className="[&_span:first-child]:text-[#2D6A2D] [&_span:last-child]:text-gray-500 [&_span:last-child]:text-xs [&_span:first-child]:text-2xl sm:[&_span:first-child]:text-3xl lg:[&_span:first-child]:text-4xl">
+                <div className=" [&_span:first-child]:text-[#2d6a2d]
+
+        /* Numbers */
+        [&_span:first-child]:text-2xl
+        sm:[&_span:first-child]:text-3xl
+        md:[&_span:first-child]:text-4xl
+        lg:[&_span:first-child]:text-4xl
+        xl:[&_span:first-child]:text-5xl
+        2xl:[&_span:first-child]:text-6xl
+
+        /* Labels */
+        [&_span:last-child]:text-gray-500
+        [&_span:last-child]:text-xs
+        sm:[&_span:last-child]:text-sm
+        md:[&_span:last-child]:text-base
+        lg:[&_span:last-child]:text-base
+        xl:[&_span:last-child]:text-lg
+        2xl:[&_span:last-child]:text-xl">
                   <AnimatedStat stat={stat} />
                 </div>
               </div>

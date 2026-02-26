@@ -101,7 +101,7 @@ const NavDropdown = ({
       <button
         onClick={() => setOpen((prev) => !prev)}
         className={cn(
-          "flex items-center gap-1 text-sm font-medium transition-colors hover:text-[#8B1A1A] pb-1",
+          "flex items-center gap-1 text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] font-medium transition-colors hover:text-[#8B1A1A] pb-1",
           isActive
             ? "text-[#8B1A1A] border-b-2 border-[#8B1A1A]"
             : "text-gray-800",
@@ -122,7 +122,7 @@ const NavDropdown = ({
       {open && item.children && (
         <div
           className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-80 bg-white rounded-3xl z-50 overflow-hidden"
-          style={{ boxShadow: '0 12px 48px rgba(0,0,0,0.15)' }}
+          style={{ boxShadow: "0 12px 48px rgba(0,0,0,0.15)" }}
         >
           {/* Dark red top accent bar */}
           <div className="h-3 w-full bg-[#7B1C1C] rounded-t-3xl" />
@@ -220,7 +220,7 @@ const MobileNavItem = ({
         href={item.href}
         onClick={onClose}
         className={cn(
-          "flex items-center gap-1 px-4 py-3 text-sm font-medium transition-colors hover:text-[#8B1A1A]",
+          "flex items-center gap-1 px-4 py-3 text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] font-medium transition-colors hover:text-[#8B1A1A]",
           isActive ? "text-[#8B1A1A]" : "text-gray-800",
         )}
       >
@@ -256,7 +256,7 @@ export default function Navbar({ className }: NavbarProps) {
       >
         {/* Top Info Bar — hidden on mobile */}
         <div className="hidden md:block border-b border-gray-100 px-6 py-2">
-          <div className="max-w-[100vw] mx-auto flex items-center justify-end gap-4">
+          <div className="max-w-screen mx-auto flex items-center justify-end gap-4">
             <div className="flex items-center gap-2">
               {SOCIAL_LINKS.map((social) => (
                 <SocialIcon key={social.name} {...social} />
@@ -265,14 +265,14 @@ export default function Navbar({ className }: NavbarProps) {
 
             <span className="text-gray-300">|</span>
 
-            <div className="flex items-center gap-1 text-xs text-gray-600">
+            <div className="flex items-center gap-1 text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] text-gray-600">
               <MapPin className="w-3.5 h-3.5 text-gray-500" />
               <span>{SCHOOL_INFO.address}</span>
             </div>
 
             <span className="text-gray-300">|</span>
 
-            <div className="flex items-center gap-1 text-xs text-gray-600">
+            <div className="flex items-center gap-1 text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] text-gray-600">
               <Phone className="w-3.5 h-3.5 text-gray-500" />
               <span>{SCHOOL_INFO.phone}</span>
             </div>
@@ -281,13 +281,13 @@ export default function Navbar({ className }: NavbarProps) {
 
         {/* Main Nav */}
         <nav className="px-4 md:px-6 py-3">
-          <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="max-w-screen mx-auto flex items-center justify-between">
             {/* Logo + School Name */}
             <Link
               href="/"
               className="flex items-center gap-2 md:gap-3 flex-shrink-0"
             >
-              <div className="relative w-10 h-10 md:w-12 md:h-12">
+              <div className="relative w-10 h-10 md:w-20 md:h-12">
                 <Image
                   src="/home/logo.svg"
                   alt={SCHOOL_INFO.name}
@@ -296,7 +296,7 @@ export default function Navbar({ className }: NavbarProps) {
                   priority
                 />
               </div>
-              <span className="text-xs md:text-sm font-semibold text-gray-800 leading-tight max-w-[120px] md:max-w-[140px]">
+              <span className="text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] font-semibold text-gray-800 leading-tight max-w-[120px] md:max-w-[150px] lg:max-w-[500px]:">
                 {SCHOOL_INFO.name}
               </span>
             </Link>
@@ -322,7 +322,7 @@ export default function Navbar({ className }: NavbarProps) {
                       key={item.href}
                       href={item.href}
                       className={cn(
-                        "flex items-center gap-1 text-sm font-medium transition-colors hover:text-[#8F3648] pb-1",
+                        "flex items-center gap-1 text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] font-medium transition-colors hover:text-[#8F3648] pb-1",
                         isActive
                           ? "text-[#8F3648] border-b-2 border-[#3D171F]"
                           : "text-gray-800",
@@ -338,7 +338,7 @@ export default function Navbar({ className }: NavbarProps) {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "text-sm font-medium transition-colors hover:text-[#8B1A1A] pb-1",
+                      "text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] font-medium transition-colors hover:text-[#8B1A1A] pb-1",
                       isActive
                         ? "text-[#8B1A1A] border-b-2 border-[#8B1A1A]"
                         : "text-gray-800",
@@ -361,7 +361,7 @@ export default function Navbar({ className }: NavbarProps) {
       text-white 
       rounded-full 
       px-6 py-2 
-      text-sm font-medium
+       text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] font-medium
       shadow-[0_6px_0_#5E1010]
       hover:shadow-[0_4px_0_#5E1010]
       active:shadow-[0_0px_0_#5E1010]
@@ -426,7 +426,7 @@ export default function Navbar({ className }: NavbarProps) {
                 className="object-contain"
               />
             </div>
-            <span className="text-xs font-semibold text-white leading-tight max-w-[160px]">
+            <span className="text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] font-semibold text-white leading-tight max-w-[160px]">
               {SCHOOL_INFO.name}
             </span>
           </Link>

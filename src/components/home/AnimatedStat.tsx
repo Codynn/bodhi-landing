@@ -1,38 +1,46 @@
-'use client'
+"use client";
 
-import { useRef } from 'react'
-import { useInView, useMotionValue, useSpring, animate } from 'framer-motion'
-import { useEffect } from 'react'
-import { HeroStat } from '@/types/home/hero.types'
+import { useRef } from "react";
+import { useInView, useMotionValue, useSpring, animate } from "framer-motion";
+import { useEffect } from "react";
+import { HeroStat } from "@/types/home/hero.types";
 
 export function AnimatedStat({ stat }: { stat: HeroStat }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '0px 0px -50px 0px' })
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -50px 0px" });
 
-  const motionValue = useMotionValue(0)
-  const spring = useSpring(motionValue, { duration: 2000, bounce: 0 })
-  const displayRef = useRef<HTMLSpanElement>(null)
+  const motionValue = useMotionValue(0);
+  const spring = useSpring(motionValue, { duration: 2000, bounce: 0 });
+  const displayRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     if (isInView) {
-      animate(motionValue, stat.value, { duration: 2, ease: [0.25, 0.1, 0.25, 1] })
+      animate(motionValue, stat.value, {
+        duration: 2,
+        ease: [0.25, 0.1, 0.25, 1],
+      });
     }
-  }, [isInView])
+  }, [isInView]);
 
   useEffect(() => {
-    return spring.on('change', (latest) => {
+    return spring.on("change", (latest) => {
       if (displayRef.current) {
-        displayRef.current.textContent = `${Math.floor(latest)}${stat.suffix}`
+        displayRef.current.textContent = `${Math.floor(latest)}${stat.suffix}`;
       }
-    })
-  }, [spring])
+    });
+  }, [spring]);
 
   return (
     <div ref={ref} className="flex flex-col items-center">
-      <span ref={displayRef} className="text-3xl sm:text-4xl font-extrabold text-white tabular-nums">
+      <span
+        ref={displayRef}
+        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold text-white tabular-nums"
+      >
         0{stat.suffix}
       </span>
-      <span className="text-sm text-white/70 mt-1">{stat.label}</span>
+      <span className="text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-2xl text-white/70 mt-1">
+        {stat.label}
+      </span>
     </div>
-  )
+  );
 }

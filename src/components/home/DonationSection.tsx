@@ -25,20 +25,20 @@ export default function DonationSection() {
 
         {/* ───────── Right: Content ───────── */}
         <div className="w-full lg:w-1/2 flex items-center px-6 sm:px-10 md:px-14 xl:px-20 py-12 lg:py-0">
-          <div className="flex flex-col gap-5 max-w-xl">
+          <div className="flex flex-col gap-5 max-w-screen">
 
             {/* Label */}
-            <p className="text-xs sm:text-sm font-bold text-[#8F3648] uppercase tracking-[0.2em]">
+            <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-bold text-[#8F3648] uppercase tracking-[0.2em]">
               {DONATION_CONTENT.label}
             </p>
 
             {/* Heading */}
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#8F3648] leading-snug">
+            <h2 className="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] xl:text-[32px] 2xl:text-[54px] font-bold text-[#8F3648] leading-snug">
               {DONATION_CONTENT.heading}
             </h2>
 
             {/* Description */}
-            <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+            <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] text-gray-600 leading-relaxed">
               {DONATION_CONTENT.description}
             </p>
 
@@ -49,7 +49,7 @@ export default function DonationSection() {
                   bg-[#7B1C1C]
                   hover:bg-[#681616]
                   text-white
-                  text-sm sm:text-base font-semibold
+                  text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-semibold
                   px-6 py-3
                   rounded-full
                   flex items-center gap-2
