@@ -35,8 +35,8 @@ export function AwakeningSection() {
         <motion.p
           className="
             font-semibold tracking-[0.2em] sm:tracking-[0.22em] 2xl:tracking-[0.25em]
-            uppercase text-[#8F3648]
-            text-[10px] sm:text-[11px] md:text-[12px] lg:text-[12px] xl:text-[13px] 2xl:text-[15px]
+            uppercase text-[#425190]
+            text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
             mb-3 sm:mb-4 md:mb-5 2xl:mb-6
           "
           variants={fadeUp}

@@ -44,7 +44,7 @@ export function DonationImpactSection() {
             {/* Tag */}
             <motion.p
               className="
-                font-semibold tracking-[0.18em] uppercase text-[#8F3648]
+                font-semibold tracking-[0.18em] uppercase text-[#425190]
                 text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
                 mb-3 sm:mb-4 2xl:mb-5
               "
@@ -80,7 +80,7 @@ export function DonationImpactSection() {
                   key={i}
                   className="
                     text-gray-600 leading-[1.8] sm:leading-[1.85] 2xl:leading-[1.95]
-                    text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
+                    text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px] max-w-screen w-full
                   "
                   variants={fadeUp}
                   initial="hidden"

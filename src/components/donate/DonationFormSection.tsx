@@ -146,7 +146,7 @@ export function DonationFormSection() {
                 flex items-center gap-2
                 text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
                 font-semibold text-white
-                bg-[#8B1A1A] hover:bg-[#7A1717]
+                bg-[#8F3648] hover:bg-[#3D171F]
                 px-4 py-2 sm:px-5 sm:py-2.5
                 rounded-full
                 shadow-[0_6px_0_#5E1010]
@@ -278,7 +278,7 @@ export function DonationFormSection() {
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
                     className="
-                      bg-[#8F3648] hover:bg-[#7a2e3c] text-white
+                      bg-[#8F3648] hover:bg-[#3D171F] text-white
                       rounded-md px-4 py-2 h-auto
                       text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
                       font-medium flex items-center gap-1.5
@@ -343,7 +343,7 @@ export function DonationFormSection() {
               <Button
                 type="submit"
                 className="
-                  w-full bg-[#8B1A1A] hover:bg-[#7A1717] text-white
+                  w-full bg-[#8F3648] hover:bg-[#3D171F] text-white
                   rounded-full h-12 sm:h-13 2xl:h-16
                   text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
                   font-semibold tracking-wide
@@ -389,7 +389,7 @@ export function DonationFormSection() {
                 </div>
                 <button
                   onClick={() => setShowQr(false)}
-                  className="w-7 h-7 rounded-full bg-[#8B1A1A] flex items-center justify-center text-white hover:bg-[#7A1717] transition-colors"
+                  className="w-7 h-7 rounded-full bg-[#8F3648] flex items-center justify-center text-white hover:bg-[#3D171F] transition-colors"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>

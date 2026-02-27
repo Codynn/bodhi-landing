@@ -7,6 +7,7 @@ import {
   INTRODUCTION_STATS,
 } from "@/constants/about/introduction.constants";
 import { AnimatedStat } from "@/components/home/AnimatedStat";
+import Link from "next/link";
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
 
@@ -75,12 +76,12 @@ export function IntroductionHeroSection() {
                 </svg>
               )}
               {i < breadcrumb.length - 1 ? (
-                <a
+                <Link
                   href={crumb.href}
                   className="hover:text-[#8F3648] transition-colors duration-200"
                 >
                   {crumb.label}
-                </a>
+                </Link>
               ) : (
                 <span className="text-[#8F3648] font-medium">
                   {crumb.label}
@@ -130,7 +131,7 @@ export function IntroductionHeroSection() {
             animate="visible"
           >
             {/* Section Tag */}
-            <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px]  font-semibold tracking-widest text-[#8F3648] uppercase">
+            <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px]  font-semibold tracking-widest text-[#425190] uppercase">
               {sectionTag}
             </p>
 

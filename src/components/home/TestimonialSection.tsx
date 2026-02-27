@@ -8,10 +8,10 @@ export default function TestimonialsSection() {
 
         {/* ── Header ── */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-14 gap-3">
-          <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-bold text-[#C0392B] uppercase tracking-widest">
+          <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-bold text-[#425190] uppercase tracking-widest">
             {TESTIMONIALS_CONTENT.label}
           </p>
-          <h2 className="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] xl:text-[32px] 2xl:text-[54px] font-bold text-[#7B1C1C] leading-snug">
+          <h2 className="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] xl:text-[32px] 2xl:text-[54px] font-bold text-[#8F3648] leading-snug">
             {TESTIMONIALS_CONTENT.heading}
           </h2>
           <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] text-gray-500 leading-relaxed max-w-[80vw]">

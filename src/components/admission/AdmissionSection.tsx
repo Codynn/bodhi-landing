@@ -206,7 +206,7 @@ export function AdmissionSection() {
 
             {/* ── RIGHT: Form ── */}
             <motion.div
-              className="flex-1 border border-gray-200 rounded-2xl px-5 py-6 sm:px-7 sm:py-8 md:px-8 md:py-9 2xl:px-12 2xl:py-12 max-w-screen w-full"
+              className="flex-1 bg-gray-100 rounded-2xl px-5 py-6 sm:px-7 sm:py-8 md:px-8 md:py-9 2xl:px-12 2xl:py-12 max-w-screen w-full"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
@@ -231,7 +231,7 @@ export function AdmissionSection() {
                     name="studentFullName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className={labelClass}>Student's Full Name*</FormLabel>
+                        <FormLabel className={labelClass}>Student&apos;s Full Name*</FormLabel>
                         <FormControl>
                           <Input placeholder="Enter full name" className={inputClass} {...field} />
                         </FormControl>
@@ -402,7 +402,7 @@ export function AdmissionSection() {
                     type="submit"
                     className="
                       w-full text-white mt-2
-                      bg-[#8B1A1A] hover:bg-[#7A1717]
+                      bg-[#8F3648] hover:bg-[#3D171F]
                       rounded-full h-12 sm:h-13 2xl:h-16
                       text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
                       font-semibold tracking-wide
@@ -456,7 +456,7 @@ export function AdmissionSection() {
               <Button
                 onClick={() => setShowSuccess(false)}
                 className="
-                  w-full bg-[#8B1A1A] hover:bg-[#7A1717] text-white
+                  w-full bg-[#8F3648] hover:bg-[#3D171F] text-white
                   rounded-full h-10 sm:h-11
                   text-[12px] sm:text-[14px] font-semibold
                   shadow-[0_4px_0_#5E1010]

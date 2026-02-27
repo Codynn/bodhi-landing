@@ -95,7 +95,7 @@ export function GallerySection() {
       <div className="max-w-[100vw] mx-auto">
 
         {/* Label */}
-        <p className="text-center text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-semibold tracking-widest text-[#8F3648] uppercase mb-3">
+        <p className="text-center text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-semibold tracking-widest text-[#425190] uppercase mb-3">
           {sectionLabel}
         </p>
 

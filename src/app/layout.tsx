@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Outfit } from 'next/font/google'
 import './globals.css'
 import Providers from '@/lib/Providers'
-import Navbar from '@/components/shared/Navbar'
+import Navbar from '@/components/shared/navbar/Navbar'
 import Footer from '@/components/shared/Footer'
 
 // ── Font ─────────────────────────────────────────────────────────────────────

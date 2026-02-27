@@ -10,7 +10,6 @@ export const NAV_ITEMS: NavItem[] = [
       { label: "Our School Family", href: "/about/school-family" },
     ],
   },
-  { label: "Academics", href: "/academics" },
   { label: "Donate", href: "/donate" },
   { label: "Notices", href: "/notices" },
   { label: "Career", href: "/career" },
@@ -41,7 +40,8 @@ export const SOCIAL_LINKS = [
 ];
 
 export const SCHOOL_INFO = {
-  name: "Bodhi International Montessori School",
+  name: "Bodhi International",
+  name2:"Montessori School",
   address: "LCM-10, Lumbini Bazar, Rupandehi",
   phone: "071-591633, 985-6025633",
   contactHref: "/contact",

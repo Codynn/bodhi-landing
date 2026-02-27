@@ -38,7 +38,7 @@ export function OurStorySection() {
         <motion.p
           className="
             font-semibold tracking-[0.2em] sm:tracking-[0.22em] 2xl:tracking-[0.25em]
-            uppercase text-[#8F3648]
+            uppercase text-[#425190]
              text-[12px] sm:text-[14px] md:text-[15px] lg:text-[18px] xl:text-[18px] 2xl:text-[24px]
             mb-3 sm:mb-4 md:mb-5 2xl:mb-6
           "

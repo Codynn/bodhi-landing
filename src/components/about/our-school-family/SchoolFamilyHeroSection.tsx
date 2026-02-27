@@ -6,6 +6,7 @@ import {
   SCHOOL_FAMILY_CONTENT,
   SCHOOL_FAMILY_MEMBERS,
 } from '@/constants/about/schoolfamily.constants'
+import Link from 'next/link'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
@@ -72,12 +73,12 @@ export function SchoolFamilyHeroSection() {
                 </svg>
               )}
               {i < breadcrumb.length - 1 ? (
-                <a
+                <Link
                   href={crumb.href}
                   className="hover:text-[#8F3648] transition-colors duration-200"
                 >
                   {crumb.label}
-                </a>
+                </Link>
               ) : (
                 <span className="text-[#8F3648] font-medium">{crumb.label}</span>
               )}
@@ -110,8 +111,8 @@ export function SchoolFamilyHeroSection() {
         >
           <p
             className="
-              font-semibold tracking-[0.18em] uppercase text-[#8F3648]
-              text-[10px] sm:text-[11px] md:text-[12px] xl:text-[13px] 2xl:text-[15px]
+              font-semibold tracking-[0.18em] uppercase text-[#425190]
+              text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px]
               mb-2 sm:mb-3
             "
           >
@@ -127,15 +128,7 @@ export function SchoolFamilyHeroSection() {
           </h2>
         </motion.div>
 
-        {/* ── Photo Grid ── */}
-        {/*
-          Layout mirrors Figma:
-          mobile:   2 columns
-          sm:       3 columns
-          md:       4 columns
-          lg+:      5 columns
-          2xl:      5 columns (larger cards)
-        */}
+    
         <div
           className="
             grid gap-5

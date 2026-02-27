@@ -11,7 +11,7 @@ export default function WhyChooseSection() {
 
         {/* ── Header ── */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-12 lg:mb-14 gap-3 w-full">
-          <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-bold text-[#8F3648] uppercase tracking-widest">
+          <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-bold text-[#425190] uppercase tracking-widest">
             {WHY_CHOOSE_CONTENT.label}
           </p>
 

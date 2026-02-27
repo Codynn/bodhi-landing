@@ -25,12 +25,12 @@ export default function AboutSection() {
           {/* ── Right: Content ── */}
           <div className="w-full lg:w-1/2 flex flex-col items-start gap-4">
             {/* Label */}
-            <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-semibold text-[#C0392B] uppercase tracking-widest">
+            <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-semibold text-[#425190] uppercase tracking-widest">
               {ABOUT_CONTENT.label}
             </p>
 
             {/* Heading */}
-            <h1 className="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] xl:text-[32px] 2xl:text-[54px]  font-bold text-[#7B1C1C] leading-snug">
+            <h1 className="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] xl:text-[32px] 2xl:text-[54px]  font-bold text-[#8F3648] leading-snug">
               {ABOUT_CONTENT.heading}
             </h1>
 
@@ -43,8 +43,8 @@ export default function AboutSection() {
             <Link href={ABOUT_CONTENT.ctaHref} className="hidden lg:block">
               <Button
                 className="
-      bg-[#8B1A1A] 
-      hover:bg-[#7A1717]
+      bg-[#8F3648] 
+      hover:bg-[#3D171F]
       text-white 
       rounded-full 
       px-6 py-2 
