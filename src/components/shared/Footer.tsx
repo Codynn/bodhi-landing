@@ -216,11 +216,11 @@ export default function Footer() {
         >
           <div
             className="
-              bg-[#7B1C1C]
+              bg-[#8F3648]
               hover:bg-[#681616]
               text-white
               text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px]
-              font-semibold
+              font-bold
               px-6 py-3
               rounded-l-full
               flex items-center gap-2

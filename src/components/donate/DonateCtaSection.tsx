@@ -34,10 +34,10 @@ export function DonateCtaSection() {
 
   return (
     <>
-      <section className="w-full bg-[#F5F5F0] relative overflow-hidden">
+      <section className="w-full  relative overflow-hidden">
         <div className="mx-auto w-full max-w-screen px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16 pt-12 sm:pt-16 md:pt-18 lg:pt-20 xl:pt-24 2xl:pt-32">
-          <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm">
-            <div className="flex flex-col lg:flex-row items-center">
+          <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm"> 
+            <div className="flex flex-col lg:flex-row items-center bg-gray-100">
 
               {/* LEFT: Illustration */}
               <motion.div
@@ -56,7 +56,7 @@ export function DonateCtaSection() {
               {/* RIGHT: Text + Button */}
               <div className="flex-1 min-w-0 px-6 pb-10 sm:px-10 sm:pb-12 lg:px-12 lg:py-14 xl:px-16 xl:py-16 2xl:px-20 2xl:py-20">
                 <motion.h2
-                  className="font-bold text-[#8F3648] leading-tight text-[20px] sm:text-[24px] md:text-[28px] lg:text-[30px] xl:text-[36px] 2xl:text-[44px] mb-5 sm:mb-6"
+                  className="font-bold text-[#8F3648] leading-tight text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] xl:text-[32px] 2xl:text-[54px] mb-5 sm:mb-6"
                   variants={fadeUp}
                   initial="hidden"
                   whileInView="visible"
@@ -70,7 +70,7 @@ export function DonateCtaSection() {
                   {paragraphs.map((para, i) => (
                     <motion.p
                       key={i}
-                      className="text-gray-600 leading-[1.8] sm:leading-[1.85] text-[12px] sm:text-[14px] md:text-[15px] lg:text-[15px] xl:text-[16px] 2xl:text-[18px]"
+                      className="text-gray-600 leading-[1.8] sm:leading-[1.85]  text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]"
                       variants={fadeUp}
                       initial="hidden"
                       whileInView="visible"
@@ -104,21 +104,6 @@ export function DonateCtaSection() {
           </div>
         </div>
 
-        {/* Green hill footer */}
-        <div className="relative w-full mt-0 leading-none">
-          <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" className="w-full block" preserveAspectRatio="none">
-            <path d="M0,100 C200,40 400,130 600,80 C800,30 1000,110 1200,70 C1320,48 1400,80 1440,90 L1440,160 L0,160 Z" fill="#2D6A2D" />
-            <path d="M0,130 C150,90 300,150 500,120 C700,90 900,145 1100,115 C1250,95 1370,125 1440,118 L1440,160 L0,160 Z" fill="#3D8B3D" />
-            <g fill="#2D6A2D">
-              <ellipse cx="180" cy="127" rx="10" ry="6" />
-              <ellipse cx="195" cy="122" rx="7" ry="5" />
-              <ellipse cx="700" cy="112" rx="10" ry="6" />
-              <ellipse cx="715" cy="107" rx="7" ry="5" />
-              <ellipse cx="1050" cy="118" rx="10" ry="6" />
-              <ellipse cx="1065" cy="113" rx="7" ry="5" />
-            </g>
-          </svg>
-        </div>
       </section>
 
       <DonationModal open={modalOpen} onClose={() => setModalOpen(false)} />

@@ -150,7 +150,7 @@ function PartnershipCard({
       <p
         className="
           text-gray-600 
-          text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[18px]
+          text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
         "
       >
         {card.description}
