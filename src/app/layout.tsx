@@ -8,9 +8,9 @@ import Footer from '@/components/shared/Footer'
 // ── Font ─────────────────────────────────────────────────────────────────────
 const outfit = Outfit({
   subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-outfit',
   weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-outfit',
+  display: 'swap',
 })
 
 // ── Site Config ───────────────────────────────────────────────────────────────
@@ -91,11 +91,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/icons/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/icons/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/icons/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/home/logo.svg', sizes: '16x16', type: 'image/png' },
+      { url: '/home/logo.svg', sizes: '32x32', type: 'image/png' },
+      { url: '/home/logo.svg', sizes: '96x96', type: 'image/png' },
     ],
-    apple: [{ url: '/icons/apple-touch-icon.png', sizes: '180x180' }],
+    apple: [{ url: '/home/logo.svg', sizes: '180x180' }],
     shortcut: '/home/logo.svg',
   },
  
@@ -123,7 +123,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={outfit.variable}>
       <head>
         <script
           type="application/ld+json"
@@ -133,7 +133,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       </head>
       <body
-        className={`${outfit.variable} font-sans antialiased min-h-screen bg-white text-gray-900`}
+        className={`font-outfit min-h-screen bg-white text-gray-900`}
       >
         <Providers>
           <Navbar />
