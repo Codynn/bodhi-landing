@@ -47,7 +47,7 @@ export default function NoticesSection() {
   return (
     <>
       <section className="w-full bg-white">
-        <div className="max-w-[100vw] mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20">
 
           {/* ── Breadcrumb ── */}
           <motion.nav

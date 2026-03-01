@@ -4,7 +4,7 @@ import { Quote } from 'lucide-react'
 export default function TestimonialsSection() {
   return (
     <section className="w-full bg-white">
-      <div className="max-w-screen mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20 ">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20 ">
 
         {/* ── Header ── */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-14 gap-3">

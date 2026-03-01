@@ -81,7 +81,7 @@ export function ContactSection() {
       <section className="w-full bg-white">
         <div
           className="
-            mx-auto w-full max-w-screen
+            mx-auto w-full max-w-7xl
             px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16
             sm:pt-10 pb-16 sm:pb-20 lg:pb-24 2xl:pb-32
           "

@@ -39,7 +39,7 @@ export function DonateHeroSection() {
 
   return (
     <section className="w-full bg-white">
-      <div className="max-w-screen mx-auto px-4 sm:px-6 lg:px-8 sm:pt-10 pb-14 sm:pb-18 lg:pb-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 sm:pt-10 pb-14 sm:pb-18 lg:pb-24">
         {/* Breadcrumb */}
         <motion.nav
           className="flex justify-center items-center gap-1.5  text-sm sm:text-base max-md:text-lg  

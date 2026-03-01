@@ -38,7 +38,7 @@ export function SchoolFamilyHeroSection() {
       <div
         className="
           mx-auto w-full
-          max-w-screen
+          max-w-7xl
           px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16
           sm:pt-10 pb-14 sm:pb-18 lg:pb-24
         "

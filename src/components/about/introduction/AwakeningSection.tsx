@@ -24,7 +24,7 @@ export function AwakeningSection() {
       <div
         className="
           mx-auto w-full text-center
-          max-w-screen
+          max-w-7xl
           px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16
           pt-12 sm:pt-16 md:pt-18 lg:pt-20 xl:pt-24 2xl:pt-32
           pb-12 sm:pb-16 md:pb-18 lg:pb-20 xl:pb-24 2xl:pb-32

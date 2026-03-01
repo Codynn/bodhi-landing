@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 export default function AboutSection() {
   return (
     <section className="w-full bg-white mt-6">
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20">
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
           {/* ── Left: Image ── */}
           <div className="w-full lg:w-1/2 shrink-0">

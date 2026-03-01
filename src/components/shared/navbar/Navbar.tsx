@@ -30,10 +30,10 @@ export default function Navbar({ className }: NavbarProps) {
 
 
         <nav className="border-b border-gray-200 bg-white shadow-sm">
-          <div className="max-w-screen w-full flex justify-between px-2">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between">
 
             {/* Logo */}
-            <Link href="/" className="flex flex-col items-center flex-shrink-0">
+            <Link href="/" className="flex flex-col items-center">
               <div className="relative w-10 h-10 md:w-15 md:h-15">
                 <Image src="/home/logo.svg" alt={SCHOOL_INFO.name} fill className="object-contain" priority />
               </div>

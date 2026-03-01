@@ -7,7 +7,7 @@ import { WhyChooseCard } from '../shared/WhyChooseCard'
 export default function WhyChooseSection() {
   return (
     <section className="w-full bg-gray-50">
-      <div className="max-w-[100vw] mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20">
 
         {/* ── Header ── */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-12 lg:mb-14 gap-3 w-full">

@@ -92,7 +92,7 @@ export function GallerySection() {
 
   return (
     <section className="w-full bg-white py-14 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-[100vw] mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Label */}
         <p className="text-center text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-semibold tracking-widest text-[#425190] uppercase mb-3">

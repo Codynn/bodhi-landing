@@ -56,7 +56,7 @@ const mobileStatsVariant: Variants = {
 export function HeroSection() {
   return (
     <section className="w-full bg-white">
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-12 lg:pt-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-12 lg:pt-14">
 
         {/* Heading */}
         <motion.h1

@@ -8,7 +8,7 @@ const SchoolMessageSection = () => {
   return (
     <section className="w-full py-10 px-6 md:px-16 my-12">
       {/* Section Label + Heading — centered */}
-      <div className="text-center mb-8 max-w-[100vw]">
+      <div className="text-center mb-8 max-w-7xl">
         <p className="flex-1 text-[12px] sm:text-[14px] md:text-[15px] lg:text-[15px] xl:text-[16px] 2xl:text-[20px] font-semibold tracking-[0.2em] text-[#425190] uppercase mb-1">
           {sectionLabel}
         </p>
@@ -18,7 +18,7 @@ const SchoolMessageSection = () => {
       </div>
 
       {/* Two-column layout: image left, text right */}
-      <div className="flex flex-col md:flex-col lg:flex-row gap-4 md:gap-6 items-start max-w-screen mx-auto rounded-lg bg-gray-100 px-4 py-6">
+      <div className="w-full flex flex-col md:flex-col lg:flex-row gap-4 md:gap-6 items-start max-w-7xl mx-auto rounded-lg bg-gray-100 px-4 py-6">
         
         {/* Principal Image — left column, fixed width */}
         <div className="flex-shrink-0 w-full md:w-[340px]">

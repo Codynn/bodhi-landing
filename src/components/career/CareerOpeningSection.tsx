@@ -125,7 +125,7 @@ export function CareerOpeningsSection() {
     <section className="w-full bg-white">
       <div
         className="
-          mx-auto w-full max-w-screen
+          mx-auto w-full max-w-7xl
           px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16
           pb-16 sm:pb-20 lg:pb-24 2xl:pb-32
         "
@@ -186,7 +186,7 @@ export function CareerOpeningsSection() {
           <Link
             href={emptyState.submitHref}
             className="
-              flex-shrink-0 flex items-center gap-2
+              shrink-0 flex items-center gap-2
               text-[12px] sm:text-[13px] xl:text-[14px] 2xl:text-[16px]
               font-semibold text-white
               bg-[#8F3648] hover:bg-[#3D171F]

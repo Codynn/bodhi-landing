@@ -35,7 +35,7 @@ export function DonateCtaSection() {
   return (
     <>
       <section className="w-full  relative overflow-hidden">
-        <div className="mx-auto w-full max-w-screen px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16 pt-12 sm:pt-16 md:pt-18 lg:pt-20 xl:pt-24 2xl:pt-32">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16 pt-12 sm:pt-16 md:pt-18 lg:pt-20 xl:pt-24 2xl:pt-32">
           <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm"> 
             <div className="flex flex-col lg:flex-row items-center bg-gray-100">
 
