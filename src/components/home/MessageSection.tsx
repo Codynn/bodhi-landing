@@ -8,7 +8,7 @@ const SchoolMessageSection = () => {
   return (
     <section className="w-full py-10 px-6 md:px-16 my-12">
       {/* Section Label + Heading — centered */}
-      <div className="text-center mb-8 max-w-7xl">
+      <div className="text-center mb-8 max-w-7xl mx-auto">
         <p className="flex-1 text-[12px] sm:text-[14px] md:text-[15px] lg:text-[15px] xl:text-[16px] 2xl:text-[20px] font-semibold tracking-[0.2em] text-[#425190] uppercase mb-1">
           {sectionLabel}
         </p>
