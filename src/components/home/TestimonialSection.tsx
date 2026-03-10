@@ -8,26 +8,26 @@ export default function TestimonialsSection() {
 
         {/* ── Header ── */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-14 gap-3">
-          <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-bold text-[#425190] uppercase tracking-widest">
+          <p className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] font-bold text-[#425190] uppercase tracking-widest">
             {TESTIMONIALS_CONTENT.label}
           </p>
-          <h2 className="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] xl:text-[32px] 2xl:text-[54px] font-bold text-[#8F3648] leading-snug">
+          <h2 className="text-[36px] sm:text-[34px] md:text-[34px] lg:text-[40px] font-bold text-[#8F3648] leading-snug">
             {TESTIMONIALS_CONTENT.heading}
           </h2>
-          <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] text-gray-500 leading-relaxed max-w-[80vw]">
+          <p className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] text-gray-500 leading-relaxed max-w-[80vw]">
             {TESTIMONIALS_CONTENT.description}
           </p>
         </div>
 
         {/* ── Row 1: 2 columns ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-10 mb-8 lg:mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4 mb-8 lg:mb-10">
           {TESTIMONIALS_DATA.slice(0, 2).map((t) => (
             <TestimonialCard key={t.id} {...t} />
           ))}
         </div>
 
         {/* ── Row 2: 3 columns ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4">
           {TESTIMONIALS_DATA.slice(2, 5).map((t) => (
             <TestimonialCard key={t.id} {...t} />
           ))}

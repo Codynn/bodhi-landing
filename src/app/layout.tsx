@@ -4,8 +4,9 @@ import './globals.css'
 import Providers from '@/lib/Providers'
 import Navbar from '@/components/shared/navbar/Navbar'
 import Footer from '@/components/shared/Footer'
+import { Toaster } from '@/components/ui/sonner'
 
-// ── Font ─────────────────────────────────────────────────────────────────────
+// ── Font ──────────────────────────────────────────────────────────────────────
 const outfit = Outfit({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800'],
@@ -38,9 +39,7 @@ const siteConfig = {
   themeColor: '#C0392B',
 }
 
-
-
-// ── Metadata ─────────────────────────────────────────────────────────────────
+// ── Metadata ──────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -98,7 +97,6 @@ export const metadata: Metadata = {
     apple: [{ url: '/home/logo.svg', sizes: '180x180' }],
     shortcut: '/home/logo.svg',
   },
- 
   formatDetection: { telephone: false, email: false, address: false },
   applicationName: siteConfig.shortName,
   category: 'education',
@@ -108,7 +106,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: siteConfig.themeColor },
-    { media: '(prefers-color-scheme: dark)', color: siteConfig.themeColor },
+    { media: '(prefers-color-scheme: dark)',  color: siteConfig.themeColor },
   ],
   width: 'device-width',
   initialScale: 1,
@@ -125,24 +123,27 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={outfit.variable}>
       <head>
-        <script
-          type="application/ld+json"
-        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       </head>
-      <body
-        className={`font-outfit min-h-screen bg-white text-gray-900`}
-      >
+      <body className="font-outfit min-h-screen bg-white text-gray-900">
         <Providers>
           <Navbar />
 
           {/* ── Page Content ── */}
-          <main className='flex-1'>{children}</main>
+          <main className="flex-1">{children}</main>
+
+          {/* ── Global Toast Notifications ── */}
+          <Toaster
+            position="top-right"
+            richColors
+            closeButton
+            duration={4000}
+          />
         </Providers>
 
-         <Footer/>
+        <Footer />
       </body>
     </html>
   )

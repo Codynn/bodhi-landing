@@ -95,12 +95,12 @@ export function GallerySection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Label */}
-        <p className="text-center text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-semibold tracking-widest text-[#425190] uppercase mb-3">
+        <p className="text-center text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]  font-semibold tracking-widest text-[#425190] uppercase mb-3">
           {sectionLabel}
         </p>
 
         {/* Heading */}
-        <h2 className="text-center text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] xl:text-[32px] 2xl:text-[54px] font-bold text-[#8F3648] mb-8 sm:mb-10">
+        <h2 className="text-center text-[26px] sm:text-[26px] md:text-[28px] lg:text-[40px]  font-bold text-[#8F3648] mb-8 sm:mb-10">
           {heading}
         </h2>
 

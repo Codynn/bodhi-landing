@@ -39,7 +39,7 @@ export function PartnershipOpportunitiesSection() {
           <motion.p
             className="
               font-semibold tracking-[0.18em] uppercase text-[#425190]
-              text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
+              text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] 
               mb-3
             "
             variants={fadeUp}
@@ -54,7 +54,7 @@ export function PartnershipOpportunitiesSection() {
           <motion.h2
             className="
               font-bold text-[#8F3648] leading-tight
-              text-[22px] sm:text-[26px] md:text-[30px] lg:text-[34px] xl:text-[38px] 2xl:text-[46px]
+              text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px]
               mb-4 sm:mb-5
             "
             variants={fadeUp}
@@ -69,7 +69,7 @@ export function PartnershipOpportunitiesSection() {
           <motion.p
             className="
               text-gray-600 leading-[1.8] mx-auto
-              text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
+              text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
               max-w-[80vw]
             "
             variants={fadeUp}
@@ -83,14 +83,14 @@ export function PartnershipOpportunitiesSection() {
         </div>
 
         {/* ── Row 1: 3 cards ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 xl:gap-12 mb-8 lg:mb-10 xl:mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4  mb-8 lg:mb-10 xl:mb-12">
           {firstRow.map((card, i) => (
             <PartnershipCard key={card.title} card={card} delay={0.22 + i * 0.1} />
           ))}
         </div>
 
         {/* ── Row 2: 2 cards centered ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 lg:gap-10 xl:gap-12 lg:w-2/3 lg:mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-2 lg:gap-4 lg:w-2/3 lg:mx-auto">
           {secondRow.map((card, i) => (
             <PartnershipCard key={card.title} card={card} delay={0.52 + i * 0.1} />
           ))}
@@ -140,7 +140,7 @@ function PartnershipCard({
       <h3
         className="
           font-bold text-gray-900 
-          text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] xl:text-[28px] 2xl:text-[32px]
+          text-[18px] sm:text-[20px] md:text-[24px] lg:text-[20px]
         "
       >
         {card.title}
@@ -150,7 +150,7 @@ function PartnershipCard({
       <p
         className="
           text-gray-600 
-          text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
+          text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] font-medium
         "
       >
         {card.description}

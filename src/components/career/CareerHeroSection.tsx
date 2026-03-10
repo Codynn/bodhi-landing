@@ -6,7 +6,7 @@ import { motion, Variants } from 'framer-motion'
 import { CAREER_HERO_CONTENT } from '@/constants/career/careerhero.constants'
 
 // ── Text scale ────────────────────────────────────────────────────────────────
-const TEXT = 'text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]'
+const TEXT = 'text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]'
 
 // ── Animations ────────────────────────────────────────────────────────────────
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
@@ -71,7 +71,7 @@ export function CareerHeroSection() {
         <motion.h1
           className="
             text-center font-bold text-gray-900 tracking-tight
-            text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl mb-4 sm:mb-5
+           text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px] mb-4 sm:mb-5
           "
           variants={fadeUp}
           initial="hidden"
@@ -114,7 +114,7 @@ export function CareerHeroSection() {
           <motion.h2
             className="
               font-bold text-[#8F3648] leading-tight
-               text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl
+               text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px]
             "
             variants={fadeUp}
             initial="hidden"

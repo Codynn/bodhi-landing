@@ -22,7 +22,7 @@ export const MobileNavItem = ({ item, pathname, onClose }: MobileNavItemProps) =
         <button
           onClick={() => setOpen((prev) => !prev)}
           className={cn(
-            "w-full flex items-center justify-between px-5 py-3.5 text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px] font-medium transition-colors",
+            "w-full flex items-center justify-between px-5 py-3.5 text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]  font-medium transition-colors",
             isActive ? "text-[#8F3648]" : "text-gray-800"
           )}
         >
@@ -36,7 +36,7 @@ export const MobileNavItem = ({ item, pathname, onClose }: MobileNavItemProps) =
                 key={child.href}
                 href={child.href}
                 onClick={onClose}
-                className="block py-2.5 pl-3 text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px] text-gray-600 hover:text-[#8F3648] border-l-2 border-gray-200 hover:border-[#8F3648] transition-colors mb-1"
+                className="block py-2.5 pl-3 text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]  text-gray-600 hover:text-[#8F3648] border-l-2 border-gray-200 hover:border-[#8F3648] transition-colors mb-1"
               >
                 {child.label}
               </Link>
@@ -53,7 +53,7 @@ export const MobileNavItem = ({ item, pathname, onClose }: MobileNavItemProps) =
         href={item.href}
         onClick={onClose}
         className={cn(
-          "flex items-center gap-1.5 px-5 py-3.5 text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px] font-medium transition-colors hover:text-[#8F3648]",
+          "flex items-center gap-1.5 px-5 py-3.5 text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]  font-medium transition-colors hover:text-[#8F3648]",
           isActive ? "text-[#8F3648]" : "text-gray-800"
         )}
       >

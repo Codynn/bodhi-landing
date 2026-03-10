@@ -149,7 +149,17 @@ export function HeroSection() {
             {HERO_STATS.map((stat) => (
               <div
                 key={stat.label}
-                className="flex-1 py-4 [&_span:first-child]:text-[#2D6A2D] [&_span:last-child]:text-gray-500 [&_span:first-child]:text-xl [&_span:last-child]:text-[10px]"
+                className="flex-1 py-4 [&_span:first-child]:text-[#2D6A2D]
+                  [&_span:first-child]:text-[32px]
+        sm:[&_span:first-child]:text-[32px]
+        md:[&_span:first-child]:text-[32px]
+        lg:[&_span:first-child]:text-[40px]
+                 [&_span:last-child]:text-gray-500 
+                   [&_span:last-child]:text-[16px]
+        sm:[&_span:last-child]:text-[16px]
+        md:[&_span:last-child]:text-[16px]
+        lg:[&_span:last-child]:text-[18px]
+                 "
               >
                 <AnimatedStat stat={stat} />
               </div>

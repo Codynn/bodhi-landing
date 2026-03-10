@@ -91,21 +91,21 @@ export default function Footer() {
                 </div>
 
                 <div className="leading-tight">
-                  <p className="text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] font-bold">Bodhi International</p>
-                  <p className="text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] text-white/70">
+                  <p className="text-[20px] sm:text-[22px] md:text-[22px] lg:text-[24px] font-bold">Bodhi International</p>
+                  <p className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] text-white/70">
                     Montessori School
                   </p>
                 </div>
               </Link>
 
-              <p className="text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] text-white/75 leading-relaxed max-w-sm">
+              <p className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] text-white/75 leading-relaxed max-w-sm">
                 {FOOTER_CONTENT.description}
               </p>
             </div>
 
             {/* ── Quick Links ── */}
             <div className="flex flex-col gap-5">
-              <h4 className="text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] font-bold tracking-wide">
+              <h4 className="text-[20px] sm:text-[22px] md:text-[22px] lg:text-[24px] font-bold tracking-wide">
                 Quick Links
               </h4>
 
@@ -115,7 +115,7 @@ export default function Footer() {
                     <Link
                       href={link.href}
                       className="
-                        text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] text-white/75 
+                       text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] text-white/75 
                         hover:text-white
                         transition-colors duration-200
                         inline-flex items-center gap-2
@@ -137,11 +137,11 @@ export default function Footer() {
 
               {/* Contact */}
               <div className="flex flex-col gap-3">
-                <h4 className="text-[16px] sm:text-[18px] md:text-[16px] lg:text-[18px] xl:text-[22px] 2xl:text-[24px] font-semibold tracking-wide">
+                <h4 className="text-[20px] sm:text-[22px] md:text-[22px] lg:text-[24px] font-semibold tracking-wide">
                   Contact Us
                 </h4>
 
-                <div className="flex items-center gap-3  text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] text-white/75">
+                <div className="flex items-center gap-3  text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]  text-white/75">
                   <Phone className="w-4 h-4 text-white/60 shrink-0" />
                   <span>{FOOTER_CONTENT.phone}</span>
                 </div>
@@ -149,7 +149,7 @@ export default function Footer() {
 
               {/* Social */}
               <div className="flex flex-col gap-3">
-                <h4 className="text-[16px] sm:text-[18px] md:text-[16px] lg:text-[18px] xl:text-[22px] 2xl:text-[24px] font-semibold tracking-wide">
+                <h4 className="text-[20px] sm:text-[22px] md:text-[22px] lg:text-[24px] font-semibold tracking-wide">
                   Follow Us
                 </h4>
 
@@ -181,7 +181,7 @@ export default function Footer() {
           </div>
 
           {/* ───── Bottom Bar ───── */}
-          <div className="border-t border-white/20 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3  text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] text-white/60">
+          <div className="border-t border-white/20 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] text-white/60">
             <p>{FOOTER_CONTENT.copyright}</p>
 
             <div className="flex items-center gap-2">
@@ -219,7 +219,7 @@ export default function Footer() {
               bg-[#8F3648]
               hover:bg-[#681616]
               text-white
-              text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px]
+              text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
               font-bold
               px-6 py-3
               rounded-l-full

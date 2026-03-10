@@ -1,103 +1,111 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import { motion, Variants, AnimatePresence } from 'framer-motion'
-import { CheckCircle, X } from 'lucide-react'
-import Link from 'next/link'
+/**
+ * components/AdmissionSection.tsx
+ * ─────────────────────────────────────────────────────────────────
+ * Admission enquiry page — Next.js App Router, TypeScript.
+ *
+ * Full data flow:
+ *
+ *   useForm (react-hook-form + zodResolver(admissionFormSchema))
+ *     └─▶ onSubmit
+ *           └─▶ useAdmission  (TanStack useMutation)
+ *                 └─▶ submitAdmission  (service)
+ *                       └─▶ axiosInstance.post("/admissions")
+ *                             └─▶ POST https://api.betterschool.app/api/admissions
+ *
+ *   On success  → <ResultPopup type="success" />  + form.reset()
+ *   On error    → <ResultPopup type="error"   />
+ *   While pending → all inputs disabled + Loader2 spinner on button
+ */
+
+import { useForm }          from "react-hook-form";
+import { zodResolver }      from "@hookform/resolvers/zod";
+import { motion, Variants } from "framer-motion";
+import { Loader2 }          from "lucide-react";
+import Link                 from "next/link";
 
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
+  Form, FormControl, FormField,
+  FormItem, FormLabel, FormMessage,
+} from "@/components/ui/form";
+import { Input }    from "@/components/ui/input";
+import { Button }   from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+  Select, SelectContent,
+  SelectItem, SelectTrigger, SelectValue,
+} from "@/components/ui/select";
 
-import { ADMISSION_CONTENT } from '@/constants/admission/admission.constants'
-import { GRADE_OPTIONS, RELATIONSHIP_OPTIONS } from '@/types/admission/admission.types'
 
-// ── Validation ────────────────────────────────────────────────────────────────
-const schema = z.object({
-  studentFullName: z.string().min(2, 'Student name is required'),
-  dateOfBirth: z.string().min(1, 'Date of birth is required'),
-  address: z.string().min(3, 'Address is required'),
-  gradeLevel: z.string().min(1, 'Please select a grade'),
-  parentFullName: z.string().min(2, 'Parent name is required'),
-  relationshipToStudent: z.string().min(1, 'Please select relationship'),
-  email: z.string().email('Enter a valid email').or(z.literal('')),
-  phoneNumber: z.string().min(7, 'Phone number is required'),
-  message: z.string().optional(),
-})
+import { ADMISSION_CONTENT }                    from "@/constants/admission/admission.constants";
+import { GRADE_OPTIONS, RELATIONSHIP_OPTIONS }  from "@/types/admission/admission.types";
+import { useAdmission }                         from "@/hooks/useAdmission";
+import { admissionFormSchema, AdmissionFormValues } from "@/lib/validations/admission-form.schema";
+import { ResultPopup } from "../shared/ResultPopUp";
 
-type FormValues = z.infer<typeof schema>
 
-// ── Shared styles ─────────────────────────────────────────────────────────────
-const TEXT = 'text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]'
+// ── Shared styles ─────────────────────────────────────────────────
+const TEXT = "text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]";
 
-const labelClass = `${TEXT} font-semibold text-gray-800`
+const labelClass = `${TEXT} font-semibold text-gray-800`;
 
 const inputClass = `
   ${TEXT} rounded-none border-0 border-b border-gray-300 bg-transparent
   px-0 shadow-none focus-visible:ring-0 focus-visible:border-[#8F3648]
   transition-colors placeholder:text-gray-400
-`
+`;
 
 const selectTriggerClass = `
   ${TEXT} rounded-none border-0 border-b border-gray-300 bg-transparent
   shadow-none focus:ring-0 focus:border-[#8F3648] px-0
   text-gray-400 transition-colors
-`
+`;
 
-// ── Animations ────────────────────────────────────────────────────────────────
-const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
+// ── Animations ────────────────────────────────────────────────────
+const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden:  { opacity: 0, y: 24 },
   visible: (delay: number = 0) => ({
     opacity: 1,
     y: 0,
     transition: { duration: 0.7, ease: EASE, delay },
   }),
-}
+};
 
+// ─────────────────────────────────────────────────────────────────
 export function AdmissionSection() {
   const {
     breadcrumb, pageTitle, sectionTag, heading, paragraphs,
-    formTitle, studentSectionLabel, parentSectionLabel,
-    submitLabel, successTitle,
-  } = ADMISSION_CONTENT
+    formTitle, studentSectionLabel, parentSectionLabel, submitLabel,
+  } = ADMISSION_CONTENT;
 
-  const [showSuccess, setShowSuccess] = useState(false)
-
-  const form = useForm<FormValues>({
-    resolver: zodResolver(schema),
+  // ── 1. Form ──────────────────────────────────────
+  const form = useForm<AdmissionFormValues>({
+    resolver: zodResolver(admissionFormSchema),
     defaultValues: {
-      studentFullName: '', dateOfBirth: '', address: '',
-      gradeLevel: '', parentFullName: '', relationshipToStudent: '',
-      email: '', phoneNumber: '', message: '',
+      studentFullName:       "",
+      dateOfBirth:           "",
+      address:               "",
+      gradeLevel:            "",
+      parentFullName:        "",
+      relationshipToStudent: "",
+      email:                 "",
+      phoneNumber:           "",
+      message:               "",
     },
-  })
+  });
 
-  const onSubmit = (values: FormValues) => {
-    console.log('Admission form submitted:', values)
-    form.reset()
-    setShowSuccess(true)
-  }
+  // ── 2. Mutation ──────────────────────────────────
+  const { admissionMutation, isPending, popup, closePopup } = useAdmission({
+    onSuccess: () => form.reset(),
+  });
 
+  // ── 3. Submit ─────────────────────────────────────
+  const onSubmit = (values: AdmissionFormValues) => admissionMutation(values);
+
+  // ─────────────────────────────────────────────────
   return (
     <>
       <section className="w-full bg-white">
@@ -108,14 +116,10 @@ export function AdmissionSection() {
             sm:pt-10 pb-16 sm:pb-20 lg:pb-24 2xl:pb-32
           "
         >
-
-          {/* ── Breadcrumb ── */}
+          {/* ── Breadcrumb ──────────────────────────── */}
           <motion.nav
             className={`flex justify-center items-center gap-1.5 ${TEXT} text-gray-500 mb-4 sm:mb-5`}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={0}
+            variants={fadeUp} initial="hidden" animate="visible" custom={0}
             aria-label="Breadcrumb"
           >
             {breadcrumb.map((crumb, i) => (
@@ -136,66 +140,48 @@ export function AdmissionSection() {
             ))}
           </motion.nav>
 
-          {/* ── Page Title ── */}
+          {/* ── Page Title ──────────────────────────── */}
           <motion.h1
             className="
               text-center font-bold text-gray-900 tracking-tight
-              text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl
+              text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px]
               mb-10 sm:mb-12 lg:mb-14
             "
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={0.1}
+            variants={fadeUp} initial="hidden" animate="visible" custom={0.1}
           >
             {pageTitle}
           </motion.h1>
 
-          {/* ── Two-column layout ── */}
+          {/* ── Two-column layout ───────────────────── */}
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 xl:gap-16 2xl:gap-20 items-start">
 
-            {/* ── LEFT: Content ── */}
+            {/* ══ LEFT — info ════════════════════════ */}
             <div className="w-full lg:w-[38%] xl:w-[36%] 2xl:w-[34%] flex-shrink-0">
 
-              {/* Tag */}
               <motion.p
-                className="
-                  font-semibold tracking-[0.18em] uppercase text-[#8F3648]
-                  text-[10px] sm:text-[11px] md:text-[12px] xl:text-[13px] 2xl:text-[15px]
-                  mb-2 sm:mb-3
-                "
-                variants={fadeUp}
-                initial="hidden"
-                animate="visible"
-                custom={0.15}
+                className={`font-semibold tracking-[0.18em] uppercase text-[#425190] ${TEXT} mb-2 sm:mb-3`}
+                variants={fadeUp} initial="hidden" animate="visible" custom={0.15}
               >
                 {sectionTag}
               </motion.p>
 
-              {/* Heading */}
               <motion.h2
                 className="
                   font-bold text-[#8F3648] leading-tight
-                  text-[20px] sm:text-[24px] md:text-[28px] lg:text-[26px] xl:text-[30px] 2xl:text-[38px]
+                  text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px]
                   mb-5 sm:mb-6 2xl:mb-8
                 "
-                variants={fadeUp}
-                initial="hidden"
-                animate="visible"
-                custom={0.2}
+                variants={fadeUp} initial="hidden" animate="visible" custom={0.2}
               >
                 {heading}
               </motion.h2>
 
-              {/* Paragraphs */}
               <div className="flex flex-col gap-4 2xl:gap-5">
                 {paragraphs.map((para, i) => (
                   <motion.p
                     key={i}
                     className={`${TEXT} text-gray-600 leading-relaxed`}
-                    variants={fadeUp}
-                    initial="hidden"
-                    animate="visible"
+                    variants={fadeUp} initial="hidden" animate="visible"
                     custom={0.25 + i * 0.07}
                   >
                     {para}
@@ -204,24 +190,24 @@ export function AdmissionSection() {
               </div>
             </div>
 
-            {/* ── RIGHT: Form ── */}
+            {/* ══ RIGHT — form ═══════════════════════ */}
             <motion.div
               className="flex-1 bg-gray-100 rounded-2xl px-5 py-6 sm:px-7 sm:py-8 md:px-8 md:py-9 2xl:px-12 2xl:py-12 max-w-screen w-full"
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={0.2}
+              variants={fadeUp} initial="hidden" animate="visible" custom={0.2}
             >
-              {/* Form title */}
               <p className={`${TEXT} font-bold text-gray-800 mb-6 sm:mb-8`}>
                 {formTitle}
               </p>
 
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 sm:gap-6">
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="flex flex-col gap-5 sm:gap-6"
+                  noValidate
+                >
 
-                  {/* ── Student Details ── */}
-                  <p className={`${TEXT} font-bold text-gray-800 border-b border-gray-100 pb-2`}>
+                  {/* ── Student Details ─────────────── */}
+                  <p className={`${TEXT} font-bold text-gray-800 border-b border-gray-300 pb-2`}>
                     {studentSectionLabel}
                   </p>
 
@@ -231,11 +217,17 @@ export function AdmissionSection() {
                     name="studentFullName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className={labelClass}>Student&apos;s Full Name*</FormLabel>
+                        <FormLabel className={labelClass}>Student&apos;s Full Name *</FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter full name" className={inputClass} {...field} />
+                          <Input
+                            placeholder="Enter full name"
+                            autoComplete="name"
+                            disabled={isPending}
+                            className={inputClass}
+                            {...field}
+                          />
                         </FormControl>
-                        <FormMessage className="text-[11px]" />
+                        <FormMessage className={TEXT} />
                       </FormItem>
                     )}
                   />
@@ -247,15 +239,16 @@ export function AdmissionSection() {
                       name="dateOfBirth"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className={labelClass}>Date of Birth</FormLabel>
+                          <FormLabel className={labelClass}>Date of Birth *</FormLabel>
                           <FormControl>
                             <Input
                               type="date"
+                              disabled={isPending}
                               className={`${inputClass} text-gray-500`}
                               {...field}
                             />
                           </FormControl>
-                          <FormMessage className="text-[11px]" />
+                          <FormMessage className={TEXT} />
                         </FormItem>
                       )}
                     />
@@ -264,11 +257,17 @@ export function AdmissionSection() {
                       name="address"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className={labelClass}>Address*</FormLabel>
+                          <FormLabel className={labelClass}>Address *</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter address" className={inputClass} {...field} />
+                            <Input
+                              placeholder="Enter address"
+                              autoComplete="street-address"
+                              disabled={isPending}
+                              className={inputClass}
+                              {...field}
+                            />
                           </FormControl>
-                          <FormMessage className="text-[11px]" />
+                          <FormMessage className={TEXT} />
                         </FormItem>
                       )}
                     />
@@ -280,8 +279,12 @@ export function AdmissionSection() {
                     name="gradeLevel"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className={labelClass}>Applying for Grade / Level*</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormLabel className={labelClass}>Applying for Grade / Level *</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          disabled={isPending}
+                        >
                           <FormControl>
                             <SelectTrigger className={selectTriggerClass}>
                               <SelectValue placeholder="Select" />
@@ -289,17 +292,19 @@ export function AdmissionSection() {
                           </FormControl>
                           <SelectContent>
                             {GRADE_OPTIONS.map((opt) => (
-                              <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                              <SelectItem key={opt.value} value={opt.value}>
+                                {opt.label}
+                              </SelectItem>
                             ))}
                           </SelectContent>
                         </Select>
-                        <FormMessage className="text-[11px]" />
+                        <FormMessage className={TEXT} />
                       </FormItem>
                     )}
                   />
 
-                  {/* ── Parent/Guardian Details ── */}
-                  <p className={`${TEXT} font-bold text-gray-800 border-b border-gray-100 pb-2 mt-2`}>
+                  {/* ── Parent / Guardian Details ────── */}
+                  <p className={`${TEXT} font-bold text-gray-800 border-b border-gray-300 pb-2 mt-2`}>
                     {parentSectionLabel}
                   </p>
 
@@ -309,11 +314,17 @@ export function AdmissionSection() {
                     name="parentFullName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className={labelClass}>Parent / Guardian Name*</FormLabel>
+                        <FormLabel className={labelClass}>Parent / Guardian Name *</FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter full name" className={inputClass} {...field} />
+                          <Input
+                            placeholder="Enter full name"
+                            autoComplete="name"
+                            disabled={isPending}
+                            className={inputClass}
+                            {...field}
+                          />
                         </FormControl>
-                        <FormMessage className="text-[11px]" />
+                        <FormMessage className={TEXT} />
                       </FormItem>
                     )}
                   />
@@ -324,8 +335,12 @@ export function AdmissionSection() {
                     name="relationshipToStudent"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className={labelClass}>Relationship to Student*</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormLabel className={labelClass}>Relationship to Student *</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          disabled={isPending}
+                        >
                           <FormControl>
                             <SelectTrigger className={selectTriggerClass}>
                               <SelectValue placeholder="Select" />
@@ -333,11 +348,13 @@ export function AdmissionSection() {
                           </FormControl>
                           <SelectContent>
                             {RELATIONSHIP_OPTIONS.map((opt) => (
-                              <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                              <SelectItem key={opt.value} value={opt.value}>
+                                {opt.label}
+                              </SelectItem>
                             ))}
                           </SelectContent>
                         </Select>
-                        <FormMessage className="text-[11px]" />
+                        <FormMessage className={TEXT} />
                       </FormItem>
                     )}
                   />
@@ -351,9 +368,16 @@ export function AdmissionSection() {
                         <FormItem>
                           <FormLabel className={labelClass}>Email</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter email" className={inputClass} {...field} />
+                            <Input
+                              type="email"
+                              placeholder="Enter email"
+                              autoComplete="email"
+                              disabled={isPending}
+                              className={inputClass}
+                              {...field}
+                            />
                           </FormControl>
-                          <FormMessage className="text-[11px]" />
+                          <FormMessage className={TEXT} />
                         </FormItem>
                       )}
                     />
@@ -362,17 +386,24 @@ export function AdmissionSection() {
                       name="phoneNumber"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className={labelClass}>Phone Number*</FormLabel>
+                          <FormLabel className={labelClass}>Phone Number *</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter phone number" className={inputClass} {...field} />
+                            <Input
+                              type="tel"
+                              placeholder="Enter phone number"
+                              autoComplete="tel"
+                              disabled={isPending}
+                              className={inputClass}
+                              {...field}
+                            />
                           </FormControl>
-                          <FormMessage className="text-[11px]" />
+                          <FormMessage className={TEXT} />
                         </FormItem>
                       )}
                     />
                   </div>
 
-                  {/* Message */}
+                  {/* Message / Queries */}
                   <FormField
                     control={form.control}
                     name="message"
@@ -381,18 +412,19 @@ export function AdmissionSection() {
                         <FormLabel className={labelClass}>Any Message or Questions</FormLabel>
                         <FormControl>
                           <Textarea
-                            placeholder="Enter message"
+                            placeholder="Enter message or any queries"
                             rows={3}
+                            disabled={isPending}
                             className="
                               rounded-none border-0 border-b border-gray-300 bg-transparent
                               shadow-none focus-visible:ring-0 focus-visible:border-[#8F3648]
                               resize-none px-0 transition-colors placeholder:text-gray-400
-                              text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
+                              text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
                             "
                             {...field}
                           />
                         </FormControl>
-                        <FormMessage className="text-[11px]" />
+                        <FormMessage className={TEXT} />
                       </FormItem>
                     )}
                   />
@@ -400,11 +432,12 @@ export function AdmissionSection() {
                   {/* Submit */}
                   <Button
                     type="submit"
+                    disabled={isPending}
                     className="
                       w-full text-white mt-2
                       bg-[#8F3648] hover:bg-[#3D171F]
                       rounded-full h-12 sm:h-13 2xl:h-16
-                      text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
+                      text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
                       font-semibold tracking-wide
                       shadow-[0_6px_0_#5E1010]
                       hover:shadow-[0_4px_0_#5E1010]
@@ -412,9 +445,18 @@ export function AdmissionSection() {
                       active:translate-y-[6px]
                       hover:translate-y-[2px]
                       transition-all duration-150
+                      disabled:opacity-60 disabled:cursor-not-allowed
+                      disabled:shadow-none disabled:translate-y-0
                     "
                   >
-                    {submitLabel}
+                    {isPending ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Submitting...
+                      </span>
+                    ) : (
+                      submitLabel
+                    )}
                   </Button>
 
                 </form>
@@ -424,54 +466,13 @@ export function AdmissionSection() {
         </div>
       </section>
 
-      {/* ── Success Popup ── */}
-      <AnimatePresence>
-        {showSuccess && (
-          <motion.div
-            className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center px-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setShowSuccess(false)}
-          >
-            <motion.div
-              className="bg-white rounded-2xl shadow-2xl p-8 sm:p-10 max-w-sm w-full flex flex-col items-center gap-5 text-center"
-              initial={{ opacity: 0, scale: 0.92, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.92, y: 20 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Green check */}
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-green-50 flex items-center justify-center">
-                <CheckCircle className="w-9 h-9 sm:w-12 sm:h-12 text-green-500" strokeWidth={1.8} />
-              </div>
-
-              {/* Message */}
-              <p className="text-[14px] sm:text-[16px] xl:text-[18px] 2xl:text-[20px] font-semibold text-gray-800 leading-snug">
-                {successTitle}
-              </p>
-
-              {/* Close button */}
-              <Button
-                onClick={() => setShowSuccess(false)}
-                className="
-                  w-full bg-[#8F3648] hover:bg-[#3D171F] text-white
-                  rounded-full h-10 sm:h-11
-                  text-[12px] sm:text-[14px] font-semibold
-                  shadow-[0_4px_0_#5E1010]
-                  hover:shadow-[0_2px_0_#5E1010]
-                  active:shadow-none active:translate-y-[4px]
-                  hover:translate-y-[2px]
-                  transition-all duration-150
-                "
-              >
-                Close
-              </Button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* ── Result Popup (Success / Error) ── */}
+      <ResultPopup
+        open={popup.open}
+        type={popup.type}
+        message={popup.message}
+        onClose={closePopup}
+      />
     </>
-  )
+  );
 }

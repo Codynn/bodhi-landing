@@ -56,7 +56,7 @@ export function DonateCtaSection() {
               {/* RIGHT: Text + Button */}
               <div className="flex-1 min-w-0 px-6 pb-10 sm:px-10 sm:pb-12 lg:px-12 lg:py-14 xl:px-16 xl:py-16 2xl:px-20 2xl:py-20">
                 <motion.h2
-                  className="font-bold text-[#8F3648] leading-tight text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] xl:text-[32px] 2xl:text-[54px] mb-5 sm:mb-6"
+                  className="font-bold text-[#8F3648] leading-tight text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px] mb-5 sm:mb-6"
                   variants={fadeUp}
                   initial="hidden"
                   whileInView="visible"
@@ -66,11 +66,11 @@ export function DonateCtaSection() {
                   {heading}
                 </motion.h2>
 
-                <div className="flex flex-col gap-3 sm:gap-4 mb-7 sm:mb-8 2xl:mb-10">
+                <div className="flex flex-col gap-2 lg:gap-4 mb-7 sm:mb-8 2xl:mb-10">
                   {paragraphs.map((para, i) => (
                     <motion.p
                       key={i}
-                      className="text-gray-600 leading-[1.8] sm:leading-[1.85]  text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]"
+                      className="text-gray-600 leading-[1.8] sm:leading-[1.85]  text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]"
                       variants={fadeUp}
                       initial="hidden"
                       whileInView="visible"
@@ -92,7 +92,7 @@ export function DonateCtaSection() {
                 >
                   <button
                     onClick={() => setModalOpen(true)}
-                    className="inline-flex items-center gap-2 bg-[#8F3648] hover:bg-[#3D171F] text-white rounded-full px-6 py-2.5 text-[13px] sm:text-[14px] md:text-[15px] xl:text-[16px] 2xl:text-[18px] font-medium shadow-[0_6px_0_#5E1010] hover:shadow-[0_4px_0_#5E1010] active:shadow-[0_0px_0_#5E1010] hover:translate-y-[2px] active:translate-y-[6px] transition-all duration-150 cursor-pointer"
+                    className="inline-flex items-center gap-2 bg-[#8F3648] hover:bg-[#3D171F] text-white rounded-full px-6 py-2.5 text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] font-medium shadow-[0_6px_0_#5E1010] hover:shadow-[0_4px_0_#5E1010] active:shadow-[0_0px_0_#5E1010] hover:translate-y-[2px] active:translate-y-[6px] transition-all duration-150 cursor-pointer"
                   >
                     {buttonLabel}
                     <Heart className="w-4 h-4 fill-white" />

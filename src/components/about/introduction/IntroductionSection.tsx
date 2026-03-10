@@ -47,10 +47,7 @@ export function IntroductionHeroSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 sm:pt-10 pb-14 sm:pb-18 lg:pb-24">
         {/* Breadcrumb */}
         <motion.nav
-          className="flex justify-center items-center gap-1.5  text-sm sm:text-base max-md:text-lg  
-  lg:text-lg  
-  xl:text-xl   
-  2xl:text-2x text-gray-500 mb-4 sm:mb-5"
+          className="flex justify-center items-center gap-1.5  text-sm sm:text-base max-md:text-lg  lg:text-lg  text-gray-500 mb-4 sm:mb-5"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
@@ -93,7 +90,7 @@ export function IntroductionHeroSection() {
 
         {/* Page Title */}
         <motion.h1
-          className="text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-gray-900 mb-8 sm:mb-10 lg:mb-14 tracking-tight"
+          className="text-center text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px] font-bold text-gray-900 mb-8 sm:mb-10 lg:mb-14 tracking-tight"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
@@ -103,7 +100,7 @@ export function IntroductionHeroSection() {
         </motion.h1>
 
         {/* Main Content */}
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16 items-start">
+        <div className="flex flex-col lg:flex-row gap-2 lg:gap-4 items-start">
           {/* Image */}
           <motion.div
             className="w-full lg:w-[45%] xl:w-[42%] flex-shrink-0"
@@ -131,17 +128,17 @@ export function IntroductionHeroSection() {
             animate="visible"
           >
             {/* Section Tag */}
-            <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px]  font-semibold tracking-widest text-[#425190] uppercase">
+            <p className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] font-semibold tracking-widest text-[#425190] uppercase">
               {sectionTag}
             </p>
 
             {/* Heading */}
-            <h1 className="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] xl:text-[28px] 2xl:text-[32px]  font-bold text-[#8F3648] leading-tight mb-2">
+            <h1 className="text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px] font-bold text-[#8F3648] leading-tight mb-2">
               {heading}
             </h1>
 
             {/* Description */}
-            <p className="text-[18px] sm:text-[16px] md:text-[18px] lg:text-[18px] xl:text-[20px] 2xl:text-[24px]  text-gray-600 leading-relaxedn mb-3 lg:mb-5">
+            <p className="text-[16px] sm:text-[16px] md:text-[18px] lg:text-[18px]  text-gray-600 leading-relaxedn mb-3 lg:mb-5">
               {description}
             </p>
 
@@ -155,12 +152,11 @@ export function IntroductionHeroSection() {
         [&_span:first-child]:text-[#2d6a2d]
 
         /* Numbers */
-        [&_span:first-child]:text-2xl
-        sm:[&_span:first-child]:text-3xl
-        md:[&_span:first-child]:text-4xl
-        lg:[&_span:first-child]:text-4xl
-        xl:[&_span:first-child]:text-5xl
-        2xl:[&_span:first-child]:text-6xl
+        [&_span:first-child]:text-[32px]
+        sm:[&_span:first-child]:text-[32px]
+        md:[&_span:first-child]:text-[32px]
+        lg:[&_span:first-child]:text-[40px]
+  
 
         /* Labels */
         [&_span:last-child]:text-gray-500
@@ -168,8 +164,6 @@ export function IntroductionHeroSection() {
         sm:[&_span:last-child]:text-sm
         md:[&_span:last-child]:text-base
         lg:[&_span:last-child]:text-base
-        xl:[&_span:last-child]:text-lg
-        2xl:[&_span:last-child]:text-xl
       "
     >
       <AnimatedStat stat={stat} />

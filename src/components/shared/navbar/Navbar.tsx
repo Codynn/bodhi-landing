@@ -37,10 +37,10 @@ export default function Navbar({ className }: NavbarProps) {
               <div className="relative w-10 h-10 md:w-15 md:h-15">
                 <Image src="/home/logo.svg" alt={SCHOOL_INFO.name} fill className="object-contain" priority />
               </div>
-              <span className="text-sm md:text-base font-bold text-gray-900  max-w-45 lg:max-w-xs">
+              <span className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]  font-bold text-gray-900  max-w-45 lg:max-w-xs">
                 {SCHOOL_INFO.name}
               </span>
-              <span className="text-sm md:text-base font-bold text-gray-900 leading-tight max-w-45 lg:max-w-xs">
+              <span className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]  font-bold text-gray-900 leading-tight max-w-45 lg:max-w-xs">
                 {SCHOOL_INFO.name2}
               </span>
             </Link>

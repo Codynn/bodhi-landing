@@ -36,7 +36,7 @@ export function AwakeningSection() {
           className="
             font-semibold tracking-[0.2em] sm:tracking-[0.22em] 2xl:tracking-[0.25em]
             uppercase text-[#425190]
-            text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
+            text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
             mb-3 sm:mb-4 md:mb-5 2xl:mb-6
           "
           variants={fadeUp}
@@ -52,7 +52,7 @@ export function AwakeningSection() {
         <motion.h2
           className="
             font-bold text-[#8F3648] leading-[1.15]
-            text-1xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl
+            text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px]
             mb-6 sm:mb-8 md:mb-9 lg:mb-10 2xl:mb-14
           "
           variants={fadeUp}
@@ -71,7 +71,7 @@ export function AwakeningSection() {
               key={i}
               className="
                 text-gray-900 leading-[1.85] sm:leading-[1.9] 2xl:leading-[2]
-                text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px]
+                text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
               "
               variants={fadeUp}
               initial="hidden"
@@ -88,7 +88,7 @@ export function AwakeningSection() {
         <motion.p
           className="
             text-gray-900 leading-relaxed font-normal
-            text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px]
+            text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
             mt-6 sm:mt-7 md:mt-8 2xl:mt-10
           "
           variants={fadeUp}

@@ -1,25 +1,29 @@
+"use client";
 import { SCHOOL_MESSAGE_DATA } from "@/constants/home/message.constants";
 import Image from "next/image";
+import { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const SchoolMessageSection = () => {
   const { sectionLabel, heading, principalImage, messageparagraphs, closing } =
     SCHOOL_MESSAGE_DATA;
 
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <section className="w-full py-10 px-6 md:px-16 my-12">
       {/* Section Label + Heading — centered */}
       <div className="text-center mb-8 max-w-7xl mx-auto">
-        <p className="flex-1 text-[12px] sm:text-[14px] md:text-[15px] lg:text-[15px] xl:text-[16px] 2xl:text-[20px] font-semibold tracking-[0.2em] text-[#425190] uppercase mb-1">
+        <p className="flex-1 text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] font-semibold tracking-[0.2em] text-[#425190] uppercase mb-1">
           {sectionLabel}
         </p>
-        <h2 className="text-[2rem] md:text-[2.25rem] font-bold text-[#8F3648] leading-tight">
+        <h2 className="text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px] font-bold text-[#8F3648] leading-tight">
           {heading}
         </h2>
       </div>
 
       {/* Two-column layout: image left, text right */}
       <div className="w-full flex flex-col md:flex-col lg:flex-row gap-4 md:gap-6 items-start max-w-7xl mx-auto rounded-lg bg-gray-100 px-4 py-6">
-        
         {/* Principal Image — left column, fixed width */}
         <div className="flex-shrink-0 w-full md:w-[340px]">
           <Image
@@ -32,20 +36,63 @@ const SchoolMessageSection = () => {
         </div>
 
         {/* Message Text — right column */}
-        <div className="flex-1 text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] text-[#1a1a1a] ">
-          {messageparagraphs.map((paragraph, index) => (
-            <p key={index} className="mb-3">
-              {paragraph}
-            </p>
-          ))}
+        <div className="flex-1 text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] text-[#1a1a1a]">
+          {/* Text with clamp only on lg+ screens */}
+          <div
+            className={`
+              relative overflow-hidden
+              transition-all duration-500 ease-in-out
+              lg:${isExpanded ? "max-h-[2000px]" : "max-h-[14em]"}
+            `}
+            style={{
+              maxHeight: isExpanded ? "2000px" : undefined,
+            }}
+          >
+            {/* Inner wrapper: clamp only on large screens */}
+            <div
+              className={`
+                lg:overflow-hidden
+                ${!isExpanded ? "lg:[display:-webkit-box] lg:[-webkit-line-clamp:8] lg:[-webkit-box-orient:vertical] lg:overflow-hidden" : ""}
+              `}
+            >
+              {messageparagraphs.map((paragraph, index) => (
+                <p key={index} className="mb-3">
+                  {paragraph}
+                </p>
+              ))}
 
-          {/* Closing block */}
-          <div className="mt-5">
-            <p className="mb-0">{closing.salutation}</p>
-            <p className="font-bold">{closing.name}</p>
-            <p>{closing.title}</p>
-            <p>{closing.school}</p>
+              {/* Closing block */}
+              <div className="mt-5">
+                <p className="mb-0">{closing.salutation}</p>
+                <p className="font-bold">{closing.name}</p>
+                <p>{closing.title}</p>
+                <p>{closing.school}</p>
+              </div>
+            </div>
+
+            {/* Fade gradient — only on lg, only when collapsed */}
+            {!isExpanded && (
+              <div className="hidden lg:block absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-gray-100 to-transparent pointer-events-none" />
+            )}
           </div>
+
+          {/* Read More button — only on lg+ */}
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="hidden lg:flex items-center gap-1 mt-3 text-[#8F3648] font-semibold text-[15px] hover:text-[#425190] transition-colors duration-200 group"
+          >
+            {isExpanded ? (
+              <>
+                Read Less
+                <ChevronUp className="w-4 h-4 transition-transform duration-200" />
+              </>
+            ) : (
+              <>
+                Read More
+                <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:translate-y-0.5" />
+              </>
+            )}
+          </button>
         </div>
       </div>
     </section>

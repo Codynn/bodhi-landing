@@ -36,7 +36,7 @@ export function TwoWaysDonationSection() {
           <motion.p
             className="
               font-semibold text-center tracking-[0.18em] uppercase text-[#425190]
-              text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
+              text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
               mb-3 
             "
             variants={fadeUp}
@@ -51,7 +51,7 @@ export function TwoWaysDonationSection() {
           <motion.h2
             className="
               font-bold text-[#8F3648] leading-tight
-              text-[22px] sm:text-[26px] md:text-[30px] lg:text-[34px] xl:text-[38px] 2xl:text-[46px] text-center
+              text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px] text-center
               mb-5 sm:mb-6
             "
             variants={fadeUp}
@@ -66,7 +66,7 @@ export function TwoWaysDonationSection() {
           <motion.p
             className="
               text-gray-600 leading-[1.8] mx-auto
-              text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
+              text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
               max-w-[80vw] text-center
             "
             variants={fadeUp}
@@ -87,7 +87,7 @@ export function TwoWaysDonationSection() {
             <motion.h3
               className="
                 font-bold text-gray-900
-                text-[15px] sm:text-[17px] md:text-[18px] lg:text-[19px] xl:text-[21px] 2xl:text-[24px]
+                text-[22px] sm:text-[24px] md:text-[24px] lg:text-[30px]
                 mb-2 sm:mb-3
               "
               variants={fadeUp}
@@ -102,7 +102,7 @@ export function TwoWaysDonationSection() {
             <motion.p
               className="
                 font-semibold text-gray-800 leading-snug
-                 text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
+                 text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
                 mb-5 sm:mb-6
               "
               variants={fadeUp}
@@ -131,7 +131,7 @@ export function TwoWaysDonationSection() {
                   <span
                     className="
                       text-gray-700 leading-[1.75] sm:leading-[1.8]
-                      text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
+                      text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
                     "
                   >
                     {point}
@@ -147,7 +147,7 @@ export function TwoWaysDonationSection() {
             <motion.h3
               className="
                 font-bold text-gray-900
-                text-[15px] sm:text-[17px] md:text-[18px] lg:text-[19px] xl:text-[21px] 2xl:text-[24px]
+                text-[22px] sm:text-[24px] md:text-[24px] lg:text-[30px]
                 mb-2 sm:mb-3
               "
               variants={fadeUp}
@@ -162,7 +162,7 @@ export function TwoWaysDonationSection() {
             <motion.p
               className="
                 font-semibold text-gray-800 leading-snug
-                text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] xl:text-[16px] 2xl:text-[18px]
+                text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
                 mb-5 sm:mb-6
               "
               variants={fadeUp}
@@ -191,7 +191,7 @@ export function TwoWaysDonationSection() {
                   <span
                     className="
                       text-gray-700 leading-[1.75] sm:leading-[1.8]
-                      text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
+                      text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
                     "
                   >
                     {point}

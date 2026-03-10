@@ -90,7 +90,7 @@ export function SchoolFamilyHeroSection() {
         <motion.h1
           className="
             text-center font-bold text-gray-900 tracking-tight
-            text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl
+           text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px]
             mb-8 sm:mb-10 lg:mb-14
           "
           variants={fadeUp}
@@ -112,7 +112,7 @@ export function SchoolFamilyHeroSection() {
           <p
             className="
               font-semibold tracking-[0.18em] uppercase text-[#425190]
-              text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px]
+              text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
               mb-2 sm:mb-3
             "
           >
@@ -121,7 +121,7 @@ export function SchoolFamilyHeroSection() {
           <h2
             className="
               font-bold text-[#8F3648] leading-tight
-              text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] xl:text-[36px] 2xl:text-[44px]
+              text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px]
             "
           >
             {heading}
@@ -173,7 +173,7 @@ export function SchoolFamilyHeroSection() {
               <p
                 className="
                   font-semibold text-[#8F3648] leading-tight
-                  text-[12px] sm:text-[13px] md:text-[13px] lg:text-[14px] xl:text-[15px] 2xl:text-[18px]
+                  text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] 
                   mb-0.5
                 "
               >
@@ -184,7 +184,7 @@ export function SchoolFamilyHeroSection() {
               <p
                 className="
                   text-gray-500
-                  text-[11px] sm:text-[12px] md:text-[12px] lg:text-[12px] xl:text-[13px] 2xl:text-[15px]
+                  text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
                 "
               >
                 {member.role}

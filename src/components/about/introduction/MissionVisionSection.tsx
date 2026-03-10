@@ -69,7 +69,7 @@ export function MissionVisionSection() {
                 <motion.h3
                   className="
                     font-bold text-[#8F3648] leading-tight
-                    text-[20px] sm:text-[24px] md:text-[26px] lg:text-[28px] xl:text-[32px] 2xl:text-[40px]
+                    text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px]
                     mb-2
                   "
                   variants={fadeUp}
@@ -85,7 +85,7 @@ export function MissionVisionSection() {
                 <motion.p
                   className="
                     text-gray-900 leading-[1.85] sm:leading-[1.9] 2xl:leading-[2]
-                    text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
+                    text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
                   "
                   variants={fadeUp}
                   initial="hidden"

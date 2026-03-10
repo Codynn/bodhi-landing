@@ -18,10 +18,10 @@ export default function NoticesSection() {
 
           {/* ── Header ── */}
           <div className="flex flex-col items-center text-center mb-10 sm:mb-12 gap-3">
-            <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-bold text-[#425190] uppercase tracking-widest">
+            <p className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] font-bold text-[#425190] uppercase tracking-widest">
               {NOTICES_CONTENT.label}
             </p>
-            <h2 className="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] xl:text-[32px] 2xl:text-[54px]  font-bold text-[#8F3648] leading-snug w-full">
+            <h2 className="text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px] font-bold text-[#8F3648] leading-snug w-full">
               {NOTICES_CONTENT.heading}
             </h2>
           </div>
@@ -40,11 +40,11 @@ export default function NoticesSection() {
                   <div className="flex items-center justify-between">
                     <Badge
                       variant="outline"
-                      className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px]  font-medium text-gray-500 border-gray-300 rounded-sm px-2 py-0.5"
+                      className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]  font-medium text-gray-500 border-gray-300 rounded-sm px-2 py-0.5"
                     >
                       {notice.category}
                     </Badge>
-                    <div className="flex items-center gap-1.5 text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] text-gray-400">
+                    <div className="flex items-center gap-1.5 text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] text-gray-400">
                       <Calendar className="w-3.5 h-3.5" />
                       <span>{notice.date}</span>
                     </div>
@@ -56,14 +56,14 @@ export default function NoticesSection() {
                   </h3>
 
                   {/* ── Description ── */}
-                  <p className="text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] text-gray-500 leading-relaxed line-clamp-3">
+                  <p className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]  text-gray-500 leading-relaxed line-clamp-3">
                     {notice.description}
                   </p>
 
                   {/* ── Read More ── */}
                   <button
                     onClick={(e) => { e.stopPropagation(); setSelected(notice) }}
-                    className="inline-flex items-center gap-1 text-[18px] sm:text-[16px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-semibold text-[#7B1C1C] hover:text-[#C0392B] transition-colors mt-1 w-fit"
+                    className="inline-flex items-center gap-1 text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] font-semibold text-[#7B1C1C] hover:text-[#C0392B] transition-colors mt-1 w-fit"
                   >
                     Read More
                     <ArrowRight className="w-3.5 h-3.5" />

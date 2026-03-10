@@ -8,7 +8,7 @@ import { CAREER_OPENINGS_CONTENT, JOB_OPENINGS } from '@/constants/career/career
 import { JobOpening } from '@/types/career/careeropening.types'
 
 // ── Text scale ────────────────────────────────────────────────────────────────
-const TEXT = 'text-[12px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]'
+const TEXT = 'text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]'
 
 // ── Animations ────────────────────────────────────────────────────────────────
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
@@ -40,7 +40,7 @@ function JobCard({ job, index }: { job: JobOpening; index: number }) {
       <div className="flex items-start justify-between gap-3">
         <h3 className="
           font-bold text-gray-900 leading-snug flex-1
-          text-[13px] sm:text-[15px] md:text-[16px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
+          text-[20px] sm:text-[20px] md:text-[20px] lg:text-[22px]
         ">
           {job.title}
         </h3>
@@ -71,7 +71,7 @@ function JobCard({ job, index }: { job: JobOpening; index: number }) {
         <span className="
           inline-block border border-gray-300 rounded-full
           px-3 py-0.5
-          text-[10px] sm:text-[11px] md:text-[12px] xl:text-[13px] 2xl:text-[14px]
+          text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
           text-gray-600 font-medium
         ">
           {job.type}
@@ -86,7 +86,7 @@ function JobCard({ job, index }: { job: JobOpening; index: number }) {
         {/* Date */}
         <div className="flex items-center gap-1.5 text-gray-400">
           <CalendarDays className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-          <span className="text-[11px] sm:text-[12px] xl:text-[13px] 2xl:text-[15px]">
+          <span className="text-[16px] sm:text-[16px] lg:text-[18px]">
             {job.date}
           </span>
         </div>
@@ -96,7 +96,7 @@ function JobCard({ job, index }: { job: JobOpening; index: number }) {
           href={job.href}
           className="
             flex items-center gap-1.5
-            text-[11px] sm:text-[12px] xl:text-[13px] 2xl:text-[15px]
+            text-[16px] sm:text-[16px] lg:text-[18px]
             font-semibold text-white
             bg-[#8F3648] hover:bg-[#3D171F]
             px-3 py-1.5 sm:px-4 sm:py-2 rounded-full
@@ -134,7 +134,7 @@ export function CareerOpeningsSection() {
         <motion.h2
           className="
             text-center font-bold text-[#8F3648]
-            text-[22px] sm:text-[26px] md:text-[30px] lg:text-[34px] xl:text-[38px] 2xl:text-[46px]
+           text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px]
             mb-8 sm:mb-10 lg:mb-12 2xl:mb-14
           "
           variants={fadeUp}
@@ -173,7 +173,7 @@ export function CareerOpeningsSection() {
           <div className="flex flex-col gap-1 sm:gap-1.5">
             <p className="
               font-bold text-gray-800
-              text-[13px] sm:text-[15px] md:text-[16px] lg:text-[17px] xl:text-[18px] 2xl:text-[20px]
+              text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
             ">
               {emptyState.heading}
             </p>
@@ -187,7 +187,7 @@ export function CareerOpeningsSection() {
             href={emptyState.submitHref}
             className="
               shrink-0 flex items-center gap-2
-              text-[12px] sm:text-[13px] xl:text-[14px] 2xl:text-[16px]
+              text-[16px] sm:text-[16px] lg:text-[18px]
               font-semibold text-white
               bg-[#8F3648] hover:bg-[#3D171F]
               px-5 py-2.5 sm:px-6 sm:py-3 rounded-full
