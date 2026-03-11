@@ -24,7 +24,7 @@ const SchoolMessageSection = () => {
 
       {/* Two-column layout: image left, text right */}
       <div className="w-full flex flex-col md:flex-col lg:flex-row gap-4 md:gap-6 items-start max-w-7xl mx-auto rounded-lg bg-gray-100 px-4 py-6">
-        {/* Principal Image — left column, fixed width */}
+        {/* Principal Image */}
         <div className="flex-shrink-0 w-full md:w-[340px]">
           <Image
             src={principalImage.src}
@@ -35,51 +35,43 @@ const SchoolMessageSection = () => {
           />
         </div>
 
-        {/* Message Text — right column */}
+        {/* Message Text */}
         <div className="flex-1 text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] text-[#1a1a1a]">
-          {/* Text with clamp only on lg+ screens */}
+
+          {/*
+            Small/medium: collapse to ~8 lines when not expanded
+            Large+:       always show full text, no clamp
+          */}
           <div
             className={`
-              relative overflow-hidden
-              transition-all duration-500 ease-in-out
-              lg:${isExpanded ? "max-h-[2000px]" : "max-h-[14em]"}
+              relative overflow-hidden transition-all duration-500 ease-in-out
+              ${!isExpanded ? "max-h-[14em] lg:max-h-none" : "max-h-[2000px] lg:max-h-none"}
             `}
-            style={{
-              maxHeight: isExpanded ? "2000px" : undefined,
-            }}
           >
-            {/* Inner wrapper: clamp only on large screens */}
-            <div
-              className={`
-                lg:overflow-hidden
-                ${!isExpanded ? "lg:[display:-webkit-box] lg:[-webkit-line-clamp:8] lg:[-webkit-box-orient:vertical] lg:overflow-hidden" : ""}
-              `}
-            >
-              {messageparagraphs.map((paragraph, index) => (
-                <p key={index} className="mb-3">
-                  {paragraph}
-                </p>
-              ))}
+            {messageparagraphs.map((paragraph, index) => (
+              <p key={index} className="mb-3">
+                {paragraph}
+              </p>
+            ))}
 
-              {/* Closing block */}
-              <div className="mt-5">
-                <p className="mb-0">{closing.salutation}</p>
-                <p className="font-bold">{closing.name}</p>
-                <p>{closing.title}</p>
-                <p>{closing.school}</p>
-              </div>
+            {/* Closing block */}
+            <div className="mt-5">
+              <p className="mb-0">{closing.salutation}</p>
+              <p className="font-bold">{closing.name}</p>
+              <p>{closing.title}</p>
+              <p>{closing.school}</p>
             </div>
 
-            {/* Fade gradient — only on lg, only when collapsed */}
+            {/* Fade gradient — small/medium only, only when collapsed */}
             {!isExpanded && (
-              <div className="hidden lg:block absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-gray-100 to-transparent pointer-events-none" />
+              <div className="lg:hidden absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-gray-100 to-transparent pointer-events-none" />
             )}
           </div>
 
-          {/* Read More button — only on lg+ */}
+          {/* Read More/Less button — small/medium only (hidden on lg+) */}
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="hidden lg:flex items-center gap-1 mt-3 text-[#8F3648] font-semibold text-[15px] hover:text-[#425190] transition-colors duration-200 group"
+            className="flex lg:hidden items-center gap-1 mt-3 text-[#8F3648] font-semibold text-[15px] hover:text-[#425190] transition-colors duration-200 group"
           >
             {isExpanded ? (
               <>

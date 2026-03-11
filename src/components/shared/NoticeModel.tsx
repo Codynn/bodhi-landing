@@ -37,7 +37,7 @@ export function NoticeModal({ notice, onClose }: NoticeModalProps) {
 
             {/* ── Header: category + close ── */}
             <div className="flex items-center justify-between px-6 pt-5 pb-3 flex-shrink-0">
-              <span className="text-[14px] sm:text-[15px] lg:text-[16px] font-semibold text-gray-500">
+              <span className="text-[16px] sm:text-[16px] lg:text-[18px] font-semibold text-gray-500">
                 {notice.category}
               </span>
               <button
@@ -51,21 +51,21 @@ export function NoticeModal({ notice, onClose }: NoticeModalProps) {
 
             {/* ── Title ── */}
             <div className="px-6 pb-4 flex-shrink-0 border-b border-gray-100">
-              <h2 className="text-[24px] sm:text-[28px] lg:text-[32px] font-bold text-gray-900 leading-snug">
+              <h2 className="text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px] font-bold text-gray-900 leading-snug">
                 {notice.title}
               </h2>
             </div>
 
             {/* ── Scrollable body ── */}
             <div className="flex-1 overflow-y-auto px-6 py-4">
-              <p className="text-[15px] sm:text-[15px] lg:text-[17px] text-gray-700 leading-relaxed whitespace-pre-line">
+              <p className="text-[16px] sm:text-[16px] lg:text-[18px] font-medium text-gray-700 leading-relaxed whitespace-pre-line">
                 {notice.fullContent ?? notice.description}
               </p>
             </div>
 
             {/* ── Footer: date ── */}
             <div className="px-6 py-4 border-t border-gray-100 flex-shrink-0">
-              <div className="flex items-center gap-1.5 text-[13px] lg:text-[15px] text-gray-400">
+              <div className="flex items-center gap-1.5 text-[16px] lg:text-[18px] text-gray-400">
                 <Calendar className="w-3.5 h-3.5" />
                 <span>{notice.date}</span>
               </div>
