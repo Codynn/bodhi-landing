@@ -44,15 +44,6 @@ const slideInLeft: Variants = {
   },
 }
 
-const mobileStatsVariant: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: EASE, delay: 0.7 },
-  },
-}
-
 export function HeroSection() {
   return (
     <section className="w-full bg-white">
@@ -60,7 +51,7 @@ export function HeroSection() {
 
         {/* Heading */}
         <motion.h1
-          className="text-center text-1xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-[#8F3648] leading-tight tracking-tight max-w-screen mx-auto mb-8 sm:mb-10"
+          className="text-center text-[28px] sm:text-[32px] md:text-[36px] lg:text-[42px] xl:text-5xl 2xl:text-6xl font-bold text-[#8F3648] leading-tight tracking-tight max-w-screen mx-auto mb-8 sm:mb-10"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
@@ -69,12 +60,12 @@ export function HeroSection() {
           Shaping Confident Learners for a Better Tomorrow
         </motion.h1>
 
-        {/* Image + overlays */}
+        {/* Image + overlays — position:relative container */}
         <div className="relative w-full">
 
           {/* School Image */}
           <motion.div
-            className="relative w-full rounded-2xl overflow-hidden aspect-[16/9] sm:aspect-[16/8] lg:aspect-[16/7]"
+            className="relative w-full rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-[16/8] lg:aspect-[16/7]"
             variants={fadeIn}
             initial="hidden"
             animate="visible"
@@ -90,9 +81,14 @@ export function HeroSection() {
             <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-transparent" />
           </motion.div>
 
-          {/* Stats Card — desktop */}
+          {/* ── Stats Card — overlays right edge on ALL screen sizes ── */}
           <motion.div
-            className="hidden sm:flex absolute top-1/2 right-0 -translate-y-1/2 flex-col bg-white/95 backdrop-blur-sm rounded-l-2xl shadow-xl overflow-hidden"
+            className="
+              absolute top-1/2 right-0 -translate-y-1/2
+              flex flex-col
+              bg-white/95 backdrop-blur-sm
+              rounded-l-2xl shadow-xl overflow-hidden
+            "
             variants={slideInRight}
             initial="hidden"
             animate="visible"
@@ -101,69 +97,47 @@ export function HeroSection() {
               <div
                 key={stat.label}
                 className={[
-                  'px-6 py-5 lg:px-8 lg:py-6',
+                  'px-3 py-3 sm:px-5 sm:py-4 lg:px-8 lg:py-6',
                   i < HERO_STATS.length - 1 ? 'border-b border-gray-100' : '',
                 ].join(' ')}
               >
-                <div className=" [&_span:first-child]:text-[#2d6a2d]
+                <div className="
+                  [&_span:first-child]:text-[#2d6a2d]
+                  [&_span:first-child]:text-[22px]
+                  sm:[&_span:first-child]:text-[28px]
+                  md:[&_span:first-child]:text-[34px]
+                  lg:[&_span:first-child]:text-[40px]
+                  xl:[&_span:first-child]:text-5xl
+                  2xl:[&_span:first-child]:text-6xl
 
-        /* Numbers */
-        [&_span:first-child]:text-2xl
-        sm:[&_span:first-child]:text-3xl
-        md:[&_span:first-child]:text-4xl
-        lg:[&_span:first-child]:text-4xl
-        xl:[&_span:first-child]:text-5xl
-        2xl:[&_span:first-child]:text-6xl
-
-        /* Labels */
-        [&_span:last-child]:text-gray-500
-        [&_span:last-child]:text-xs
-        sm:[&_span:last-child]:text-sm
-        md:[&_span:last-child]:text-base
-        lg:[&_span:last-child]:text-base
-        xl:[&_span:last-child]:text-lg
-        2xl:[&_span:last-child]:text-xl">
+                  [&_span:last-child]:text-gray-500
+                  [&_span:last-child]:text-[10px]
+                  sm:[&_span:last-child]:text-[13px]
+                  md:[&_span:last-child]:text-[15px]
+                  lg:[&_span:last-child]:text-base
+                  xl:[&_span:last-child]:text-lg
+                  2xl:[&_span:last-child]:text-xl
+                ">
                   <AnimatedStat stat={stat} />
                 </div>
               </div>
             ))}
           </motion.div>
 
-          {/* Arrow Circle */}
+          {/* ── Arrow Circle — overlays bottom-left on ALL screen sizes ── */}
           <motion.div
-            className="hidden sm:flex absolute bottom-3 left-[-6px] translate-y-1/2 w-14 h-14 lg:w-[72px] lg:h-[72px] bg-white rounded-full items-center justify-center z-10 shadow-md"
+            className="
+              absolute bottom-3 left-[-6px] translate-y-1/2
+              w-10 h-10 sm:w-14 sm:h-14 lg:w-[72px] lg:h-[72px]
+              bg-white rounded-full
+              flex items-center justify-center
+              z-10 shadow-md
+            "
             variants={slideInLeft}
             initial="hidden"
             animate="visible"
           >
-            <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 text-[#2D6A2D] stroke-[2.5]" />
-          </motion.div>
-
-          {/* Stats Row — mobile */}
-          <motion.div
-            className="sm:hidden mt-4 bg-white rounded-2xl shadow-md border border-gray-100 flex divide-x divide-gray-100"
-            variants={mobileStatsVariant}
-            initial="hidden"
-            animate="visible"
-          >
-            {HERO_STATS.map((stat) => (
-              <div
-                key={stat.label}
-                className="flex-1 py-4 [&_span:first-child]:text-[#2D6A2D]
-                  [&_span:first-child]:text-[32px]
-        sm:[&_span:first-child]:text-[32px]
-        md:[&_span:first-child]:text-[32px]
-        lg:[&_span:first-child]:text-[40px]
-                 [&_span:last-child]:text-gray-500 
-                   [&_span:last-child]:text-[16px]
-        sm:[&_span:last-child]:text-[16px]
-        md:[&_span:last-child]:text-[16px]
-        lg:[&_span:last-child]:text-[18px]
-                 "
-              >
-                <AnimatedStat stat={stat} />
-              </div>
-            ))}
+            <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-[#2D6A2D] stroke-[2.5]" />
           </motion.div>
 
         </div>

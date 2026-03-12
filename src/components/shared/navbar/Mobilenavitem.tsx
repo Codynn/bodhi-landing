@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NavItem } from "@/types/layout/navbar.types";
 
@@ -18,26 +18,32 @@ export const MobileNavItem = ({ item, pathname, onClose }: MobileNavItemProps) =
 
   if (item.children) {
     return (
-      <div className="border-b border-gray-100 last:border-0">
+      <div>
         <button
           onClick={() => setOpen((prev) => !prev)}
-          className={cn(
-            "w-full flex items-center justify-between px-5 py-3.5 text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]  font-medium transition-colors",
-            isActive ? "text-[#8F3648]" : "text-gray-800"
-          )}
+          className="w-full flex items-center justify-between py-3 text-[17px] sm:text-[18px] font-medium text-white/90 hover:text-white transition-colors"
         >
-          {item.label}
-          <ChevronDown className={cn("w-4 h-4 transition-transform duration-200", open && "rotate-180")} />
+          <span className={cn(isActive && "text-white font-semibold")}>
+            {item.label}
+          </span>
+          <ChevronDown
+            className={cn(
+              "w-4 h-4 text-white/60 transition-transform duration-200",
+              open && "rotate-180"
+            )}
+          />
         </button>
+
         {open && (
-          <div className="bg-gray-50 px-5 pb-2">
+          <div className="pl-3 pb-2 flex flex-col gap-1">
             {item.children.map((child) => (
               <Link
                 key={child.href}
                 href={child.href}
                 onClick={onClose}
-                className="block py-2.5 pl-3 text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]  text-gray-600 hover:text-[#8F3648] border-l-2 border-gray-200 hover:border-[#8F3648] transition-colors mb-1"
+                className="flex items-center gap-2 py-2 text-[15px] sm:text-[16px] text-white/75 hover:text-white transition-colors"
               >
+                <ArrowRight className="w-3.5 h-3.5 flex-shrink-0" />
                 {child.label}
               </Link>
             ))}
@@ -48,18 +54,16 @@ export const MobileNavItem = ({ item, pathname, onClose }: MobileNavItemProps) =
   }
 
   return (
-    <div className="border-b border-gray-100 last:border-0">
-      <Link
-        href={item.href}
-        onClick={onClose}
-        className={cn(
-          "flex items-center gap-1.5 px-5 py-3.5 text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]  font-medium transition-colors hover:text-[#8F3648]",
-          isActive ? "text-[#8F3648]" : "text-gray-800"
-        )}
-      >
-        {item.label}
-        {item.label === "Donate" && <span className="text-[#8F3648]">♥</span>}
-      </Link>
-    </div>
+    <Link
+      href={item.href}
+      onClick={onClose}
+      className={cn(
+        "flex items-center gap-1.5 py-3 text-[17px] sm:text-[18px] font-medium transition-colors hover:text-white",
+        isActive ? "text-white font-semibold" : "text-white/90"
+      )}
+    >
+      {item.label}
+      {item.label === "Donate" && <span className="text-red-300">♥</span>}
+    </Link>
   );
 };
