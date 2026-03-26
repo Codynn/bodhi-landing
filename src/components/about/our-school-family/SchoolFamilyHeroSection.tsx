@@ -35,14 +35,8 @@ export function SchoolFamilyHeroSection() {
 
   return (
     <section className="w-full bg-white">
-      <div
-        className="
-          mx-auto w-full
-          max-w-7xl
-          px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16
-          sm:pt-10 pb-14 sm:pb-18 lg:pb-24
-        "
-      >
+
+       <div className="bg-gray-50 mb-5 max-w-screen w-full py-4">
 
         {/* ── Breadcrumb — centred, same pattern as IntroductionHeroSection ── */}
         <motion.nav
@@ -86,7 +80,8 @@ export function SchoolFamilyHeroSection() {
           ))}
         </motion.nav>
 
-        {/* ── Page Title ── */}
+
+          {/* ── Page Title ── */}
         <motion.h1
           className="
             text-center font-bold text-gray-900 tracking-tight
@@ -100,6 +95,20 @@ export function SchoolFamilyHeroSection() {
         >
           {pageTitle}
         </motion.h1>
+
+       
+
+
+       </div>
+
+      <div
+        className="
+          mx-auto w-full
+          max-w-7xl
+          px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16
+          sm:pt-10 pb-14 sm:pb-18 lg:pb-24
+        "
+      >
 
         {/* ── Section Tag + Sub-heading ── */}
         <motion.div
@@ -127,6 +136,7 @@ export function SchoolFamilyHeroSection() {
             {heading}
           </h2>
         </motion.div>
+      
 
     
         <div

@@ -41,8 +41,10 @@ export const SOCIAL_LINKS = [
 
 export const SCHOOL_INFO = {
   name: "Bodhi International",
-  name2:"Montessori School",
+  name2: "Montessori School",
   address: "LCM-10, Lumbini Bazar, Rupandehi",
-  phone: "071-591633, 985-6025633",
+
+  phones: ["071591633", "9856025633"],
+
   contactHref: "/contact",
 };

@@ -25,16 +25,9 @@ export function CareerHeroSection() {
 
   return (
     <section className="w-full bg-white">
-      <div
-        className="
-          mx-auto w-full max-w-7xl
-          px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16
-          pt-6 sm:pt-8 md:pt-10
-          pb-16 sm:pb-20 lg:pb-24 2xl:pb-32
-        "
-      >
 
-        {/* ── Breadcrumb ── */}
+          <div className="bg-gray-50 mb-5 max-w-screen w-full py-4">
+
         <motion.nav
           className={`flex justify-center items-center gap-1.5 ${TEXT} text-gray-500 mb-3 sm:mb-4`}
           variants={fadeUp}
@@ -107,10 +100,22 @@ export function CareerHeroSection() {
           </Link>
         </motion.div>
 
+                </div>
+
+      <div
+        className="
+          mx-auto w-full max-w-7xl
+          px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16
+          pt-6 sm:pt-8 md:pt-10
+          pb-16 sm:pb-20 lg:pb-24 2xl:pb-32
+        "
+      >
+
+     
+
         {/* ── Centered text content ── */}
         <div className="max-w-screen mx-auto text-center flex flex-col gap-5 sm:gap-6 2xl:gap-8 mb-10 sm:mb-12 lg:mb-14 2xl:mb-16">
 
-          {/* Heading */}
           <motion.h2
             className="
               font-bold text-[#8F3648] leading-tight

@@ -31,7 +31,7 @@ export const MobileDrawer = ({
     className={cn(
       "fixed inset-0 z-50 flex flex-col lg:hidden",
       "transition-transform duration-300 ease-in-out",
-      open ? "translate-x-0" : "translate-x-full"
+      open ? "translate-y-0" : "-translate-y-full"
     )}
     aria-label="Mobile navigation"
   >
@@ -42,7 +42,7 @@ export const MobileDrawer = ({
         src="/home/mobilenav.png"
         alt=""
         fill
-        className="object-fill"
+        className="object-cover object-top"
         priority
       />
     </div>
@@ -86,11 +86,18 @@ export const MobileDrawer = ({
         <span>{SCHOOL_INFO.address}</span>
       </div>
 
-      {/* Phone */}
-      <div className="flex items-center gap-2 text-[13px] sm:text-[14px] text-white/85">
-        <Phone className="w-3.5 h-3.5 flex-shrink-0 text-white" />
-        <span>{SCHOOL_INFO.phone}</span>
-      </div>
+     <div className="flex items-center gap-2 text-gray-500">
+  <Phone className="w-3.5 h-3.5 flex-shrink-0" />
+
+  {SCHOOL_INFO.phones.map((phone, index) => (
+    <span key={phone}>
+      <a href={`tel:${phone}`} className="hover:underline">
+        {phone}
+      </a>
+      {index < SCHOOL_INFO.phones.length - 1 && ", "}
+    </span>
+  ))}
+</div>
 
       {/* Website by BetterSchool */}
       <div className="flex items-center justify-center gap-1.5 pt-3">

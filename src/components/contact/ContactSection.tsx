@@ -1,27 +1,5 @@
 "use client";
 
-/**
- * components/ContactSection.tsx
- * ─────────────────────────────────────────────────────────────────
- * Contact-Us page section — Next.js 14 App Router, TypeScript.
- *
- * Full data flow:
- *
- *   useForm (react-hook-form + zodResolver(contactFormSchema))
- *     └─▶ onSubmit
- *           └─▶ useContactMessage  (TanStack useMutation)
- *                 └─▶ sendContactMessage  (service)
- *                       └─▶ axiosInstance.post("/contactMessage")
- *                             └─▶ POST https://api.betterschool.app/api/contactMessage
- *
- *   On success  → shadcn toast (green left border) + form.reset()
- *   On error    → shadcn toast (destructive / red)
- *   While pending → all inputs disabled + Loader2 spinner on button
- *
- * Required in app/layout.tsx:
- *   import { Toaster } from "@/components/ui/toaster"
- *   <Toaster />
- */
 
 import { useForm }          from "react-hook-form";
 import { zodResolver }      from "@hookform/resolvers/zod";
@@ -123,19 +101,15 @@ export function ContactSection() {
   return (
     <>
     <section className="w-full bg-white">
-      <div
-        className="
-          mx-auto w-full max-w-7xl
-          px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16
-          sm:pt-10 pb-16 sm:pb-20 lg:pb-24 2xl:pb-32
-        "
-      >
-        {/* ── Breadcrumb ──────────────────────────────── */}
+
+       {/* ── Breadcrumb ──────────────────────────────── */}
+        <div className="bg-gray-50 mb-5 max-w-screen w-full py-4">
+
         <motion.nav
           className={`flex justify-center items-center gap-1.5 ${TEXT} text-gray-500 mb-4 sm:mb-5`}
           variants={fadeUp} initial="hidden" animate="visible" custom={0}
           aria-label="Breadcrumb"
-        >
+          >
           {breadcrumb.map((crumb, i) => (
             <span key={crumb.href} className="flex items-center gap-1.5">
               {i > 0 && (
@@ -159,19 +133,29 @@ export function ContactSection() {
               )}
             </span>
           ))}
-        </motion.nav>
 
+          </motion.nav>
         {/* ── Page title ──────────────────────────────── */}
         <motion.h1
           className="
-            text-center font-bold text-gray-900 tracking-tight
-            text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px]
-            mb-10 sm:mb-12 lg:mb-14
+          text-center font-bold text-gray-900 tracking-tight
+          text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px]
+          mb-10 sm:mb-12 lg:mb-1
           "
           variants={fadeUp} initial="hidden" animate="visible" custom={0.1}
-        >
+          >
           {pageTitle}
         </motion.h1>
+          </div>
+
+      <div
+        className="
+          mx-auto w-full max-w-7xl
+          px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16
+          sm:pt-10 pb-16 sm:pb-20 lg:pb-24 2xl:pb-32
+        "
+      >
+       
 
         {/* ── Two-column layout ───────────────────────── */}
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 xl:gap-16 2xl:gap-20 items-start">

@@ -106,8 +106,8 @@ export default function NoticesSection(): React.JSX.Element {
   return (
     <React.Fragment>
       <section className="w-full bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20">
 
+      <div className="bg-gray-50 mb-5 max-w-screen w-full py-4">
           {/* Breadcrumb */}
           <motion.nav
             className="flex justify-center items-center gap-1.5 text-sm sm:text-base lg:text-lg text-gray-500 mb-4 sm:mb-5"
@@ -155,6 +155,13 @@ export default function NoticesSection(): React.JSX.Element {
           >
             Notices
           </motion.h1>
+
+
+      </div>
+
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20">
+
 
           {/* Error */}
           {isError && (

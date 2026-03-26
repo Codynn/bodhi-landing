@@ -44,7 +44,9 @@ export function IntroductionHeroSection() {
 
   return (
     <section className="w-full bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 sm:pt-10 pb-14 sm:pb-18 lg:pb-24">
+
+
+<div className="bg-gray-50 mb-5 max-w-screen w-full py-4">
         {/* Breadcrumb */}
         <motion.nav
           className="flex justify-center items-center gap-1.5  text-sm sm:text-base max-md:text-lg  lg:text-lg  text-gray-500 mb-4 sm:mb-5"
@@ -98,6 +100,13 @@ export function IntroductionHeroSection() {
         >
           {pageTitle}
         </motion.h1>
+
+
+
+</div>
+     
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 sm:pt-10 pb-14 sm:pb-18 lg:pb-24">
 
         {/* Main Content */}
         <div className="flex flex-col lg:flex-row gap-2 lg:gap-4 items-start">

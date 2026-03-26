@@ -12,7 +12,7 @@ export interface FooterSocials {
 
 export interface FooterContent {
   description: string
-  phone: string
+  phone: string[]
   quickLinks: FooterLink[]
   socials: FooterSocials
   copyright: string

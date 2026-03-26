@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
 import {
   Phone,
   Heart,
@@ -10,8 +10,8 @@ import {
   Youtube,
   Instagram,
   Linkedin,
-} from "lucide-react"
-import { FOOTER_CONTENT } from "@/constants/layout/footer.constants"
+} from "lucide-react";
+import { FOOTER_CONTENT } from "@/constants/layout/footer.constants";
 
 // ── Wave Transition ─────────────────────────────────────────────
 export function FooterWave() {
@@ -29,7 +29,7 @@ export function FooterWave() {
         />
       </div>
     </div>
-  )
+  );
 }
 
 // ── Social Circle ───────────────────────────────────────────────
@@ -38,9 +38,9 @@ function SocialCircle({
   label,
   icon,
 }: {
-  href: string
-  label: string
-  icon: React.ReactNode
+  href: string;
+  label: string;
+  icon: React.ReactNode;
 }) {
   return (
     <Link
@@ -59,24 +59,21 @@ function SocialCircle({
     >
       {icon}
     </Link>
-  )
+  );
 }
 
 // ── Footer ──────────────────────────────────────────────────────
 export default function Footer() {
   return (
     <footer className="relative w-full mt-12">
-
       {/* Wave */}
       <FooterWave />
 
       {/* Main Body */}
       <div className="bg-[#22784E] text-white">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 pt-12 pb-8">
-
           {/* ───── Grid ───── */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
-
             {/* ── Logo + About ── */}
             <div className="flex flex-col gap-5">
               <Link href="/" className="flex items-center gap-3">
@@ -91,7 +88,9 @@ export default function Footer() {
                 </div>
 
                 <div className="leading-tight">
-                  <p className="text-[20px] sm:text-[22px] md:text-[22px] lg:text-[24px] font-bold">Bodhi International</p>
+                  <p className="text-[20px] sm:text-[22px] md:text-[22px] lg:text-[24px] font-bold">
+                    Bodhi International
+                  </p>
                   <p className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] text-white/70">
                     Montessori School
                   </p>
@@ -134,16 +133,25 @@ export default function Footer() {
 
             {/* ── Contact + Social ── */}
             <div className="flex flex-col gap-8">
-
               {/* Contact */}
               <div className="flex flex-col gap-3">
                 <h4 className="text-[20px] sm:text-[22px] md:text-[22px] lg:text-[24px] font-semibold tracking-wide">
                   Contact Us
                 </h4>
 
-                <div className="flex items-center gap-3  text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]  text-white/75">
+                <div className="flex items-center gap-3 text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] text-white/75">
                   <Phone className="w-4 h-4 text-white/60 shrink-0" />
-                  <span>{FOOTER_CONTENT.phone}</span>
+
+                  <span>
+                    {FOOTER_CONTENT.phone.map((phone, index) => (
+                      <span key={phone}>
+                        <a href={`tel:${phone}`} className="hover:underline">
+                          {phone}
+                        </a>
+                        {index < FOOTER_CONTENT.phone.length - 1 && ", "}
+                      </span>
+                    ))}
+                  </span>
                 </div>
               </div>
 
@@ -176,7 +184,6 @@ export default function Footer() {
                   />
                 </div>
               </div>
-
             </div>
           </div>
 
@@ -195,7 +202,6 @@ export default function Footer() {
               />
             </div>
           </div>
-
         </div>
       </div>
 
@@ -203,10 +209,7 @@ export default function Footer() {
       {/* Floating Half-Hidden 3D Donate Button */}
       {/* ────────────────────────────────────────────── */}
 
-      <Link
-        href="/donate"
-        className="fixed bottom-8 right-0 z-50 group"
-      >
+      <Link href="/donate" className="fixed bottom-8 right-0 z-50 group">
         <div
           className="
             translate-x-1/2
@@ -241,7 +244,6 @@ export default function Footer() {
           </div>
         </div>
       </Link>
-
     </footer>
-  )
+  );
 }

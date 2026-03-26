@@ -36,12 +36,12 @@ export function WhyChooseCard({
         </div>
 
         {/* Title */}
-        <h3 className="text-[16px] sm:text-[18px] md:text-[16px] lg:text-[18px] xl:text-[22px] 2xl:text-[24px] font-bold text-gray-800">
+        <h3 className="text-[18px] sm:text-[18px] md:text-[16px] lg:text-[18px] font-bold text-gray-800">
           {title}
         </h3>
 
         {/* Description */}
-        <p className="text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] 2xl:text-[20px] text-gray-500 leading-relaxed">
+        <p className="text-[16px] sm:text-[16px] md:text-[18px] lg:text-[18px]  text-gray-500 leading-relaxed">
           {description}
         </p>
       </CardContent>

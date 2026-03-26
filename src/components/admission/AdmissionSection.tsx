@@ -109,14 +109,10 @@ export function AdmissionSection() {
   return (
     <>
       <section className="w-full bg-white">
-        <div
-          className="
-            mx-auto w-full max-w-7xl
-            px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16
-            sm:pt-10 pb-16 sm:pb-20 lg:pb-24 2xl:pb-32
-          "
-        >
-          {/* ── Breadcrumb ──────────────────────────── */}
+
+         <div className="bg-gray-50 mb-5 max-w-screen w-full py-4">
+               {/* ── Breadcrumb ──────────────────────────── */}
+          
           <motion.nav
             className={`flex justify-center items-center gap-1.5 ${TEXT} text-gray-500 mb-4 sm:mb-5`}
             variants={fadeUp} initial="hidden" animate="visible" custom={0}
@@ -151,6 +147,18 @@ export function AdmissionSection() {
           >
             {pageTitle}
           </motion.h1>
+
+         </div>
+
+
+        <div
+          className="
+            mx-auto w-full max-w-7xl
+            px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16
+            sm:pt-10 pb-16 sm:pb-20 lg:pb-24 2xl:pb-32
+          "
+        >
+        
 
           {/* ── Two-column layout ───────────────────── */}
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 xl:gap-16 2xl:gap-20 items-start">
