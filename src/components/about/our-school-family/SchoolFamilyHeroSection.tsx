@@ -1,14 +1,13 @@
-'use client'
+"use client";
 
-import Image from 'next/image'
-import { motion, Variants } from 'framer-motion'
-import {
-  SCHOOL_FAMILY_CONTENT,
-  SCHOOL_FAMILY_MEMBERS,
-} from '@/constants/about/schoolfamily.constants'
-import Link from 'next/link'
+import Image from "next/image";
+import { motion, Variants } from "framer-motion";
+import { SCHOOL_FAMILY_CONTENT } from "@/constants/about/schoolfamily.constants";
+import Link from "next/link";
+import { useGetSchoolStaffs } from "@/services/api/directoryContentApi";
+import SafeImage from "@/components/shared/SafeImage";
 
-const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
+const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 28 },
@@ -17,7 +16,7 @@ const fadeUp: Variants = {
     y: 0,
     transition: { duration: 0.7, ease: EASE, delay },
   }),
-}
+};
 
 const fadeInCard: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -26,19 +25,17 @@ const fadeInCard: Variants = {
     y: 0,
     transition: { duration: 0.5, ease: EASE, delay },
   }),
-}
-
-
+};
 
 export function SchoolFamilyHeroSection() {
-  const { breadcrumb, pageTitle, sectionTag, heading } = SCHOOL_FAMILY_CONTENT
+  const { breadcrumb, pageTitle, sectionTag, heading } = SCHOOL_FAMILY_CONTENT;
+  const { data: schoolStaffs, isLoading: loadingStaffs } = useGetSchoolStaffs();
+
+  const SCHOOL_FAMILY_MEMBERS = schoolStaffs?.data || [];
 
   return (
     <section className="w-full bg-white">
-
-       <div className="bg-gray-50 mb-5 max-w-screen w-full py-4">
-
-        {/* ── Breadcrumb — centred, same pattern as IntroductionHeroSection ── */}
+      <div className="bg-gray-50 mb-5 max-w-screen w-full py-4">
         <motion.nav
           className="
             flex justify-center items-center gap-1.5
@@ -63,7 +60,11 @@ export function SchoolFamilyHeroSection() {
                   viewBox="0 0 24 24"
                   aria-hidden="true"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 5l7 7-7 7"
+                  />
                 </svg>
               )}
               {i < breadcrumb.length - 1 ? (
@@ -74,14 +75,15 @@ export function SchoolFamilyHeroSection() {
                   {crumb.label}
                 </Link>
               ) : (
-                <span className="text-[#8F3648] font-medium">{crumb.label}</span>
+                <span className="text-[#8F3648] font-medium">
+                  {crumb.label}
+                </span>
               )}
             </span>
           ))}
         </motion.nav>
 
-
-          {/* ── Page Title ── */}
+        {/* ── Page Title ── */}
         <motion.h1
           className="
             text-center font-bold text-gray-900 tracking-tight
@@ -95,11 +97,7 @@ export function SchoolFamilyHeroSection() {
         >
           {pageTitle}
         </motion.h1>
-
-       
-
-
-       </div>
+      </div>
 
       <div
         className="
@@ -109,7 +107,6 @@ export function SchoolFamilyHeroSection() {
           sm:pt-10 pb-14 sm:pb-18 lg:pb-24
         "
       >
-
         {/* ── Section Tag + Sub-heading ── */}
         <motion.div
           className="text-center mb-8 sm:mb-10 lg:mb-12 2xl:mb-16"
@@ -136,9 +133,7 @@ export function SchoolFamilyHeroSection() {
             {heading}
           </h2>
         </motion.div>
-      
 
-    
         <div
           className="
             grid gap-5
@@ -146,64 +141,81 @@ export function SchoolFamilyHeroSection() {
             sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 2xl:gap-8
           "
         >
-          {SCHOOL_FAMILY_MEMBERS.map((member, i) => (
-            <motion.div
-              key={`${member.name}-${i}`}
-              className="flex flex-col items-center text-center bg-gray-100 px-6 py-6 rounded-2xl"
-              variants={fadeInCard}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '0px 0px -40px 0px' }}
-              custom={0.05 * (i % 5)}
-            >
-              {/* Photo */}
-              <div
-                className="
+          {loadingStaffs &&
+            Array.from({ length: 5 }).map((_, i) => (
+              <motion.div
+                key={`skeleton-${i}`}
+                className="flex flex-col items-center text-center bg-gray-100 px-6 py-6 rounded-2xl"
+                variants={fadeInCard}
+                initial="hidden"
+                animate="visible"
+                custom={0.05 * i}
+              >
+                <div className="relative w-full overflow-hidden rounded-xl aspect-[3/4] mb-2 sm:mb-3 2xl:mb-4 bg-gray-300 animate-pulse" />
+                <div className="h-5 bg-gray-300 rounded w-3/4 mb-2 animate-pulse" />
+                <div className="h-5 bg-gray-300 rounded w-1/2 animate-pulse" />
+              </motion.div>
+            ))}
+          {!loadingStaffs &&
+            SCHOOL_FAMILY_MEMBERS.map((member: any, i: number) => (
+              <motion.div
+                key={`${member.username}-${i}`}
+                className="flex flex-col items-center text-center bg-gray-100 px-6 py-6 rounded-2xl"
+                variants={fadeInCard}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+                custom={0.05 * (i % 5)}
+              >
+                {/* Photo */}
+                <div
+                  className="
                   relative w-full overflow-hidden rounded-xl
                   aspect-[3/4]
                   mb-2 sm:mb-3 2xl:mb-4
                   shadow-sm
                 "
-              >
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  fill
-                  className="object-cover object-top"
-                  sizes="
+                >
+                  <SafeImage
+                    src={member.photo || "/staff/dummy.png"}
+                    fallback="/staff/dummy.png"
+                    alt={member.username}
+                    fill
+                    unoptimized
+                    className="object-cover object-top"
+                    sizes="
                     (max-width: 640px)  50vw,
                     (max-width: 768px)  33vw,
                     (max-width: 1024px) 25vw,
                     20vw
                   "
-                />
-              </div>
+                  />
+                </div>
 
-              {/* Name */}
-              <p
-                className="
+                {/* Name */}
+                <p
+                  className="
                   font-semibold text-[#8F3648] leading-tight
                   text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] 
                   mb-0.5
                 "
-              >
-                {member.name}
-              </p>
+                >
+                  {member.username}
+                </p>
 
-              {/* Role */}
-              <p
-                className="
+                {/* Role */}
+                <p
+                  className="
                   text-gray-500
                   text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
                 "
-              >
-                {member.role}
-              </p>
-            </motion.div>
-          ))}
+                >
+                  {member.role}
+                </p>
+              </motion.div>
+            ))}
         </div>
-
       </div>
     </section>
-  )
+  );
 }

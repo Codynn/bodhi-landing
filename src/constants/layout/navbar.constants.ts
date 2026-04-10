@@ -19,22 +19,22 @@ export const NAV_ITEMS: NavItem[] = [
 export const SOCIAL_LINKS = [
   {
     name: "Facebook",
-    href: "https://facebook.com",
+    href: "https://www.facebook.com/bodhiinternationalmontessori",
     icon: "facebook",
   },
   {
     name: "YouTube",
-    href: "https://youtube.com",
+    href: "https://www.facebook.com/bodhiinternationalmontessori",
     icon: "youtube",
   },
   {
     name: "Instagram",
-    href: "https://instagram.com",
+    href: "https://www.facebook.com/bodhiinternationalmontessori",
     icon: "instagram",
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com",
+    href: "https://www.facebook.com/bodhiinternationalmontessori",
     icon: "linkedin",
   },
 ];
