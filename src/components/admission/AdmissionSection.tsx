@@ -1,23 +1,5 @@
 "use client";
 
-/**
- * components/AdmissionSection.tsx
- * ─────────────────────────────────────────────────────────────────
- * Admission enquiry page — Next.js App Router, TypeScript.
- *
- * Full data flow:
- *
- *   useForm (react-hook-form + zodResolver(admissionFormSchema))
- *     └─▶ onSubmit
- *           └─▶ useAdmission  (TanStack useMutation)
- *                 └─▶ submitAdmission  (service)
- *                       └─▶ axiosInstance.post("/admissions")
- *                             └─▶ POST https://api.betterschool.app/api/admissions
- *
- *   On success  → <ResultPopup type="success" />  + form.reset()
- *   On error    → <ResultPopup type="error"   />
- *   While pending → all inputs disabled + Loader2 spinner on button
- */
 
 import { useForm }          from "react-hook-form";
 import { zodResolver }      from "@hookform/resolvers/zod";
@@ -38,7 +20,7 @@ import {
 } from "@/components/ui/select";
 
 
-import { ADMISSION_CONTENT }                    from "@/constants/admission/admission.constants";
+import { ADMISSION_CONTENT, AdmissionContent }                    from "@/constants/admission/admission.constants";
 import { GRADE_OPTIONS, RELATIONSHIP_OPTIONS }  from "@/types/admission/admission.types";
 import { useAdmission }                         from "@/hooks/useAdmission";
 import { admissionFormSchema, AdmissionFormValues } from "@/lib/validations/admission-form.schema";
@@ -74,12 +56,28 @@ const fadeUp: Variants = {
   }),
 };
 
+interface admissionProps {
+   data?:AdmissionContent
+}
+
+
 // ─────────────────────────────────────────────────────────────────
-export function AdmissionSection() {
-  const {
-    breadcrumb, pageTitle, sectionTag, heading, paragraphs,
-    formTitle, studentSectionLabel, parentSectionLabel, submitLabel,
-  } = ADMISSION_CONTENT;
+export function AdmissionSection({data}:admissionProps) {
+ 
+
+    const content = {
+    breadcrumb: data?.breadcrumb ?? ADMISSION_CONTENT.breadcrumb,
+    pageTitle: data?.pageTitle ?? ADMISSION_CONTENT.pageTitle,
+    sectionTag: data?.sectionTag ?? ADMISSION_CONTENT.sectionTag,
+    heading:  data?.heading ?? ADMISSION_CONTENT.heading,
+    paragraphs:  data?.paragraphs ?? ADMISSION_CONTENT.paragraphs,
+    formTitle:  data?.formTitle ?? ADMISSION_CONTENT.formTitle,
+    studentSectionLabel:
+       data?.studentSectionLabel ?? ADMISSION_CONTENT.studentSectionLabel,
+    parentSectionLabel:
+       data?.parentSectionLabel ?? ADMISSION_CONTENT.parentSectionLabel,
+    submitLabel:  data?.submitLabel ?? ADMISSION_CONTENT.submitLabel,
+  };
 
   // ── 1. Form ──────────────────────────────────────
   const form = useForm<AdmissionFormValues>({
@@ -118,14 +116,14 @@ export function AdmissionSection() {
             variants={fadeUp} initial="hidden" animate="visible" custom={0}
             aria-label="Breadcrumb"
           >
-            {breadcrumb.map((crumb, i) => (
+            {content.breadcrumb.map((crumb, i) => (
               <span key={crumb.href} className="flex items-center gap-1.5">
                 {i > 0 && (
                   <svg className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
                 )}
-                {i < breadcrumb.length - 1 ? (
+                {i < content.breadcrumb.length - 1 ? (
                   <Link href={crumb.href} className="hover:text-[#8F3648] transition-colors duration-200">
                     {crumb.label}
                   </Link>
@@ -145,7 +143,7 @@ export function AdmissionSection() {
             "
             variants={fadeUp} initial="hidden" animate="visible" custom={0.1}
           >
-            {pageTitle}
+            {content.pageTitle}
           </motion.h1>
 
          </div>
@@ -170,7 +168,7 @@ export function AdmissionSection() {
                 className={`font-semibold tracking-[0.18em] uppercase text-[#425190] ${TEXT} mb-2 sm:mb-3`}
                 variants={fadeUp} initial="hidden" animate="visible" custom={0.15}
               >
-                {sectionTag}
+                {content.sectionTag}
               </motion.p>
 
               <motion.h2
@@ -181,11 +179,11 @@ export function AdmissionSection() {
                 "
                 variants={fadeUp} initial="hidden" animate="visible" custom={0.2}
               >
-                {heading}
+                {content.heading}
               </motion.h2>
 
               <div className="flex flex-col gap-4 2xl:gap-5">
-                {paragraphs.map((para, i) => (
+                {content.paragraphs.map((para, i) => (
                   <motion.p
                     key={i}
                     className={`${TEXT} text-gray-600 leading-relaxed`}
@@ -204,7 +202,7 @@ export function AdmissionSection() {
               variants={fadeUp} initial="hidden" animate="visible" custom={0.2}
             >
               <p className={`${TEXT} font-bold text-gray-800 mb-6 sm:mb-8`}>
-                {formTitle}
+                {content.formTitle}
               </p>
 
               <Form {...form}>
@@ -216,7 +214,7 @@ export function AdmissionSection() {
 
                   {/* ── Student Details ─────────────── */}
                   <p className={`${TEXT} font-bold text-gray-800 border-b border-gray-300 pb-2`}>
-                    {studentSectionLabel}
+                    {content.studentSectionLabel}
                   </p>
 
                   {/* Student Full Name */}
@@ -313,7 +311,7 @@ export function AdmissionSection() {
 
                   {/* ── Parent / Guardian Details ────── */}
                   <p className={`${TEXT} font-bold text-gray-800 border-b border-gray-300 pb-2 mt-2`}>
-                    {parentSectionLabel}
+                    {content.parentSectionLabel}
                   </p>
 
                   {/* Parent Full Name */}
@@ -463,7 +461,7 @@ export function AdmissionSection() {
                         Submitting...
                       </span>
                     ) : (
-                      submitLabel
+                      content.submitLabel
                     )}
                   </Button>
 

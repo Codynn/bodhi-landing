@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { motion, Variants } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { EDUCATION_CHANGES_LIVES_CONTENT } from '@/constants/donate/educationchange.constants'
+import { EducationChangesLivesContent } from '@/types/donate/educationchange.types'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
@@ -25,9 +26,22 @@ const fadeLeft: Variants = {
   }),
 }
 
-export function EducationChangesLivesSection() {
-  const { tag, heading, description, points, closingText, image } =
-    EDUCATION_CHANGES_LIVES_CONTENT
+interface educationChangesProps{
+   data?:EducationChangesLivesContent
+}
+
+export function EducationChangesLivesSection({data}:educationChangesProps) {
+      
+      const content = {
+    tag: data?.tag ?? EDUCATION_CHANGES_LIVES_CONTENT.tag,
+    heading: data?.heading ?? EDUCATION_CHANGES_LIVES_CONTENT.heading,
+    description:
+      data?.description ?? EDUCATION_CHANGES_LIVES_CONTENT.description,
+    points: data?.points ?? EDUCATION_CHANGES_LIVES_CONTENT.points,
+    closingText:
+      data?.closingText ?? EDUCATION_CHANGES_LIVES_CONTENT.closingText,
+    image: data?.image ?? EDUCATION_CHANGES_LIVES_CONTENT.image,
+  }
 
   return (
     <section className="w-full bg-white">
@@ -57,7 +71,7 @@ export function EducationChangesLivesSection() {
               viewport={{ once: true, margin: '0px 0px -60px 0px' }}
               custom={0}
             >
-              {tag}
+              {content.tag}
             </motion.p>
 
             {/* Heading */}
@@ -72,7 +86,7 @@ export function EducationChangesLivesSection() {
               viewport={{ once: true, margin: '0px 0px -60px 0px' }}
               custom={0.1}
             >
-              {heading}
+              {content.heading}
             </motion.h2>
 
             {/* Description */}
@@ -87,12 +101,12 @@ export function EducationChangesLivesSection() {
               viewport={{ once: true, margin: '0px 0px -40px 0px' }}
               custom={0.18}
             >
-              {description}
+              {content.description}
             </motion.p>
 
             {/* Bullet Points */}
             <ul className="flex flex-col gap-3 sm:gap-4 2xl:gap-5 mb-1">
-              {points.map((point, i) => (
+              {content.points.map((point, i) => (
                 <motion.li
                   key={i}
                   className="flex items-center gap-2"
@@ -132,7 +146,7 @@ export function EducationChangesLivesSection() {
               viewport={{ once: true, margin: '0px 0px -40px 0px' }}
               custom={0.55}
             >
-              {closingText}
+              {content.closingText}
             </motion.p>
           </div>
 
@@ -150,8 +164,8 @@ export function EducationChangesLivesSection() {
           >
             <div className="relative w-full aspect-[4/3] overflow-hidden shadow-md">
               <Image
-                src={image.src}
-                alt={image.alt}
+                src={content.image.src}
+                alt={content.image.alt}
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"

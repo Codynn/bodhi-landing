@@ -50,11 +50,11 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ data }: HeroSectionProps) {
-  // fallback to constants if no API data
+ 
   const heading  = data?.heading  ?? HERO_CONTENT.heading
   const imageSrc = data?.imageSrc ?? HERO_CONTENT.imageSrc
   const imageAlt = data?.imageAlt ?? HERO_CONTENT.imageAlt
-  const stats    = data?.stats    ?? HERO_CONTENT.stats     // ← now works
+  const stats    = data?.stats    ?? HERO_CONTENT.stats     
 
   return (
     <section className="w-full bg-white">

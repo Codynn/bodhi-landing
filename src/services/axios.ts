@@ -1,3 +1,4 @@
+
 import axios, {
   AxiosError,
   AxiosResponse,
@@ -18,6 +19,7 @@ export const axiosInstance = axios.create({
     "Content-Type": "application/json",
   },
 });
+
 export const directoryAxiosInstance = axios.create({
   baseURL: DIRECTORY_BASE_URL,
   timeout: 15_000,
@@ -25,9 +27,16 @@ export const directoryAxiosInstance = axios.create({
     "Content-Type": "application/json",
   },
 });
+
 // ─── Request interceptor ──────────────────────────────────────────
 axiosInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    }
     return config;
   },
   (error: AxiosError) => Promise.reject(error),

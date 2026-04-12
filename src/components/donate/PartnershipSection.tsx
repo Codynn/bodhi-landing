@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { motion, Variants } from 'framer-motion'
 import { PARTNERSHIP_OPPORTUNITIES_CONTENT } from '@/constants/donate/partnership.constants'
+import { PartnershipOpportunitiesContent } from '@/types/donate/partnership.types'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
@@ -15,12 +16,23 @@ const fadeUp: Variants = {
   }),
 }
 
-export function PartnershipOpportunitiesSection() {
-  const { tag, heading, description, cards } = PARTNERSHIP_OPPORTUNITIES_CONTENT
+interface partnershipProps {
+   data?:PartnershipOpportunitiesContent
+}
 
-  // Split into rows: first row 3 cards, second row 2 cards centered
-  const firstRow = cards.slice(0, 3)
-  const secondRow = cards.slice(3)
+export function PartnershipOpportunitiesSection({data}:partnershipProps) {
+     
+  const content = {
+    tag: data?.tag ?? PARTNERSHIP_OPPORTUNITIES_CONTENT.tag,
+    heading: data?.heading ?? PARTNERSHIP_OPPORTUNITIES_CONTENT.heading,
+    description:
+      data?.description ?? PARTNERSHIP_OPPORTUNITIES_CONTENT.description,
+    cards: data?.cards ?? PARTNERSHIP_OPPORTUNITIES_CONTENT.cards,
+  }
+
+
+  const firstRow = content.cards.slice(0, 3)
+  const secondRow = content.cards.slice(3)
 
   return (
     <section className="w-full bg-white">
@@ -48,7 +60,7 @@ export function PartnershipOpportunitiesSection() {
             viewport={{ once: true, margin: '0px 0px -60px 0px' }}
             custom={0}
           >
-            {tag}
+            {content.tag}
           </motion.p>
 
           <motion.h2
@@ -63,7 +75,7 @@ export function PartnershipOpportunitiesSection() {
             viewport={{ once: true, margin: '0px 0px -60px 0px' }}
             custom={0.1}
           >
-            {heading}
+            {content.heading}
           </motion.h2>
 
           <motion.p
@@ -78,7 +90,7 @@ export function PartnershipOpportunitiesSection() {
             viewport={{ once: true, margin: '0px 0px -40px 0px' }}
             custom={0.18}
           >
-            {description}
+            {content.description}
           </motion.p>
         </div>
 

@@ -1,4 +1,20 @@
-export const ADMISSION_CONTENT = {
+export interface AdmissionContent {
+  breadcrumb: {
+    label: string
+    href: string
+  }[]
+  pageTitle: string
+  sectionTag: string
+  heading: string
+  paragraphs: string[]
+  formTitle: string
+  studentSectionLabel: string
+  parentSectionLabel: string
+  submitLabel: string
+  successTitle: string
+}
+
+export const ADMISSION_CONTENT:AdmissionContent = {
   breadcrumb: [
     { label: 'Home', href: '/' },
     { label: 'Admission', href: '/admission' },

@@ -1,9 +1,19 @@
 import { AdmissionSection } from '@/components/admission/AdmissionSection'
 
-export default function AdmissionPage() {
+async function getAdmissionData() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admission`, {
+    cache: 'force-cache',
+  })
+
+  return res.json()
+}
+
+export default async function AdmissionPage() {
+  const data = await getAdmissionData()
+
   return (
     <main className="min-h-screen bg-white">
-      <AdmissionSection />
+      <AdmissionSection data={data?.admission} />
     </main>
   )
 }

@@ -4,12 +4,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion, Variants } from 'framer-motion'
 import { CAREER_HERO_CONTENT } from '@/constants/career/careerhero.constants'
+import { CareerHeroContent } from '@/types/career/careerhero.types'
 
-// ── Text scale ────────────────────────────────────────────────────────────────
+// ── Text scale ───────────────────────────────────────────────
 const TEXT = 'text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]'
 
-// ── Animations ────────────────────────────────────────────────────────────────
+// ── Animation ────────────────────────────────────────────────
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
+
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: (d: number = 0) => ({
@@ -19,15 +21,30 @@ const fadeUp: Variants = {
   }),
 }
 
-export function CareerHeroSection() {
-  const { breadcrumb, pageTitle, poweredByLogo, heading, paragraphs, staffImage } =
-    CAREER_HERO_CONTENT
+// ─────────────────────────────────────────────────────────────
+export function CareerHeroSection({
+  data,
+}: {
+  data?: Partial<CareerHeroContent>
+}) {
+
+
+  const content: CareerHeroContent = {
+    breadcrumb: data?.breadcrumb ?? CAREER_HERO_CONTENT.breadcrumb,
+    pageTitle: data?.pageTitle ?? CAREER_HERO_CONTENT.pageTitle,
+    poweredByLogo: data?.poweredByLogo ?? CAREER_HERO_CONTENT.poweredByLogo,
+    heading: data?.heading ?? CAREER_HERO_CONTENT.heading,
+    paragraphs: data?.paragraphs ?? CAREER_HERO_CONTENT.paragraphs,
+    staffImage: data?.staffImage ?? CAREER_HERO_CONTENT.staffImage,
+  }
 
   return (
     <section className="w-full bg-white">
 
-          <div className="bg-gray-50 mb-5 max-w-screen w-full py-4">
+      {/* ── Header ─────────────────────────────── */}
+      <div className="bg-gray-50 mb-5 max-w-screen w-full py-4">
 
+        {/* Breadcrumb */}
         <motion.nav
           className={`flex justify-center items-center gap-1.5 ${TEXT} text-gray-500 mb-3 sm:mb-4`}
           variants={fadeUp}
@@ -36,7 +53,7 @@ export function CareerHeroSection() {
           custom={0}
           aria-label="Breadcrumb"
         >
-          {breadcrumb.map((crumb, i) => (
+          {content.breadcrumb.map((crumb, i) => (
             <span key={crumb.href} className="flex items-center gap-1.5">
               {i > 0 && (
                 <svg
@@ -49,8 +66,12 @@ export function CareerHeroSection() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               )}
-              {i < breadcrumb.length - 1 ? (
-                <Link href={crumb.href} className="hover:text-[#8F3648] transition-colors duration-200">
+
+              {i < content.breadcrumb.length - 1 ? (
+                <Link
+                  href={crumb.href}
+                  className="hover:text-[#8F3648] transition-colors duration-200"
+                >
                   {crumb.label}
                 </Link>
               ) : (
@@ -60,112 +81,94 @@ export function CareerHeroSection() {
           ))}
         </motion.nav>
 
-        {/* ── Page Title ── */}
+        {/* Page Title */}
         <motion.h1
-          className="
-            text-center font-bold text-gray-900 tracking-tight
-           text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px] mb-4 sm:mb-5
-          "
+          className="text-center font-bold text-gray-900 tracking-tight
+          text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px] mb-4 sm:mb-5"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={0.08}
         >
-          {pageTitle}
+          {content.pageTitle}
         </motion.h1>
 
-        {/* ── Powered by badge ── */}
+        {/* Powered by */}
         <motion.div
-          className="flex justify-center items-center  mb-10"
+          className="flex justify-center items-center mb-10 gap-2"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={0.14}
         >
-          <span className={`${TEXT} text-gray-900 font-bold`}>Powered by</span>
+          <span className={`${TEXT} text-gray-900 font-bold`}>
+            Powered by
+          </span>
+
           <Link
-            href={poweredByLogo.href}
+            href={content.poweredByLogo.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center"
           >
             <div className="relative h-5 sm:h-6 xl:h-7 2xl:h-9 w-auto aspect-[3/1]">
               <Image
-                src={poweredByLogo.src}
-                alt={poweredByLogo.alt}
+                src={content.poweredByLogo.src}
+                alt={content.poweredByLogo.alt}
                 fill
                 className="object-contain"
               />
             </div>
           </Link>
         </motion.div>
+      </div>
 
-                </div>
+      {/* ── Body ─────────────────────────────── */}
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16 pb-16">
 
-      <div
-        className="
-          mx-auto w-full max-w-7xl
-          px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16
-          pt-6 sm:pt-8 md:pt-10
-          pb-16 sm:pb-20 lg:pb-24 2xl:pb-32
-        "
-      >
-
-     
-
-        {/* ── Centered text content ── */}
-        <div className="max-w-screen mx-auto text-center flex flex-col gap-5 sm:gap-6 2xl:gap-8 mb-10 sm:mb-12 lg:mb-14 2xl:mb-16">
+        {/* Heading + Paragraphs */}
+        <div className="text-center flex flex-col gap-5 mb-12">
 
           <motion.h2
-            className="
-              font-bold text-[#8F3648] leading-tight
-               text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px]
-            "
+            className="font-bold text-[#8F3648]
+            text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px]"
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+            viewport={{ once: true }}
             custom={0}
           >
-            {heading}
+            {content.heading}
           </motion.h2>
 
-          {/* Paragraphs */}
-          {paragraphs.map((para: string, i: number) => (
+          {content.paragraphs.map((p, i) => (
             <motion.p
               key={i}
-              className={`${TEXT} text-gray-600 leading-[1.85] sm:leading-[1.9] 2xl:leading-[2]`}
+              className={`${TEXT} text-gray-600 leading-relaxed`}
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: '0px 0px -30px 0px' }}
-              custom={0.08 + i * 0.08}
+              viewport={{ once: true }}
+              custom={0.1 + i * 0.08}
             >
-              {para}
+              {p}
             </motion.p>
           ))}
         </div>
 
-        {/* ── Staff Photo ── */}
+        {/* Image */}
         <motion.div
-          className="
-            relative w-full mx-auto overflow-hidden rounded-2xl
-            max-w-screen
-            aspect-[16/9] sm:aspect-[16/8] lg:aspect-[16/7]
-          "
+          className="relative w-full aspect-[16/8] rounded-2xl overflow-hidden"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '0px 0px -60px 0px' }}
-          custom={0.1}
+          viewport={{ once: true }}
+          custom={0.2}
         >
           <Image
-            src={staffImage.src}
-            alt={staffImage.alt}
+            src={content.staffImage.src}
+            alt={content.staffImage.alt}
             fill
-            className="object-cover object-center"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 860px"
-            priority
+            className="object-cover"
           />
         </motion.div>
 

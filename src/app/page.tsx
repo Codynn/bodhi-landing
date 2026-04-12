@@ -43,7 +43,6 @@ export default async function HomePage() {
         <DonationSection data={data?.donation} />
       </FadeInSection>
 
-      {/* Dynamic section — fetches client-side via TanStack Query */}
       <FadeInSection>
         <NoticesSection />
       </FadeInSection>

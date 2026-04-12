@@ -3,8 +3,8 @@ export interface JobOpening {
   title: string
   description: string
   type: 'Full Time' | 'Part Time' | 'Contract'
-  date: string        
-  href: string        
+  date: string
+  href: string
 }
 
 export interface CareerOpeningsContent {

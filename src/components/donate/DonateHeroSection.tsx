@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 import { DONATE_HERO_CONTENT } from "@/constants/donate/donate.constants";
+import { DonateHeroContent } from "@/types/donate/donate.types";
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
 
@@ -33,9 +34,22 @@ const fadeInRight: Variants = {
   },
 };
 
-export function DonateHeroSection() {
-  const { breadcrumb, pageTitle, sectionTag, heading, description, image } =
-  DONATE_HERO_CONTENT;
+
+interface DonateHeroProps {
+  data?: DonateHeroContent;
+}
+
+
+export function DonateHeroSection({data}:DonateHeroProps) {
+  
+     const content = {
+    breadcrumb: data?.breadcrumb ?? DONATE_HERO_CONTENT.breadcrumb,
+    pageTitle: data?.pageTitle ?? DONATE_HERO_CONTENT.pageTitle,
+    sectionTag: data?.sectionTag ?? DONATE_HERO_CONTENT.sectionTag,
+    heading: data?.heading ?? DONATE_HERO_CONTENT.heading,
+    description: data?.description ?? DONATE_HERO_CONTENT.description,
+    image: data?.image ?? DONATE_HERO_CONTENT.image,
+  };
 
   return (
     <section className="w-full bg-white">
@@ -53,7 +67,7 @@ export function DonateHeroSection() {
           custom={0}
           aria-label="Breadcrumb"
         >
-          {breadcrumb.map((crumb, i) => (
+          {content.breadcrumb.map((crumb, i) => (
             <span key={crumb.href} className="flex items-center gap-1.5">
               {i > 0 && (
                 <svg
@@ -71,7 +85,7 @@ export function DonateHeroSection() {
                   />
                 </svg>
               )}
-              {i < breadcrumb.length - 1 ? (
+              {i < content.breadcrumb.length - 1 ? (
                 <a
                   href={crumb.href}
                   className="hover:text-[#8F3648] transition-colors duration-200"
@@ -95,7 +109,7 @@ export function DonateHeroSection() {
           animate="visible"
           custom={0.1}
         >
-          {pageTitle}
+          {content.pageTitle}
         </motion.h1>
 
 
@@ -115,8 +129,8 @@ export function DonateHeroSection() {
           >
             <div className="relative w-full rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3] shadow-lg">
               <Image
-                src={image.src}
-                alt={image.alt}
+                src={content.image.src}
+                alt={content.image.alt}
                 fill
                 priority
                 className="object-cover object-center"
@@ -134,17 +148,17 @@ export function DonateHeroSection() {
           >
             {/* Section Tag */}
             <p className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]  font-semibold tracking-widest text-[#425190] uppercase">
-              {sectionTag}
+              {content.sectionTag}
             </p>
 
             {/* Heading */}
             <h1 className="text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px] font-bold text-[#8F3648] leading-tight mb-2">
-              {heading}
+              {content.heading}
             </h1>
 
             {/* Description */}
             <p className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] text-gray-600 leading-relaxedn mb-3 lg:mb-5">
-              {description}
+              {content.description}
             </p>
 
             

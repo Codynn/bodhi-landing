@@ -1,5 +1,6 @@
+import { DonateHeroContent } from "@/types/donate/donate.types";
 
-export const DONATE_HERO_CONTENT = {
+export const DONATE_HERO_CONTENT:DonateHeroContent = {
   breadcrumb: [
     { label: 'Home', href: '/' },
     { label: 'Donate', href: '/donate' },

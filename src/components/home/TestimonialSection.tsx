@@ -8,7 +8,7 @@ interface testimonialsSectionProps{
 
 export default function TestimonialsSection({data}:testimonialsSectionProps) {
 
-      // 🧠 HYBRID SYSTEM
+   
   const content = {
     label: data?.label ?? TESTIMONIALS_CONTENT.label,
     heading: data?.heading ?? TESTIMONIALS_CONTENT.heading,

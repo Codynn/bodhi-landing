@@ -26,6 +26,7 @@ import {
 import { CONTACT_CONTENT }   from "@/constants/contact/contact.constants";
 import { useContactMessage } from "@/hooks/usecontactmessage";
 import { ResultPopup } from "../shared/ResultPopUp";
+import { ContactContent } from "@/types/contact/contact.types";
 
 // ── Shared responsive text size ───────────────────────────────────
 const TEXT = "text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]";
@@ -63,12 +64,22 @@ const SOCIAL_ICONS = [
   { key: "linkedin",  Icon: Linkedin,  label: "LinkedIn"  },
 ] as const;
 
+interface ContactSectionProps {
+  data?: ContactContent
+}
+
+
 // ─────────────────────────────────────────────────────────────────
-export function ContactSection() {
-  const {
-    breadcrumb, pageTitle, sectionTag,
-    heading, info, formTitle, submitLabel,
-  } = CONTACT_CONTENT;
+export function ContactSection({ data }: ContactSectionProps) {
+  const content = {
+    breadcrumb: data?.breadcrumb ?? CONTACT_CONTENT.breadcrumb,
+    pageTitle: data?.pageTitle ?? CONTACT_CONTENT.pageTitle,
+    sectionTag: data?.sectionTag ?? CONTACT_CONTENT.sectionTag,
+    heading: data?.heading ?? CONTACT_CONTENT.heading,
+    info: data?.info ?? CONTACT_CONTENT.info,
+    formTitle: data?.formTitle ?? CONTACT_CONTENT.formTitle,
+    submitLabel: data?.submitLabel ?? CONTACT_CONTENT.submitLabel,
+  };
 
   // ── 1. Form ─────────────────────────────────────────
   const form = useForm<ContactFormValues>({
@@ -91,10 +102,10 @@ export function ContactSection() {
 
   // ── Social hrefs ────────────────────────────────────
   const socialHrefs: Record<string, string> = {
-    facebook:  info.social.facebook,
-    youtube:   info.social.youtube,
-    instagram: info.social.instagram,
-    linkedin:  info.social.linkedin,
+    facebook:  content.info.social.facebook,
+    youtube:   content.info.social.youtube,
+    instagram: content.info.social.instagram,
+    linkedin:  content.info.social.linkedin,
   };
 
   // ─────────────────────────────────────────────────────
@@ -110,7 +121,7 @@ export function ContactSection() {
           variants={fadeUp} initial="hidden" animate="visible" custom={0}
           aria-label="Breadcrumb"
           >
-          {breadcrumb.map((crumb, i) => (
+          {content.breadcrumb.map((crumb, i) => (
             <span key={crumb.href} className="flex items-center gap-1.5">
               {i > 0 && (
                 <svg
@@ -121,7 +132,7 @@ export function ContactSection() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               )}
-              {i < breadcrumb.length - 1 ? (
+              {i < content.breadcrumb.length - 1 ? (
                 <Link
                   href={crumb.href}
                   className="hover:text-[#8F3648] transition-colors duration-200"
@@ -144,7 +155,7 @@ export function ContactSection() {
           "
           variants={fadeUp} initial="hidden" animate="visible" custom={0.1}
           >
-          {pageTitle}
+          {content.pageTitle}
         </motion.h1>
           </div>
 
@@ -168,7 +179,7 @@ export function ContactSection() {
               className={`font-semibold tracking-[0.18em] uppercase text-[#425190] ${TEXT}`}
               variants={fadeUp} initial="hidden" animate="visible" custom={0.15}
             >
-              {sectionTag}
+              {content.sectionTag}
             </motion.p>
 
             {/* Heading */}
@@ -179,7 +190,7 @@ export function ContactSection() {
               "
               variants={fadeUp} initial="hidden" animate="visible" custom={0.2}
             >
-              {heading}
+              {content.heading}
             </motion.h2>
 
             {/* Info blocks */}
@@ -192,7 +203,7 @@ export function ContactSection() {
                 <p className={`${TEXT} font-bold text-gray-800 mb-1`}>Contact Us</p>
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4 xl:w-5 xl:h-5 text-gray-500 flex-shrink-0" />
-                  <span className={`${TEXT} text-gray-600`}>{info.phone.join(", ")}</span>
+                  <span className={`${TEXT} text-gray-600`}>{content.info.phone.join(", ")}</span>
                 </div>
               </div>
 
@@ -201,7 +212,7 @@ export function ContactSection() {
                 <p className={`${TEXT} font-bold text-gray-800 mb-1`}>Address</p>
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4 xl:w-5 xl:h-5 text-gray-500 flex-shrink-0" />
-                  <span className={`${TEXT} text-gray-600`}>{info.address}</span>
+                  <span className={`${TEXT} text-gray-600`}>{content.info.address}</span>
                 </div>
               </div>
 
@@ -210,7 +221,7 @@ export function ContactSection() {
                 <p className={`${TEXT} font-bold text-gray-800 mb-1`}>School Hour</p>
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 xl:w-5 xl:h-5 text-gray-500 flex-shrink-0" />
-                  <span className={`${TEXT} text-gray-600`}>{info.schoolHours}</span>
+                  <span className={`${TEXT} text-gray-600`}>{content.info.schoolHours}</span>
                 </div>
               </div>
 
@@ -247,7 +258,7 @@ export function ContactSection() {
               variants={fadeUp} initial="hidden" animate="visible" custom={0.3}
             >
               <iframe
-                src={info.mapEmbedUrl}
+                src={content.info.mapEmbedUrl}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -269,7 +280,7 @@ export function ContactSection() {
             variants={fadeUp} initial="hidden" animate="visible" custom={0.2}
           >
             <p className={`${TEXT} font-bold text-gray-800 mb-6 sm:mb-8`}>
-              {formTitle}
+              {content.formTitle}
             </p>
 
             <Form {...form}>
@@ -389,7 +400,7 @@ export function ContactSection() {
                       Sending...
                     </span>
                   ) : (
-                    submitLabel
+                   content.submitLabel
                   )}
                 </Button>
               </form>
