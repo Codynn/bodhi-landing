@@ -1,12 +1,13 @@
 export interface Testimonial {
-  id: number
-  quote: string
-  name: string
-  role: string
+  id: number;
+  quote: string;
+  name: string;
+  role: string;
 }
 
 export interface TestimonialsContent {
-  label: string
-  heading: string
-  description: string
+  label: string;
+  heading: string;
+  description: string;
+  testimonials: Testimonial[];
 }

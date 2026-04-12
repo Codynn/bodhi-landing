@@ -1,3 +1,4 @@
+// app/page.tsx
 import AboutSection from "@/components/home/AboutSection";
 import DonationSection from "@/components/home/DonationSection";
 import { GallerySection } from "@/components/home/GallerySection";
@@ -9,37 +10,50 @@ import WhyChooseSection from "@/components/home/WhyChooseSection";
 import FadeInSection from "@/components/shared/FadeInSection";
 import React from "react";
 
-export default function HomePage() {
+// Static data fetched at build time
+async function getHomeData() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/home`, {
+    cache: "force-cache",
+  });
+  return res.json();
+}
+
+export default async function HomePage() {
+  const data = await getHomeData();
+  console.log(data)
+
   return (
     <main className="relative w-full font-outfit">
-      <HeroSection />
+      {/* Static sections — rendered at build time */}
+      <HeroSection data={data?.hero} />
 
       <FadeInSection>
-        <AboutSection />
+        <AboutSection data={data?.about} />
       </FadeInSection>
 
       <FadeInSection>
-        <WhyChooseSection />
+        <WhyChooseSection data={data?.whyChoose} />
       </FadeInSection>
 
       <FadeInSection>
-        <SchoolMessageSection />
+        <SchoolMessageSection data={data?.message} />
       </FadeInSection>
 
       <FadeInSection>
-        <DonationSection />
+        <DonationSection data={data?.donation} />
       </FadeInSection>
 
+      {/* Dynamic section — fetches client-side via TanStack Query */}
       <FadeInSection>
         <NoticesSection />
       </FadeInSection>
 
       <FadeInSection>
-        <GallerySection />
+        <GallerySection data={data?.gallery} />
       </FadeInSection>
 
       <FadeInSection>
-        <TestimonialsSection />
+        <TestimonialsSection data={data?.testimonials} />
       </FadeInSection>
     </main>
   );

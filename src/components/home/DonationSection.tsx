@@ -5,8 +5,25 @@ import Link from "next/link"
 import { Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DONATION_CONTENT } from "@/constants/home/donation.constants"
+import { DonationContent } from "@/types/home/donation.types"
 
-export default function DonationSection() {
+interface donationSectionProps{
+    data?:DonationContent
+}
+
+export default function DonationSection({data}:donationSectionProps) {
+
+     // 🧠 HYBRID FALLBACK SYSTEM
+  const content = {
+    label: data?.label ?? DONATION_CONTENT.label,
+    heading: data?.heading ?? DONATION_CONTENT.heading,
+    description: data?.description ?? DONATION_CONTENT.description,
+    ctaLabel: data?.ctaLabel ?? DONATION_CONTENT.ctaLabel,
+    ctaHref: data?.ctaHref ?? DONATION_CONTENT.ctaHref,
+    imageSrc: data?.imageSrc ?? DONATION_CONTENT.imageSrc,
+    imageAlt: data?.imageAlt ?? DONATION_CONTENT.imageAlt,
+  };
+
   return (
     <section className="w-full bg-gray-50 overflow-hidden mt-12">
       <div className="flex flex-col lg:flex-row items-stretch">
@@ -14,8 +31,8 @@ export default function DonationSection() {
         {/* ───────── Left: Image ───────── */}
         <div className="relative w-full lg:w-1/2 min-h-[320px] sm:min-h-[420px] lg:min-h-120 2xl:min-h-200">
           <Image
-            src={DONATION_CONTENT.imageSrc}
-            alt={DONATION_CONTENT.imageAlt}
+            src={content.imageSrc}
+            alt={content.imageAlt}
             fill
             priority
             className="object-cover object-center"
@@ -29,21 +46,21 @@ export default function DonationSection() {
 
             {/* Label */}
             <p className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] font-bold text-[#425190] uppercase tracking-[0.2em]">
-              {DONATION_CONTENT.label}
+              {content.label}
             </p>
 
             {/* Heading */}
             <h2 className="text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px] font-bold text-[#8F3648] leading-snug">
-              {DONATION_CONTENT.heading}
+              {content.heading}
             </h2>
 
             {/* Description */}
             <p className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] text-gray-600 leading-relaxed">
-              {DONATION_CONTENT.description}
+              {content.description}
             </p>
 
             {/* 3D Donate Button */}
-            <Link href={DONATION_CONTENT.ctaHref} className="self-start mt-3">
+            <Link href={content.ctaHref} className="self-start mt-3">
               <Button
                 className="
                   bg-[#7B1C1C]
@@ -64,7 +81,7 @@ export default function DonationSection() {
                   transition-all duration-150
                 "
               >
-                {DONATION_CONTENT.ctaLabel}
+                {content.ctaLabel}
                 <Heart className="w-4 h-4 sm:w-5 sm:h-5 fill-white" />
               </Button>
             </Link>

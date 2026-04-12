@@ -1,7 +1,23 @@
-import { TESTIMONIALS_CONTENT, TESTIMONIALS_DATA } from '@/constants/home/testimonials.constants'
+import { TESTIMONIALS_CONTENT } from '@/constants/home/testimonials.constants'
+import { TestimonialsContent } from '@/types/home/testimonials.types';
 import { Quote } from 'lucide-react'
 
-export default function TestimonialsSection() {
+interface testimonialsSectionProps{
+   data?:TestimonialsContent
+}
+
+export default function TestimonialsSection({data}:testimonialsSectionProps) {
+
+      // 🧠 HYBRID SYSTEM
+  const content = {
+    label: data?.label ?? TESTIMONIALS_CONTENT.label,
+    heading: data?.heading ?? TESTIMONIALS_CONTENT.heading,
+    description: data?.description ?? TESTIMONIALS_CONTENT.description,
+    Testimonial:data?.testimonials  ?? TESTIMONIALS_CONTENT.testimonials
+  };
+
+
+
   return (
     <section className="w-full bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20 ">
@@ -9,26 +25,26 @@ export default function TestimonialsSection() {
         {/* ── Header ── */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-14 gap-3">
           <p className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] font-bold text-[#425190] uppercase tracking-widest">
-            {TESTIMONIALS_CONTENT.label}
+            {content.label}
           </p>
           <h2 className="text-[36px] sm:text-[34px] md:text-[34px] lg:text-[40px] font-bold text-[#8F3648] leading-snug">
-            {TESTIMONIALS_CONTENT.heading}
+            {content.heading}
           </h2>
           <p className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] text-gray-500 leading-relaxed max-w-[80vw]">
-            {TESTIMONIALS_CONTENT.description}
+            {content.description}
           </p>
         </div>
 
         {/* ── Row 1: 2 columns ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4 mb-8 lg:mb-10">
-          {TESTIMONIALS_DATA.slice(0, 2).map((t) => (
+          {content.Testimonial.slice(0, 2).map((t) => (
             <TestimonialCard key={t.id} {...t} />
           ))}
         </div>
 
         {/* ── Row 2: 3 columns ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4">
-          {TESTIMONIALS_DATA.slice(2, 5).map((t) => (
+          {content.Testimonial.slice(2, 5).map((t) => (
             <TestimonialCard key={t.id} {...t} />
           ))}
         </div>

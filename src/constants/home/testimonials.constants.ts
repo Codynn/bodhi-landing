@@ -1,13 +1,11 @@
-import { Testimonial, TestimonialsContent } from "@/types/home/testimonials.types"
+import { TestimonialsContent } from "@/types/home/testimonials.types"
 
 export const TESTIMONIALS_CONTENT: TestimonialsContent = {
   label: 'What Our Community Says',
   heading: 'Trusted by Parents, Valued by Teachers',
   description:
     'At Bodhi School, we believe strong early education begins with trust and care. Hear from our parents and teachers about how our nurturing environment, dedicated educators, and child-focused approach help young learners grow with confidence and joy.',
-}
-
-export const TESTIMONIALS_DATA: Testimonial[] = [
+ testimonials:[
   {
     id: 1,
     quote:
@@ -44,3 +42,4 @@ export const TESTIMONIALS_DATA: Testimonial[] = [
     role: 'Parent',
   },
 ]
+}

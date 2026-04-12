@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence, Variants } from 'framer-motion'
 import { GALLERY_CONTENT } from '@/constants/home/gallery.constants'
+import { GalleryContent } from '@/types/home/gallery.types'
 
 const IMAGES_PER_PAGE = 6
 
@@ -69,8 +70,20 @@ function getVariants(dir: WipeDir, delay: number): Variants {
   }
 }
 
-export function GallerySection() {
-  const { sectionLabel, heading, images } = GALLERY_CONTENT
+interface gallerySectionProps{
+   data?:GalleryContent
+}
+
+export function GallerySection({data}:gallerySectionProps) {
+  
+    const content = {
+    sectionLabel: data?.sectionLabel ?? GALLERY_CONTENT.sectionLabel,
+    heading: data?.heading ?? GALLERY_CONTENT.heading,
+    images: data?.images ?? GALLERY_CONTENT.images,
+  };
+
+    const images = content.images;
+
   const [page, setPage]           = useState(0)
   const [direction, setDirection] = useState(1)
 
@@ -96,12 +109,12 @@ export function GallerySection() {
 
         {/* Label */}
         <p className="text-center text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]  font-semibold tracking-widest text-[#425190] uppercase mb-3">
-          {sectionLabel}
+          {content.sectionLabel}
         </p>
 
         {/* Heading */}
         <h2 className="text-center text-[26px] sm:text-[26px] md:text-[28px] lg:text-[40px]  font-bold text-[#8F3648] mb-8 sm:mb-10">
-          {heading}
+          {content.heading}
         </h2>
 
         {/* ── Desktop Masonry Grid ── */}

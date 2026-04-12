@@ -1,3 +1,4 @@
+
 import { HeroContent, HeroStat } from "@/types/home/hero.types"
 
 export const HERO_STATS: HeroStat[] = [
@@ -8,6 +9,7 @@ export const HERO_STATS: HeroStat[] = [
 
 export const HERO_CONTENT: HeroContent = {
   heading:  'Shaping Confident Learners for a Better Tomorrow',
-  imageSrc: '/home/school-building.jpg',
+  imageSrc: '/home/school.png',
   imageAlt: 'Bodhi International Montessori School Building',
+  stats: HERO_STATS,  // ← add this
 }
