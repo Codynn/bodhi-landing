@@ -1,6 +1,7 @@
-import { HeroStat } from "@/types/home/hero.types"
 
-export const INTRODUCTION_CONTENT = {
+import type { IntroductionContent } from '@/types/about/introduction.types'
+
+export const INTRODUCTION_CONTENT: IntroductionContent = {
   breadcrumb: [
     { label: 'Home', href: '/' },
     { label: 'Introduction', href: '/about/introduction' },
@@ -14,10 +15,9 @@ export const INTRODUCTION_CONTENT = {
     src: '/about/about1.png',
     alt: 'Bodhi International Montessori School Staff and Students',
   },
+  stats: [
+    { value: 10,  suffix: '+', label: 'Years of Excellence' },
+    { value: 100, suffix: '+', label: 'Current Students'    },
+    { value: 15,  suffix: '+', label: 'Professionals'       },
+  ],
 }
-
-export const INTRODUCTION_STATS: HeroStat[] = [
-  { value: 10, suffix: '+', label: 'Years of Excellence' },
-  { value: 100, suffix: '+', label: 'Current Students' },
-  { value: 15, suffix: '+', label: 'Professionals' },
-]

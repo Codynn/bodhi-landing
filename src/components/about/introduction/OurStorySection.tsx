@@ -2,6 +2,7 @@
 
 import { OUR_STORY_CONTENT } from '@/constants/about/ourstory.constants'
 import { motion, Variants } from 'framer-motion'
+import type { OurStoryContent } from '@/types/about/ourstory.types'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
@@ -14,68 +15,54 @@ const fadeUp: Variants = {
   }),
 }
 
+interface OurStorySectionProps {
+  data?: OurStoryContent
+}
 
-
-export function OurStorySection() {
-  const { sectionTag, heading, paragraphs } = OUR_STORY_CONTENT
+export function OurStorySection({ data }: OurStorySectionProps) {
+  // 🧠 HYBRID FALLBACK SYSTEM
+  const content = {
+    sectionTag: data?.sectionTag ?? OUR_STORY_CONTENT.sectionTag,
+    heading:    data?.heading    ?? OUR_STORY_CONTENT.heading,
+    paragraphs: data?.paragraphs ?? OUR_STORY_CONTENT.paragraphs,
+  }
 
   return (
     <section className="w-full">
-      {/* Top divider — subtle separator from previous section */}
       <div className="w-full border-t border-white/10" />
 
-      <div
-        className="
-          mx-auto w-full text-center
-          max-w-7xl
-          px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16
-          pt-12 sm:pt-16 md:pt-18 lg:pt-20 xl:pt-24 2xl:pt-32
-          pb-14 sm:pb-18 md:pb-20 lg:pb-24 xl:pb-28 2xl:pb-36
-        "
-      >
+      <div className="mx-auto w-full text-center max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16 pt-12 sm:pt-16 md:pt-18 lg:pt-20 xl:pt-24 2xl:pt-32 pb-14 sm:pb-18 md:pb-20 lg:pb-24 xl:pb-28 2xl:pb-36">
 
         {/* Section Tag */}
         <motion.p
-          className="
-            font-semibold tracking-[0.2em] sm:tracking-[0.22em] 2xl:tracking-[0.25em]
-            uppercase text-[#425190]
-             text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
-            mb-3 sm:mb-4 md:mb-5 2xl:mb-6
-          "
+          className="font-semibold tracking-[0.2em] sm:tracking-[0.22em] 2xl:tracking-[0.25em] uppercase text-[#425190] text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] mb-3 sm:mb-4 md:mb-5 2xl:mb-6"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '0px 0px -60px 0px' }}
           custom={0}
         >
-          {sectionTag}
+          {content.sectionTag}
         </motion.p>
 
         {/* Heading */}
         <motion.h2
-          className="
-            font-bold text-[#8F3648] leading-[1.15]
-            text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px]
-            mb-6 sm:mb-8 md:mb-9 lg:mb-10 2xl:mb-14
-          "
+          className="font-bold text-[#8F3648] leading-[1.15] text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px] mb-6 sm:mb-8 md:mb-9 lg:mb-10 2xl:mb-14"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '0px 0px -60px 0px' }}
           custom={0.1}
         >
-          {heading}
+          {content.heading}
         </motion.h2>
 
         {/* Paragraphs */}
         <div className="flex flex-col gap-5 sm:gap-6 md:gap-7 2xl:gap-9">
-          {paragraphs.map((para, i) => (
+          {content.paragraphs.map((para, i) => (
             <motion.p
               key={i}
-              className="
-                text-gray-900 leading-[1.85] sm:leading-[1.9] 2xl:leading-[2]
-                text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]
-              "
+              className="text-gray-900 leading-[1.85] sm:leading-[1.9] 2xl:leading-[2] text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]"
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"

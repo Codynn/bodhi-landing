@@ -102,7 +102,7 @@ export function DonateHeroSection({data}:DonateHeroProps) {
         </motion.nav>
 
         {/* Page Title */}
-        <motion.h1
+        <motion.h2
           className="text-center text-[32px] sm:text-[34px] md:text-[34px] lg:text-[40px] font-bold text-gray-900 mb-8 sm:mb-10 lg:mb-14 tracking-tight"
           variants={fadeUp}
           initial="hidden"
@@ -110,7 +110,7 @@ export function DonateHeroSection({data}:DonateHeroProps) {
           custom={0.1}
         >
           {content.pageTitle}
-        </motion.h1>
+        </motion.h2>
 
 
      </div>

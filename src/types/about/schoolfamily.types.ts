@@ -1,7 +1,3 @@
-export interface BreadcrumbItem {
-  label: string
-  href: string
-}
 
 export interface SchoolFamilyMember {
   name: string
@@ -10,7 +6,10 @@ export interface SchoolFamilyMember {
 }
 
 export interface SchoolFamilyContent {
-  breadcrumb: BreadcrumbItem[]
+  breadcrumb: {
+    label: string
+    href: string
+  }[]
   pageTitle: string
   sectionTag: string
   heading: string

@@ -87,7 +87,7 @@ export default function NoticesSection(): React.JSX.Element {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20">
 
           {/* Page title */}
-          <motion.h1
+          <motion.h2
             className="text-center font-bold text-gray-900 tracking-tight text-[32px] sm:text-[34px] lg:text-[40px] mb-10 sm:mb-12"
             variants={fadeUp}
             initial="hidden"
@@ -95,7 +95,7 @@ export default function NoticesSection(): React.JSX.Element {
             custom={0.1}
           >
             Notices
-          </motion.h1>
+          </motion.h2>
 
           {/* Error */}
           {isError && (

@@ -45,9 +45,9 @@ export default function AboutSection({ data }: AboutSectionProps) {
               {label}
             </p>
 
-            <h1 className="text-[32px] sm:text-[32px] md:text-[32px] lg:text-[40px] font-bold text-[#8F3648] leading-snug">
+            <h2 className="text-[32px] sm:text-[32px] md:text-[32px] lg:text-[40px] font-bold text-[#8F3648] leading-snug">
               {heading}
-            </h1>
+            </h2>
 
             <p className="text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] text-gray-600 leading-relaxed">
               {description}

@@ -7,6 +7,7 @@ import { HERO_CONTENT } from '@/constants/home/hero.constants'
 import { AnimatedStat } from '@/components/home/AnimatedStat'
 import { HeroContent } from '@/types/home/hero.types'
 
+
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
 const fadeUp: Variants = {
