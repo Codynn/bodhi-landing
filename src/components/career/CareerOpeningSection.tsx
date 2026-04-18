@@ -1,24 +1,30 @@
+"use client";
 
-'use client'
+import Link from "next/link";
+import { motion, Variants } from "framer-motion";
+import {
+  ArrowUpRight,
+  CalendarDays,
+  ArrowRight,
+  AlertCircle,
+  BriefcaseIcon,
+} from "lucide-react";
 
-import Link from 'next/link'
-import { motion, Variants } from 'framer-motion'
-import { ArrowUpRight, CalendarDays, ArrowRight } from 'lucide-react'
+import { CAREER_OPENINGS_CONTENT } from "@/constants/career/careeropening.constants";
+import { JobOpening } from "@/types/career/careeropening.types";
+import { useJobOpenings } from "@/hooks/useJobOpenings";
 
-import { CAREER_OPENINGS_CONTENT } from '@/constants/career/careeropening.constants'
-import { JobOpening } from '@/types/career/careeropening.types'
-import { useJobOpenings } from '@/hooks/useJobOpenings'
-
-const TEXT = 'text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]'
-const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
+const TEXT = "text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]";
+const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: (d: number = 0) => ({
-    opacity: 1, y: 0,
+    opacity: 1,
+    y: 0,
     transition: { duration: 0.65, ease: EASE, delay: d },
   }),
-}
+};
 
 // ── Skeleton Card ─────────────────────────────────────────────────
 function SkeletonCard() {
@@ -39,7 +45,7 @@ function SkeletonCard() {
         <div className="h-9 w-28 bg-gray-200 rounded-full" />
       </div>
     </div>
-  )
+  );
 }
 
 // ── Job Card ──────────────────────────────────────────────────────
@@ -50,7 +56,7 @@ function JobCard({ job, index }: { job: JobOpening; index: number }) {
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+      viewport={{ once: true, margin: "0px 0px -40px 0px" }}
       custom={index * 0.06}
     >
       <div className="flex items-start justify-between gap-3">
@@ -92,15 +98,62 @@ function JobCard({ job, index }: { job: JobOpening; index: number }) {
         </Link>
       </div>
     </motion.div>
-  )
+  );
+}
+
+// ── Error Box ─────────────────────────────────────────────────────
+function ErrorBox() {
+  return (
+    <motion.div
+      className="flex items-start gap-3 bg-red-50 border border-red-200 rounded-2xl px-5 py-5 sm:px-6 sm:py-6 mb-5 sm:mb-6"
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      custom={0}
+    >
+      <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+      <div className="flex flex-col gap-1">
+        <p className="font-semibold text-red-700 text-[16px] lg:text-[18px]">
+          Unable to load openings
+        </p>
+        <p className="text-red-500 text-[14px] lg:text-[16px] leading-relaxed">
+          We couldn&apos;t fetch the latest job openings. Please try refreshing the page.
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
+// ── Empty Box ─────────────────────────────────────────────────────
+function EmptyBox() {
+  return (
+    <motion.div
+      className="flex flex-col items-center justify-center gap-3 bg-gray-50 border border-gray-200 rounded-2xl px-5 py-10 sm:py-14 mb-5 sm:mb-6 text-center"
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      custom={0}
+    >
+      <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
+        <BriefcaseIcon className="w-6 h-6 text-gray-400" />
+      </div>
+      <p className="font-semibold text-gray-700 text-[16px] lg:text-[18px]">
+        No open positions right now
+      </p>
+      <p className="text-gray-400 text-[14px] lg:text-[16px] leading-relaxed max-w-sm">
+        We don&apos;t have any openings at the moment. Submit your CV below and we&apos;ll reach out when something comes up.
+      </p>
+    </motion.div>
+  );
 }
 
 // ── Main Section ──────────────────────────────────────────────────
 export function CareerOpeningsSection() {
-  // 🧠 HYBRID FALLBACK SYSTEM
-  const { sectionHeading, emptyState } = CAREER_OPENINGS_CONTENT
-  const { jobs, isLoading } = useJobOpenings()
-  const isEmpty = !isLoading && jobs.length === 0
+  const { sectionHeading, emptyState } = CAREER_OPENINGS_CONTENT;
+  const { jobs, isLoading, isError } = useJobOpenings();
+  const isEmpty = !isLoading && !isError && jobs.length === 0;
 
   return (
     <section className="w-full bg-white">
@@ -111,7 +164,7 @@ export function CareerOpeningsSection() {
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+          viewport={{ once: true, margin: "0px 0px -40px 0px" }}
           custom={0}
         >
           {sectionHeading}
@@ -126,8 +179,14 @@ export function CareerOpeningsSection() {
           </div>
         )}
 
+        {/* Error state */}
+        {isError && <ErrorBox />}
+
+        {/* Empty state */}
+        {isEmpty && <EmptyBox />}
+
         {/* Job Cards */}
-        {!isLoading && !isEmpty && (
+        {!isLoading && !isError && jobs.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 2xl:gap-6 mb-5 sm:mb-6">
             {jobs.map((job, i) => (
               <JobCard key={job.id} job={job} index={i} />
@@ -135,13 +194,13 @@ export function CareerOpeningsSection() {
           </div>
         )}
 
-        {/* Empty State / Submit CV Banner */}
+        {/* Submit CV Banner */}
         <motion.div
           className="border border-gray-200 rounded-2xl px-5 py-5 sm:px-7 sm:py-6 md:px-8 2xl:px-10 2xl:py-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+          viewport={{ once: true, margin: "0px 0px -40px 0px" }}
           custom={0.1}
         >
           <div className="flex flex-col gap-1 sm:gap-1.5">
@@ -164,5 +223,5 @@ export function CareerOpeningsSection() {
 
       </div>
     </section>
-  )
+  );
 }

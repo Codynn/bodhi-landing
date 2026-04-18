@@ -1,6 +1,4 @@
-
-import axiosInstance from "@/services/axios";
-import type { ApiResponse } from "@/types/api/Api.types";
+import { hirynnAxiosInstance } from "@/services/axios";
 
 const SCHOOL_ID = process.env.NEXT_PUBLIC_BETTERSCHOOL_ID ?? "bodhi";
 
@@ -15,7 +13,7 @@ export interface JobOpeningItem {
   school: string;
   title: string;
   description: string;
-  type: 'Full Time' | 'Part Time' | 'Contract';
+  type: "Full Time" | "Part Time" | "Contract";
   date: string;
   createdBy: string;
   createdByRole: "SCHOOL" | "TEACHER" | string;
@@ -24,22 +22,21 @@ export interface JobOpeningItem {
   __v: number;
 }
 
-export type JobOpeningApiResponse = ApiResponse<JobOpeningItem[]>;
+export interface JobOpeningApiResponse {
+  total: number;
+  page: number;
+  limit: number;
+  jobs: JobOpeningItem[];
+}
 
 export async function fetchJobOpenings(
-  params: JobOpeningQueryParams = {},
+  params: JobOpeningQueryParams = {}
 ): Promise<JobOpeningApiResponse> {
   const { page = 1, limit = 10 } = params;
 
-  const response = await axiosInstance.get<JobOpeningApiResponse>(
-    "/career/openings",
-    {
-      params: {
-        school: SCHOOL_ID,
-        page,
-        limit,
-      },
-    },
+  const response = await hirynnAxiosInstance.get<JobOpeningApiResponse>(
+    `/school/job/${SCHOOL_ID}`,  // → https://voidnepal.com.np/hirynn-api/api/school/job/{id}
+    { params: { page, limit } },
   );
 
   return response.data;

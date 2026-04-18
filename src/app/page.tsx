@@ -12,7 +12,7 @@ import React from "react";
 
 // Static data fetched at build time
 async function getHomeData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/home`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/content/home`, {
     cache: "force-cache",
   });
   return res.json();
@@ -24,7 +24,7 @@ export default async function HomePage() {
 
   return (
     <main className="relative w-full font-outfit">
-      {/* Static sections — rendered at build time */}
+      
       <HeroSection data={data?.hero} />
 
       <FadeInSection>
