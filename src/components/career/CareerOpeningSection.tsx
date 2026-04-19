@@ -1,18 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 import {
   ArrowUpRight, CalendarDays, ArrowRight,
   AlertCircle, BriefcaseIcon,
 } from "lucide-react";
 
-import { CAREER_OPENINGS_CONTENT } from "@/constants/career/careeropening.constants";
-import { JobOpening } from "@/types/career/careeropening.types";
-import { useJobOpenings } from "@/hooks/useJobOpenings";
 import { hirynnAxiosInstance } from "@/services/axios";
 import { ApplyModal } from "./ApplyModal";
+import { CareerOpeningsContent, JobOpening } from "@/types/career/careeropening.types";
+import { useJobOpenings } from "@/hooks/useJobOpenings";
+import { CvModal } from "./CvModal";
+
 
 const TEXT = "text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]";
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
@@ -23,6 +23,14 @@ const fadeUp: Variants = {
     opacity: 1, y: 0,
     transition: { duration: 0.65, ease: EASE, delay: d },
   }),
+};
+
+const CV_JOB: JobOpening = {
+  id:          "__cv_submission__",
+  title:       "Share Your CV",
+  description: "Don't see a role that fits? Submit your CV and we'll reach out when something comes up.",
+  type:        "",
+  date:        "",
 };
 
 // ── Skeleton Card ─────────────────────────────────────────────────
@@ -81,19 +89,23 @@ function JobCard({
         {job.description}
       </p>
 
-      <div>
-        <span className="inline-block border border-gray-300 rounded-full px-3 py-0.5 text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] text-gray-600 font-medium">
-          {job.type}
-        </span>
-      </div>
+      {job.type && (
+        <div>
+          <span className="inline-block border border-gray-300 rounded-full px-3 py-0.5 text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px] text-gray-600 font-medium">
+            {job.type}
+          </span>
+        </div>
+      )}
 
       <div className="border-t border-gray-100" />
 
       <div className="flex items-center justify-between gap-2">
-        <div className="flex items-center gap-1.5 text-gray-400">
-          <CalendarDays className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-          <span className="text-[16px] sm:text-[16px] lg:text-[18px]">{job.date}</span>
-        </div>
+        {job.date && (
+          <div className="flex items-center gap-1.5 text-gray-400">
+            <CalendarDays className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+            <span className="text-[16px] sm:text-[16px] lg:text-[18px]">{job.date}</span>
+          </div>
+        )}
         <button
           onClick={() => onApply(job)}
           className="flex items-center gap-1.5 text-[16px] sm:text-[16px] lg:text-[18px] font-semibold text-white bg-[#8F3648] hover:bg-[#3D171F] px-3 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-[0_4px_0_#5E1010] hover:shadow-[0_2px_0_#5E1010] active:shadow-none active:translate-y-[4px] hover:translate-y-[2px] transition-all duration-150"
@@ -147,36 +159,63 @@ function EmptyBox() {
   );
 }
 
+export const CAREER_OPENINGS_CONTENT: CareerOpeningsContent = {
+  sectionHeading: 'Current Openings',
+  emptyState: {
+    heading:     'We currently do not have any job openings.',
+    subtext:     'However, if you would like to be considered for future opportunities, please share your CV with us.',
+    submitLabel: 'Submit CV',
+    submitHref:  '/contact',
+  },
+};
+
 // ── Main Section ──────────────────────────────────────────────────
 export function CareerOpeningsSection() {
   const { sectionHeading, emptyState } = CAREER_OPENINGS_CONTENT;
   const { jobs, isLoading, isError }   = useJobOpenings();
   const isEmpty = !isLoading && !isError && jobs.length === 0;
 
+  // Job apply modal
   const [selectedJob, setSelectedJob] = useState<JobOpening | null>(null);
-  const [modalOpen, setModalOpen]     = useState(false);
+  const [jobModalOpen, setJobModalOpen] = useState(false);
 
-  const openModal = (job: JobOpening) => {
+  // CV submission modal
+  const [cvModalOpen, setCvModalOpen] = useState(false);
+
+  const openJobModal = (job: JobOpening) => {
     setSelectedJob(job);
-    setModalOpen(true);
+    setJobModalOpen(true);
+  };
+  const closeJobModal = () => {
+    setJobModalOpen(false);
+    setTimeout(() => setSelectedJob(null), 300);
   };
 
-  const closeModal = () => {
-    setModalOpen(false);
-    setTimeout(() => setSelectedJob(null), 300); // wait for exit animation
+  const openCvModal  = () => setCvModalOpen(true);
+  const closeCvModal = () => setCvModalOpen(false);
+
+  // Applies to a specific job
+  const handleJobApplySubmit = async (jobId: string, data: FormData) => {
+    try {
+      await hirynnAxiosInstance.post(`/school/job/${jobId}/applyAnonymous`, data);
+    } catch (error: any) {
+      console.error("[applyAnonymous] error:", error?.response?.data);
+      throw error;
+    }
   };
 
-  // ✅ No Content-Type header — axios sets multipart/form-data + boundary automatically
-  // ✅ No try/catch — throws on error so ApplyForm's catch block fires the toast
-   const handleApplySubmit = async (jobId: string, data: any) => {
+  // Submits CV without a specific job
+    const SCHOOL_ID = process.env.NEXT_PUBLIC_HIRYNN_ID ?? "bodhi";
+
+const handleCvSubmit = async (data: FormData) => {
+
+  data.append("schoolId", SCHOOL_ID);
+
   try {
-    await hirynnAxiosInstance.post(
-      `/school/job/${jobId}/applyAnonymous`,
-      data
-    );
+    await hirynnAxiosInstance.post(`/school/cvSubmission`, data);
   } catch (error: any) {
-    console.error("[applyAnonymous] 400 response body:", error?.response?.data);
-    throw error; // still re-throw so the toast fires
+    console.error("[cvSubmission] error:", error?.response?.data);
+    throw error;
   }
 };
 
@@ -210,7 +249,7 @@ export function CareerOpeningsSection() {
           {!isLoading && !isError && jobs.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 2xl:gap-6 mb-5 sm:mb-6">
               {jobs.map((job, i) => (
-                <JobCard key={job.id} job={job} index={i} onApply={openModal} />
+                <JobCard key={job.id} job={job} index={i} onApply={openJobModal} />
               ))}
             </div>
           )}
@@ -230,25 +269,33 @@ export function CareerOpeningsSection() {
               </p>
               <p className={`${TEXT} text-gray-500 leading-relaxed`}>{emptyState.subtext}</p>
             </div>
-            <Link
-              href={emptyState.submitHref}
+
+            <button
+              onClick={openCvModal}
               className="shrink-0 flex items-center gap-2 text-[16px] sm:text-[16px] lg:text-[18px] font-semibold text-white bg-[#8F3648] hover:bg-[#3D171F] px-5 py-2.5 sm:px-6 sm:py-3 rounded-full shadow-[0_5px_0_#5E1010] hover:shadow-[0_3px_0_#5E1010] active:shadow-none active:translate-y-[5px] hover:translate-y-[2px] transition-all duration-150 w-full sm:w-auto justify-center"
             >
               {emptyState.submitLabel}
               <ArrowRight className="w-3.5 h-3.5 2xl:w-4 2xl:h-4" strokeWidth={2.5} />
-            </Link>
+            </button>
           </motion.div>
 
         </div>
       </section>
 
-      {/* ── Apply Modal ── */}
+      {/* Job Apply Modal */}
       <ApplyModal
-        open={modalOpen}
+        open={jobModalOpen}
         job={selectedJob}
-        onClose={closeModal}
-        onSubmit={handleApplySubmit}
+        onClose={closeJobModal}
+        onSubmit={handleJobApplySubmit}
       />
+
+      {/* CV Submission Modal */}
+       <CvModal
+  open={cvModalOpen}
+  onClose={closeCvModal}
+  onSubmit={handleCvSubmit}
+/>
     </>
   );
 }

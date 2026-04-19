@@ -1,12 +1,10 @@
+
 "use client";
 
 import { useEffect, useRef } from "react";
 import { X } from "lucide-react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-
-import { ApplyForm } from "./ApplyForm";
-import { JobOpening } from "@/types/career/careeropening.types";
-
+import { CvSubmitForm } from "./CvSubmitForm";
 
 const EASE: [number, number, number, number]      = [0.32, 0.72, 0, 1];
 const EXIT_EASE: [number, number, number, number] = [0.4, 0, 1, 1];
@@ -23,16 +21,13 @@ const panelVariants: Variants = {
   exit:    { opacity: 0, y: 24, scale: 0.97, transition: { duration: 0.2,  ease: EXIT_EASE } },
 };
 
-const isCvMode = (job: JobOpening) => job.id === "__cv_submission__";
-
-interface ApplyModalProps {
-  open: boolean;
-  job: JobOpening | null;
-  onClose: () => void;
-  onSubmit: (jobId: string, data: FormData) => Promise<void>;
+interface CvModalProps {
+  open:     boolean;
+  onClose:  () => void;
+  onSubmit: (data: FormData) => Promise<void>;
 }
 
-export function ApplyModal({ open, job, onClose, onSubmit }: ApplyModalProps) {
+export function CvModal({ open, onClose, onSubmit }: CvModalProps) {
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -47,15 +42,9 @@ export function ApplyModal({ open, job, onClose, onSubmit }: ApplyModalProps) {
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
-  const handleFormSubmit = async (formData: FormData) => {
-    if (!job?.id) throw new Error("Job ID is missing");
-    await onSubmit(job.id, formData);
-    onClose();
-  };
-
   return (
     <AnimatePresence>
-      {open && job && (
+      {open && (
         <motion.div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
           style={{ backgroundColor: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)" }}
@@ -70,7 +59,7 @@ export function ApplyModal({ open, job, onClose, onSubmit }: ApplyModalProps) {
           }}
           aria-modal="true"
           role="dialog"
-          aria-labelledby="apply-modal-title"
+          aria-labelledby="cv-modal-title"
         >
           <motion.div
             ref={panelRef}
@@ -84,27 +73,15 @@ export function ApplyModal({ open, job, onClose, onSubmit }: ApplyModalProps) {
             <div className="flex items-start justify-between gap-4 px-5 pt-5 pb-4 sm:px-7 sm:pt-6 border-b border-gray-100 flex-shrink-0">
               <div className="flex flex-col gap-1">
                 <p
-                  id="apply-modal-title"
+                  id="cv-modal-title"
                   className="font-bold text-gray-900 text-[18px] sm:text-[20px] lg:text-[22px] leading-snug"
                 >
-                  {job.title}
+                  Share Your CV
                 </p>
-
-                {/* Only show type/date badges for real job postings */}
-                {!isCvMode(job) && (
-                  <div className="flex items-center gap-2 flex-wrap">
-                    {job.type && (
-                      <span className="inline-block border border-gray-300 rounded-full px-2.5 py-0.5 text-[13px] text-gray-500 font-medium">
-                        {job.type}
-                      </span>
-                    )}
-                    {job.date && (
-                      <span className="text-[13px] text-gray-400">{job.date}</span>
-                    )}
-                  </div>
-                )}
+                <p className="text-[13px] text-gray-400">
+                  We&apos;ll keep it on file and reach out when something comes up.
+                </p>
               </div>
-
               <button
                 onClick={onClose}
                 aria-label="Close modal"
@@ -116,14 +93,7 @@ export function ApplyModal({ open, job, onClose, onSubmit }: ApplyModalProps) {
 
             {/* ── Scrollable Body ── */}
             <div className="overflow-y-auto flex-1 px-5 py-5 sm:px-7 sm:py-6">
-              <p className="text-[15px] sm:text-[16px] text-gray-500 leading-relaxed mb-6">
-                {job.description}
-              </p>
-              <ApplyForm
-                jobTitle={isCvMode(job) ? undefined : job.title}
-                formTitle={isCvMode(job) ? "Submit Your CV" : undefined}
-                onSubmit={handleFormSubmit}
-              />
+              <CvSubmitForm onSubmit={async (fd) => { await onSubmit(fd); onClose(); }} />
             </div>
           </motion.div>
         </motion.div>

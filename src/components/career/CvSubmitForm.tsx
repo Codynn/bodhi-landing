@@ -16,7 +16,7 @@ import { Button }   from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
 // ── Zod Schema ────────────────────────────────────────────────────
-export const applyFormSchema = z.object({
+const cvFormSchema = z.object({
   fullName:          z.string().min(2, "Full name must be at least 2 characters").max(100),
   currentCompany:    z.string().min(1, "Current company is required").max(100),
   email:             z.string().email("Please enter a valid email address"),
@@ -28,6 +28,7 @@ export const applyFormSchema = z.object({
   expectedSalary:    z.string().min(1, "Expected salary is required").max(100),
   location:          z.string().min(2, "Location is required").max(150),
   coverLetter:       z.string().max(2000).optional().or(z.literal("")),
+  portfolioLink:     z.string().url("Please enter a valid URL").optional().or(z.literal("")),
   resume: z
     .custom<File>((f) => f instanceof File, "Resume is required")
     .refine((f) => (f as File).size <= 5 * 1024 * 1024, "Max 5 MB")
@@ -42,7 +43,7 @@ export const applyFormSchema = z.object({
     .optional(),
 });
 
-export type ApplyFormValues = z.infer<typeof applyFormSchema>;
+type CvFormValues = z.infer<typeof cvFormSchema>;
 
 // ── Styles ────────────────────────────────────────────────────────
 const TEXT       = "text-[16px] sm:text-[16px] md:text-[16px] lg:text-[18px]";
@@ -53,49 +54,47 @@ const inputClass = `
   transition-colors placeholder:text-gray-400
 `;
 
-interface ApplyFormProps {
-  jobTitle?:  string;
-  formTitle?: string; // overrides the auto-generated label when provided
-  onSubmit?:  (data: FormData) => Promise<void>;
+interface CvSubmitFormProps {
+  onSubmit: (data: FormData) => Promise<void>;
 }
 
-export function ApplyForm({ jobTitle, formTitle, onSubmit }: ApplyFormProps) {
-  const form = useForm<ApplyFormValues>({
-    resolver: zodResolver(applyFormSchema),
+export function CvSubmitForm({ onSubmit }: CvSubmitFormProps) {
+  const form = useForm<CvFormValues>({
+    resolver: zodResolver(cvFormSchema),
     defaultValues: {
       fullName: "", currentCompany: "", email: "", phone: "",
       yearsOfExperience: "", expectedSalary: "", location: "",
-      coverLetter: "", resume: undefined,
+      coverLetter: "", portfolioLink: "", resume: undefined,
     },
   });
 
   const isPending    = form.formState.isSubmitting;
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // Derive the heading shown inside the form box
-  const resolvedTitle = formTitle ?? (jobTitle ? `Apply for: ${jobTitle}` : "Job Application Form");
-
-  const handleSubmit = async (values: ApplyFormValues) => {
+  const handleSubmit = async (values: CvFormValues) => {
     const fd = new FormData();
     fd.append("fullName",        values.fullName);
     fd.append("email",           values.email);
     fd.append("phone",           values.phone ?? "");
     fd.append("currentCompany",  values.currentCompany);
     fd.append("yearsExperience", values.yearsOfExperience);
-    fd.append("coverLetter",     values.coverLetter ?? "");
+    fd.append("expectedSalary",  values.expectedSalary);
+    fd.append("location",        values.location);
+    fd.append("coverletter",     values.coverLetter ?? "");   // ← CV endpoint field name
+    fd.append("profoliolink",    values.portfolioLink ?? ""); // ← CV endpoint field name
     if (values.resume instanceof File) {
       fd.append("file", values.resume);
     }
 
     if (process.env.NODE_ENV === "development") {
-      console.log("[ApplyForm] FormData entries:");
+      console.log("[CvSubmitForm] FormData entries:");
       fd.forEach((value, key) => console.log(`  ${key}:`, value));
     }
 
     try {
-      await onSubmit?.(fd);
-      toast.success("Application submitted!", {
-        description: "We'll review your application and be in touch shortly.",
+      await onSubmit(fd);
+      toast.success("CV submitted!", {
+        description: "We'll keep your CV on file and reach out when something comes up.",
       });
       form.reset();
       if (fileInputRef.current) fileInputRef.current.value = "";
@@ -111,7 +110,7 @@ export function ApplyForm({ jobTitle, formTitle, onSubmit }: ApplyFormProps) {
   return (
     <div className="bg-gray-100 rounded-2xl px-5 py-6 sm:px-7 sm:py-8 md:px-8 md:py-9 w-full">
       <p className={`${TEXT} font-bold text-gray-800 mb-6 sm:mb-8`}>
-        {resolvedTitle}
+        Submit Your CV
       </p>
 
       <Form {...form}>
@@ -207,45 +206,58 @@ export function ApplyForm({ jobTitle, formTitle, onSubmit }: ApplyFormProps) {
             )} />
           </div>
 
+          {/* Portfolio Link — only in CV form */}
+          <FormField control={form.control} name="portfolioLink" render={({ field }) => (
+            <FormItem>
+              <FormLabel className={labelClass}>Portfolio / LinkedIn</FormLabel>
+              <FormControl>
+                <Input
+                  type="url"
+                  placeholder="https://yourportfolio.com"
+                  disabled={isPending}
+                  className={inputClass}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage className={TEXT} />
+            </FormItem>
+          )} />
+
+          {/* Resume */}
           <FormField
             control={form.control}
             name="resume"
-            render={({ field: { onChange, value, ref, ...rest } }) => (
-              <FormItem>
-                <FormLabel className={labelClass}>Resume / CV</FormLabel>
-                <FormControl>
-                  <Input
-                    type="file"
-                    accept=".pdf,.doc,.docx"
-                    disabled={isPending}
-                    ref={(e) => {
-                      ref(e);
-                      fileInputRef.current = e;
-                    }}
-                    className={`
-                      ${TEXT} rounded-none border-0 border-b border-gray-300 bg-transparent
-                      px-0 shadow-none focus-visible:ring-0 focus-visible:border-[#8F3648]
-                      transition-colors text-gray-500
-                      file:mr-3 file:py-0.5 file:px-3 file:rounded-full file:border
-                      file:border-gray-300 file:text-[14px] file:font-medium file:text-gray-600
-                      file:bg-white file:cursor-pointer hover:file:bg-gray-50 file:transition-colors
-                    `}
-                    onChange={(e) => onChange(e.target.files?.[0])}
-                    {...rest}
-                  />
-                </FormControl>
-                <p className="text-[13px] text-gray-400 mt-1">PDF or Word, max 5 MB</p>
-                <FormMessage className={TEXT} />
-              </FormItem>
-            )}
+         
+render={({ field: { onChange, ref, value, ...rest } }) => (  
+  <FormItem>
+    <FormLabel className={labelClass}>Resume / CV</FormLabel>
+    <FormControl>
+      <Input
+        type="file"
+        accept=".pdf,.doc,.docx"
+        disabled={isPending}
+        ref={(e) => {
+          ref(e);
+          fileInputRef.current = e;
+        }}
+        className={`...`}
+        onChange={(e) => onChange(e.target.files?.[0])}
+        {...rest}  // value is NOT spread here since we destructured it out
+      />
+    </FormControl>
+    <p className="text-[13px] text-gray-400 mt-1">PDF or Word, max 5 MB</p>
+    <FormMessage className={TEXT} />
+  </FormItem>
+)}
           />
 
+          {/* Cover Letter */}
           <FormField control={form.control} name="coverLetter" render={({ field }) => (
             <FormItem>
               <FormLabel className={labelClass}>Cover Letter</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Tell us why you're a great fit for this role..."
+                  placeholder="Tell us a bit about yourself and what kind of role you're looking for..."
                   rows={4}
                   disabled={isPending}
                   className="
@@ -282,7 +294,7 @@ export function ApplyForm({ jobTitle, formTitle, onSubmit }: ApplyFormProps) {
                 <Loader2 className="w-5 h-5 animate-spin" /> Submitting...
               </span>
             ) : (
-              "Submit Application"
+              "Submit CV"
             )}
           </Button>
         </form>
