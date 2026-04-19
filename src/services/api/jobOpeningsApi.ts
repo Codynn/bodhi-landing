@@ -1,6 +1,6 @@
 import { hirynnAxiosInstance } from "@/services/axios";
 
-const SCHOOL_ID = process.env.NEXT_PUBLIC_BETTERSCHOOL_ID ?? "bodhi";
+const SCHOOL_ID = process.env.NEXT_PUBLIC_HIRYNN_ID ?? "bodhi";
 
 export interface JobOpeningQueryParams {
   page?: number;

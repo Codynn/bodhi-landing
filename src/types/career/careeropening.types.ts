@@ -1,18 +1,17 @@
 export interface JobOpening {
-  id: string
-  title: string
+  id:          string
+  title:       string
   description: string
-  type: 'Full Time' | 'Part Time' | 'Contract'
-  date: string
-  href: string
+  type:        string  // formatted from API's employmentType e.g. "FULL_TIME" → "Full Time"
+  date:        string
 }
 
 export interface CareerOpeningsContent {
   sectionHeading: string
   emptyState: {
-    heading: string
-    subtext: string
+    heading:     string
+    subtext:     string
     submitLabel: string
-    submitHref: string
+    submitHref:  string
   }
 }

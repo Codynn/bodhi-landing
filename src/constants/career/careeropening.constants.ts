@@ -17,7 +17,7 @@ export const JOB_OPENINGS: JobOpening[] = [
     description: 'Interested candidates are requested to fill out the career application form with their details and attach their updated C...',
     type:        'Full Time',
     date:        '2082/08/01',
-    href:        '/career?id=1',
+  
   },
   {
     id:          '2',
@@ -25,7 +25,7 @@ export const JOB_OPENINGS: JobOpening[] = [
     description: 'Interested candidates are requested to fill out the career application form with their details and attach their updated C...',
     type:        'Full Time',
     date:        '2082/08/01',
-    href:        '/career?id=2',
+  
   },
   {
     id:          '3',
@@ -33,7 +33,7 @@ export const JOB_OPENINGS: JobOpening[] = [
     description: 'Interested candidates are requested to fill out the career application form with their details and attach their updated C...',
     type:        'Full Time',
     date:        '2082/08/01',
-    href:        '/career?id=3',
+    
   },
   {
     id:          '4',
@@ -41,7 +41,7 @@ export const JOB_OPENINGS: JobOpening[] = [
     description: 'Interested candidates are requested to fill out the career application form with their details and attach their updated C...',
     type:        'Full Time',
     date:        '2082/08/01',
-    href:        '/career?id=4',
+
   },
   {
     id:          '5',
@@ -49,7 +49,7 @@ export const JOB_OPENINGS: JobOpening[] = [
     description: 'Interested candidates are requested to fill out the career application form with their details and attach their updated C...',
     type:        'Full Time',
     date:        '2082/08/01',
-    href:        '/career?id=5',
+  
   },
   {
     id:          '6',
@@ -57,6 +57,6 @@ export const JOB_OPENINGS: JobOpening[] = [
     description: 'Interested candidates are requested to fill out the career application form with their details and attach their updated C...',
     type:        'Full Time',
     date:        '2082/08/01',
-    href:        '/career?id=6',
+    
   },
 ]

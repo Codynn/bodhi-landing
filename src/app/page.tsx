@@ -12,10 +12,26 @@ import React from "react";
 
 // Static data fetched at build time
 async function getHomeData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/content/home`, {
-    cache: "force-cache",
-  });
-  return res.json();
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_DIRECTORY_BASE_URL}/api/public/school/${process.env.NEXT_PUBLIC_BETTERSCHOOL_ID}/content/home`,
+    {
+      next: { revalidate: 3600 },
+      headers: {
+        "x-school-id": process.env.NEXT_PUBLIC_BETTERSCHOOL_ID ?? "",
+        // try adding these one at a time if the above doesn't work:
+        // "Authorization": `Bearer ${process.env.DIRECTORY_API_KEY}`,
+        // "x-api-key": process.env.DIRECTORY_API_KEY ?? "",
+      },
+    }
+  );
+
+  if (!res.ok) {
+    console.error("Failed to fetch home data:", res.status, res.statusText);
+    return null;
+  }
+
+  const json = await res.json();
+  return json?.data || null;
 }
 
 export default async function HomePage() {

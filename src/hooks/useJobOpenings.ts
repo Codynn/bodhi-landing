@@ -1,48 +1,39 @@
-"use client";
-
 import { useQuery } from "@tanstack/react-query";
-import {
-  fetchJobOpenings,
-  JobOpeningItem,
-} from "@/services/api/jobOpeningsApi";
+import { hirynnAxiosInstance } from "@/services/axios";
 import { JobOpening } from "@/types/career/careeropening.types";
-import { JOB_OPENINGS } from "@/constants/career/careeropening.constants";
 
-function mapToJobOpening(item: JobOpeningItem): JobOpening {
-  return {
-    id: item._id,
-    title: item.title,
-    description: item.description,
-    type: item.type,
-    date: new Date(item.createdAt).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    }),
-    href: `/career?id=${item._id}`,
-  };
+const SCHOOL_ID = process.env.NEXT_PUBLIC_HIRYNN_ID ?? "";
+
+// "FULL_TIME" → "Full Time"
+function formatEmploymentType(type: string): string {
+  return type
+    .replace(/_/g, " ")
+    .toLowerCase()
+    .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 export function useJobOpenings() {
-  const query = useQuery({
-    queryKey: ["job-openings"],
-    queryFn: async () => {
-      const response = await fetchJobOpenings({ page: 1, limit: 10 });
-      return (response.jobs ?? []).map(mapToJobOpening); // ← .jobs not .data
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["job-openings", SCHOOL_ID],
+    queryFn:  async () => {
+      const res = await hirynnAxiosInstance.get(
+        `/school/job/${SCHOOL_ID}`,
+        { params: { page: 1, limit: 20 } },
+      );
+      return res.data;
     },
-    staleTime: 1000 * 60 * 5,
-    retry: 2,
+    enabled: !!SCHOOL_ID,
   });
 
-  // Only fall back to constants on error, never mask loading or empty states
-  const jobs = query.isError ? JOB_OPENINGS : (query.data ?? []);
+  const jobs: JobOpening[] = (data?.jobs ?? []).map((item: any) => ({
+    id:          item.id,                                    // ✅ API returns "id" not "_id"
+    title:       item.title,
+    description: item.description,
+    type:        formatEmploymentType(item.employmentType ?? ""), // ✅ API field is "employmentType"
+    date:        new Date(item.createdAt).toLocaleDateString("en-US", {
+                   year: "numeric", month: "short", day: "numeric",
+                 }),
+  }));
 
-  return {
-    jobs,
-    isLoading: query.isPending,  // ← v5: isPending, not isLoading
-    isFetching: query.isFetching,
-    isError: query.isError,
-    isUsingFallback: query.isError,
-    error: query.error as Error | null,
-  };
+  return { jobs, isLoading, isError };
 }
