@@ -18,11 +18,15 @@ export default function Navbar({ className }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   // eslint-disable-next-line react-hooks/set-state-in-effect
-  useEffect(() => { setMobileOpen(false); }, [pathname]);
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileOpen]);
 
   return (
@@ -30,14 +34,18 @@ export default function Navbar({ className }: NavbarProps) {
       <header className={cn("w-full bg-white sticky top-0 z-40", className)}>
         <nav className="border-b border-gray-200 bg-white shadow-sm">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
             {/* ── Mobile row: Logo | Contact Us | Hamburger ── */}
             <div className="flex items-center justify-between py-2 lg:hidden">
-
               {/* Logo */}
               <Link href="/" className="flex items-center gap-2">
                 <div className="relative w-10 h-10">
-                  <Image src="/home/logo.svg" alt={SCHOOL_INFO.name} fill className="object-contain" priority />
+                  <Image
+                    src="/home/logo.svg"
+                    alt={SCHOOL_INFO.name}
+                    fill
+                    className="object-contain"
+                    priority
+                  />
                 </div>
                 <div className="flex flex-col leading-tight">
                   <span className="text-[13px] sm:text-[14px] font-bold text-gray-900">
@@ -76,11 +84,16 @@ export default function Navbar({ className }: NavbarProps) {
 
             {/* ── Desktop layout (unchanged) ── */}
             <div className="hidden lg:flex justify-between">
-
               {/* Logo */}
               <Link href="/" className="flex flex-col items-center">
                 <div className="relative w-15 h-15">
-                  <Image src="/home/logo.svg" alt={SCHOOL_INFO.name} fill className="object-contain" priority />
+                  <Image
+                    src="/home/logo.svg"
+                    alt={SCHOOL_INFO.name}
+                    fill
+                    className="object-contain"
+                    priority
+                  />
                 </div>
                 <span className="text-[16px] lg:text-[18px] font-bold text-gray-900 max-w-xs">
                   {SCHOOL_INFO.name}
@@ -104,7 +117,6 @@ export default function Navbar({ className }: NavbarProps) {
                 </div>
               </div>
             </div>
-
           </div>
         </nav>
       </header>
@@ -115,7 +127,9 @@ export default function Navbar({ className }: NavbarProps) {
         aria-hidden="true"
         className={cn(
           "fixed inset-0 bg-black/40 z-40 lg:hidden transition-opacity duration-300",
-          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          mobileOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none",
         )}
       />
 
