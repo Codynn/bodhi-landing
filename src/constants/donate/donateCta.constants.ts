@@ -9,7 +9,7 @@ export const DONATE_CTA_CONTENT: DonateCtaContent = {
   buttonLabel: "Donate Now",
   buttonHref: "/donate",
   image: {
-    src: process.env.NEXT_PUBLIC_IMAGE_PREFIX + "/donate/sprout-tree.svg",
+    src: "/donate/sprout-tree.svg",
     alt: "A sprouting plant symbolising growth and hope",
   },
 };

@@ -14,7 +14,7 @@ export const EDUCATION_CHANGES_LIVES_CONTENT: EducationChangesLivesContent = {
   closingText:
     "Supporting a child's education is not charity — it is an investment in a more compassionate and equitable future.",
   image: {
-    src: process.env.NEXT_PUBLIC_IMAGE_PREFIX + "/donate/education.png",
+    src: "/donate/education.png",
     alt: "Children studying together in a classroom",
   },
 };

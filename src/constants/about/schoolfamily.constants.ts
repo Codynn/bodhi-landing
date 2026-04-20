@@ -18,46 +18,46 @@ export const SCHOOL_FAMILY_MEMBERS: SchoolFamilyMember[] = [
   {
     name: "Principal Name",
     role: "Principal",
-    image: process.env.NEXT_PUBLIC_IMAGE_PREFIX + "/staff/message.png",
+    image: "/staff/message.png",
   },
   {
     name: "Principal Name",
     role: "Principal",
-    image: process.env.NEXT_PUBLIC_IMAGE_PREFIX + "/staff/message.png",
+    image: "/staff/message.png",
   },
   {
     name: "Principal Name",
     role: "Principal",
-    image: process.env.NEXT_PUBLIC_IMAGE_PREFIX + "/staff/message.png",
+    image: "/staff/message.png",
   },
   {
     name: "Principal Name",
     role: "Principal",
-    image: process.env.NEXT_PUBLIC_IMAGE_PREFIX + "/staff/message.png",
+    image: "/staff/message.png",
   },
   {
     name: "Principal Name",
     role: "Principal",
-    image: process.env.NEXT_PUBLIC_IMAGE_PREFIX + "/staff/message.png",
+    image: "/staff/message.png",
   },
   {
     name: "Principal Name",
     role: "Principal",
-    image: process.env.NEXT_PUBLIC_IMAGE_PREFIX + "/staff/message.png",
+    image: "/staff/message.png",
   },
   {
     name: "Principal Name",
     role: "Principal",
-    image: process.env.NEXT_PUBLIC_IMAGE_PREFIX + "/staff/message.png",
+    image: "/staff/message.png",
   },
   {
     name: "Principal Name",
     role: "Principal",
-    image: process.env.NEXT_PUBLIC_IMAGE_PREFIX + "/staff/message.png",
+    image: "/staff/message.png",
   },
   {
     name: "Principal Name",
     role: "Principal",
-    image: process.env.NEXT_PUBLIC_IMAGE_PREFIX + "/staff/message.png",
+    image: "/staff/message.png",
   },
 ];

@@ -7,7 +7,7 @@ export const CAREER_HERO_CONTENT: CareerHeroContent = {
   ],
   pageTitle: "Career",
   poweredByLogo: {
-    src: process.env.NEXT_PUBLIC_IMAGE_PREFIX + "/about/hirynn.png",
+    src: "/about/hirynn.png",
     alt: "Powered by logo",
     href: "#",
   },
@@ -17,7 +17,7 @@ export const CAREER_HERO_CONTENT: CareerHeroContent = {
     "We recognize that a positive school culture starts with dedicated educators who care deeply about teaching and student well-being. If you are committed to quality education, strong values, and student-centered learning, we invite you to explore career opportunities with us. Join our team and become part of a learning community where your efforts make a real difference in shaping the future of our students.",
   ],
   staffImage: {
-    src: process.env.NEXT_PUBLIC_IMAGE_PREFIX + "/about/career.png",
+    src: "/about/career.png",
     alt: "Bodhi School staff and teachers",
   },
 };
